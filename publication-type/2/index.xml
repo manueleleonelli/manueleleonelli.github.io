@@ -1,22 +1,70 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>2 | Academic</title>
-    <link>https://academic-demo.netlify.app/publication-type/2/</link>
-      <atom:link href="https://academic-demo.netlify.app/publication-type/2/index.xml" rel="self" type="application/rss+xml" />
+    <title>2 | Manuele Leonelli</title>
+    <link>https://manueleleonelli.github.io/publication-type/2/</link>
+      <atom:link href="https://manueleleonelli.github.io/publication-type/2/index.xml" rel="self" type="application/rss+xml" />
     <description>2</description>
-    <generator>Wowchemy (https://wowchemy.com)</generator><language>en-us</language><lastBuildDate>Tue, 01 Sep 2015 00:00:00 +0000</lastBuildDate>
+    <generator>Wowchemy (https://wowchemy.com)</generator><language>en-us</language><lastBuildDate>Fri, 01 Jan 2021 00:00:00 +0000</lastBuildDate>
     <image>
-      <url>https://academic-demo.netlify.app/media/icon_hua2ec155b4296a9c9791d015323e16eb5_11927_512x512_fill_lanczos_center_3.png</url>
+      <url>https://manueleleonelli.github.io/media/icon_hua2ec155b4296a9c9791d015323e16eb5_11927_512x512_fill_lanczos_center_3.png</url>
       <title>2</title>
-      <link>https://academic-demo.netlify.app/publication-type/2/</link>
+      <link>https://manueleleonelli.github.io/publication-type/2/</link>
     </image>
     
     <item>
+      <title>A change-point approach for the identification of financial extreme regimes</title>
+      <link>https://manueleleonelli.github.io/publication/changepoint/</link>
+      <pubDate>Fri, 01 Jan 2021 00:00:00 +0000</pubDate>
+      <guid>https://manueleleonelli.github.io/publication/changepoint/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Model-preserving sensitivity analysis for families of Gaussian distributions</title>
+      <link>https://manueleleonelli.github.io/publication/jmlr/</link>
+      <pubDate>Sat, 09 May 2020 00:00:00 +0000</pubDate>
+      <guid>https://manueleleonelli.github.io/publication/jmlr/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Coherent combination of probabilistic outputs for group decision making, an algebraic approach</title>
+      <link>https://manueleleonelli.github.io/publication/spectrum/</link>
+      <pubDate>Thu, 09 Apr 2020 00:00:00 +0000</pubDate>
+      <guid>https://manueleleonelli.github.io/publication/spectrum/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Semiparametric bivariate modelling with flexible extremal dependence</title>
+      <link>https://manueleleonelli.github.io/publication/sc/</link>
+      <pubDate>Mon, 09 Mar 2020 00:00:00 +0000</pubDate>
+      <guid>https://manueleleonelli.github.io/publication/sc/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Sensitivity analysis beyond linearity</title>
+      <link>https://manueleleonelli.github.io/publication/beyond/</link>
+      <pubDate>Wed, 09 Oct 2019 00:00:00 +0000</pubDate>
+      <guid>https://manueleleonelli.github.io/publication/beyond/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Directed expected utility networks</title>
+      <link>https://manueleleonelli.github.io/publication/deca/</link>
+      <pubDate>Tue, 09 May 2017 00:00:00 +0000</pubDate>
+      <guid>https://manueleleonelli.github.io/publication/deca/</guid>
+      <description></description>
+    </item>
+    
+    <item>
       <title>An example journal article</title>
-      <link>https://academic-demo.netlify.app/publication/journal-article/</link>
+      <link>https://manueleleonelli.github.io/publication/journal-article/</link>
       <pubDate>Tue, 01 Sep 2015 00:00:00 +0000</pubDate>
-      <guid>https://academic-demo.netlify.app/publication/journal-article/</guid>
+      <guid>https://manueleleonelli.github.io/publication/journal-article/</guid>
       <description>&lt;div class=&#34;alert alert-note&#34;&gt;
   &lt;div&gt;
     Click the &lt;em&gt;Cite&lt;/em&gt; button above to demo the feature to enable visitors to import publication metadata into their reference management software.
@@ -29,6 +77,14 @@
 &lt;/div&gt;
 &lt;p&gt;Supplementary notes can be added here, including &lt;a href=&#34;https://wowchemy.com/docs/writing-markdown-latex/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;code, math, and images&lt;/a&gt;.&lt;/p&gt;
 </description>
+    </item>
+    
+    <item>
+      <title>Bayesian decision support for complex systems with many distributed experts</title>
+      <link>https://manueleleonelli.github.io/publication/anor/</link>
+      <pubDate>Wed, 12 Aug 2015 00:00:00 +0000</pubDate>
+      <guid>https://manueleleonelli.github.io/publication/anor/</guid>
+      <description></description>
     </item>
     
   </channel>

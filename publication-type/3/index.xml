@@ -1,22 +1,78 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>3 | Academic</title>
-    <link>https://academic-demo.netlify.app/publication-type/3/</link>
-      <atom:link href="https://academic-demo.netlify.app/publication-type/3/index.xml" rel="self" type="application/rss+xml" />
+    <title>3 | Manuele Leonelli</title>
+    <link>https://manueleleonelli.github.io/publication-type/3/</link>
+      <atom:link href="https://manueleleonelli.github.io/publication-type/3/index.xml" rel="self" type="application/rss+xml" />
     <description>3</description>
-    <generator>Wowchemy (https://wowchemy.com)</generator><language>en-us</language><lastBuildDate>Sun, 07 Apr 2019 00:00:00 +0000</lastBuildDate>
+    <generator>Wowchemy (https://wowchemy.com)</generator><language>en-us</language><lastBuildDate>Sun, 01 Aug 2021 00:00:00 +0000</lastBuildDate>
     <image>
-      <url>https://academic-demo.netlify.app/media/icon_hua2ec155b4296a9c9791d015323e16eb5_11927_512x512_fill_lanczos_center_3.png</url>
+      <url>https://manueleleonelli.github.io/media/icon_hua2ec155b4296a9c9791d015323e16eb5_11927_512x512_fill_lanczos_center_3.png</url>
       <title>3</title>
-      <link>https://academic-demo.netlify.app/publication-type/3/</link>
+      <link>https://manueleleonelli.github.io/publication-type/3/</link>
     </image>
     
     <item>
+      <title>Staged trees and asymmetry-labeled DAGs</title>
+      <link>https://manueleleonelli.github.io/publication/aldag/</link>
+      <pubDate>Sun, 01 Aug 2021 00:00:00 +0000</pubDate>
+      <guid>https://manueleleonelli.github.io/publication/aldag/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Sensitivity and robustness analysis in Bayesian networks with the bnmonitor R package</title>
+      <link>https://manueleleonelli.github.io/publication/bnmonitor/</link>
+      <pubDate>Thu, 01 Jul 2021 00:00:00 +0000</pubDate>
+      <guid>https://manueleleonelli.github.io/publication/bnmonitor/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Context-specific causal discovery for categorical data using staged trees</title>
+      <link>https://manueleleonelli.github.io/publication/causal/</link>
+      <pubDate>Tue, 01 Jun 2021 00:00:00 +0000</pubDate>
+      <guid>https://manueleleonelli.github.io/publication/causal/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>A new class of generative classifiers based on staged tree models</title>
+      <link>https://manueleleonelli.github.io/publication/classifier/</link>
+      <pubDate>Tue, 01 Dec 2020 00:00:00 +0000</pubDate>
+      <guid>https://manueleleonelli.github.io/publication/classifier/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Tracking change-points in multivariate extremes</title>
+      <link>https://manueleleonelli.github.io/publication/multi_change/</link>
+      <pubDate>Sun, 01 Nov 2020 00:00:00 +0000</pubDate>
+      <guid>https://manueleleonelli.github.io/publication/multi_change/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>The curved exponential family of a staged tree</title>
+      <link>https://manueleleonelli.github.io/publication/exponential/</link>
+      <pubDate>Thu, 01 Oct 2020 00:00:00 +0000</pubDate>
+      <guid>https://manueleleonelli.github.io/publication/exponential/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>The R package stagedtrees for structural learning of stratified staged trees</title>
+      <link>https://manueleleonelli.github.io/publication/jss/</link>
+      <pubDate>Wed, 01 Apr 2020 00:00:00 +0000</pubDate>
+      <guid>https://manueleleonelli.github.io/publication/jss/</guid>
+      <description></description>
+    </item>
+    
+    <item>
       <title>An example preprint / working paper</title>
-      <link>https://academic-demo.netlify.app/publication/preprint/</link>
+      <link>https://manueleleonelli.github.io/publication/preprint/</link>
       <pubDate>Sun, 07 Apr 2019 00:00:00 +0000</pubDate>
-      <guid>https://academic-demo.netlify.app/publication/preprint/</guid>
+      <guid>https://manueleleonelli.github.io/publication/preprint/</guid>
       <description>&lt;div class=&#34;alert alert-note&#34;&gt;
   &lt;div&gt;
     Create your slides in Markdown - click the &lt;em&gt;Slides&lt;/em&gt; button to check out the example.
@@ -24,6 +80,14 @@
 &lt;/div&gt;
 &lt;p&gt;Supplementary notes can be added here, including &lt;a href=&#34;https://wowchemy.com/docs/writing-markdown-latex/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;code, math, and images&lt;/a&gt;.&lt;/p&gt;
 </description>
+    </item>
+    
+    <item>
+      <title>A geometric characterization of sensitivity analysis in monomial models</title>
+      <link>https://manueleleonelli.github.io/publication/geometric/</link>
+      <pubDate>Sat, 01 Dec 2018 00:00:00 +0000</pubDate>
+      <guid>https://manueleleonelli.github.io/publication/geometric/</guid>
+      <description></description>
     </item>
     
   </channel>

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Chiara Lattanzi | Manuele Leonelli</title>
+    <link>https://manueleleonelli.github.io/author/chiara-lattanzi/</link>
+      <atom:link href="https://manueleleonelli.github.io/author/chiara-lattanzi/index.xml" rel="self" type="application/rss+xml" />
+    <description>Chiara Lattanzi</description>
+    <generator>Wowchemy (https://wowchemy.com)</generator><language>en-us</language><lastBuildDate>Fri, 01 Jan 2021 00:00:00 +0000</lastBuildDate>
+    <image>
+      <url>https://manueleleonelli.github.io/media/icon_hua2ec155b4296a9c9791d015323e16eb5_11927_512x512_fill_lanczos_center_3.png</url>
+      <title>Chiara Lattanzi</title>
+      <link>https://manueleleonelli.github.io/author/chiara-lattanzi/</link>
+    </image>
+    
+    <item>
+      <title>A change-point approach for the identification of financial extreme regimes</title>
+      <link>https://manueleleonelli.github.io/publication/changepoint/</link>
+      <pubDate>Fri, 01 Jan 2021 00:00:00 +0000</pubDate>
+      <guid>https://manueleleonelli.github.io/publication/changepoint/</guid>
+      <description></description>
+    </item>
+    
+  </channel>
+</rss>

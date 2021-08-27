@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Decision Theory | Manuele Leonelli</title>
+    <link>https://manueleleonelli.github.io/tag/decision-theory/</link>
+      <atom:link href="https://manueleleonelli.github.io/tag/decision-theory/index.xml" rel="self" type="application/rss+xml" />
+    <description>Decision Theory</description>
+    <generator>Wowchemy (https://wowchemy.com)</generator><language>en-us</language><lastBuildDate>Tue, 09 May 2017 00:00:00 +0000</lastBuildDate>
+    <image>
+      <url>https://manueleleonelli.github.io/media/icon_hua2ec155b4296a9c9791d015323e16eb5_11927_512x512_fill_lanczos_center_3.png</url>
+      <title>Decision Theory</title>
+      <link>https://manueleleonelli.github.io/tag/decision-theory/</link>
+    </image>
+    
+    <item>
+      <title>Directed expected utility networks</title>
+      <link>https://manueleleonelli.github.io/publication/deca/</link>
+      <pubDate>Tue, 09 May 2017 00:00:00 +0000</pubDate>
+      <guid>https://manueleleonelli.github.io/publication/deca/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Bayesian decision support for complex systems with many distributed experts</title>
+      <link>https://manueleleonelli.github.io/publication/anor/</link>
+      <pubDate>Wed, 12 Aug 2015 00:00:00 +0000</pubDate>
+      <guid>https://manueleleonelli.github.io/publication/anor/</guid>
+      <description></description>
+    </item>
+    
+  </channel>
+</rss>

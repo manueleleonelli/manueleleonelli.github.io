@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Staged trees | Manuele Leonelli</title>
+    <link>https://manueleleonelli.github.io/tag/staged-trees/</link>
+      <atom:link href="https://manueleleonelli.github.io/tag/staged-trees/index.xml" rel="self" type="application/rss+xml" />
+    <description>Staged trees</description>
+    <generator>Wowchemy (https://wowchemy.com)</generator><language>en-us</language><lastBuildDate>Sun, 01 Aug 2021 00:00:00 +0000</lastBuildDate>
+    <image>
+      <url>https://manueleleonelli.github.io/media/icon_hua2ec155b4296a9c9791d015323e16eb5_11927_512x512_fill_lanczos_center_3.png</url>
+      <title>Staged trees</title>
+      <link>https://manueleleonelli.github.io/tag/staged-trees/</link>
+    </image>
+    
+    <item>
+      <title>Staged trees and asymmetry-labeled DAGs</title>
+      <link>https://manueleleonelli.github.io/publication/aldag/</link>
+      <pubDate>Sun, 01 Aug 2021 00:00:00 +0000</pubDate>
+      <guid>https://manueleleonelli.github.io/publication/aldag/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Context-specific causal discovery for categorical data using staged trees</title>
+      <link>https://manueleleonelli.github.io/publication/causal/</link>
+      <pubDate>Tue, 01 Jun 2021 00:00:00 +0000</pubDate>
+      <guid>https://manueleleonelli.github.io/publication/causal/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>A new class of generative classifiers based on staged tree models</title>
+      <link>https://manueleleonelli.github.io/publication/classifier/</link>
+      <pubDate>Tue, 01 Dec 2020 00:00:00 +0000</pubDate>
+      <guid>https://manueleleonelli.github.io/publication/classifier/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>The curved exponential family of a staged tree</title>
+      <link>https://manueleleonelli.github.io/publication/exponential/</link>
+      <pubDate>Thu, 01 Oct 2020 00:00:00 +0000</pubDate>
+      <guid>https://manueleleonelli.github.io/publication/exponential/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>The R package stagedtrees for structural learning of stratified staged trees</title>
+      <link>https://manueleleonelli.github.io/publication/jss/</link>
+      <pubDate>Wed, 01 Apr 2020 00:00:00 +0000</pubDate>
+      <guid>https://manueleleonelli.github.io/publication/jss/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Sensitivity analysis beyond linearity</title>
+      <link>https://manueleleonelli.github.io/publication/beyond/</link>
+      <pubDate>Wed, 09 Oct 2019 00:00:00 +0000</pubDate>
+      <guid>https://manueleleonelli.github.io/publication/beyond/</guid>
+      <description></description>
+    </item>
+    
+  </channel>
+</rss>

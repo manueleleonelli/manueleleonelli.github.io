@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Eva Riccomagno | Manuele Leonelli</title>
+    <link>https://manueleleonelli.github.io/author/eva-riccomagno/</link>
+      <atom:link href="https://manueleleonelli.github.io/author/eva-riccomagno/index.xml" rel="self" type="application/rss+xml" />
+    <description>Eva Riccomagno</description>
+    <generator>Wowchemy (https://wowchemy.com)</generator><language>en-us</language><lastBuildDate>Thu, 09 Apr 2020 00:00:00 +0000</lastBuildDate>
+    <image>
+      <url>https://manueleleonelli.github.io/media/icon_hua2ec155b4296a9c9791d015323e16eb5_11927_512x512_fill_lanczos_center_3.png</url>
+      <title>Eva Riccomagno</title>
+      <link>https://manueleleonelli.github.io/author/eva-riccomagno/</link>
+    </image>
+    
+    <item>
+      <title>Coherent combination of probabilistic outputs for group decision making, an algebraic approach</title>
+      <link>https://manueleleonelli.github.io/publication/spectrum/</link>
+      <pubDate>Thu, 09 Apr 2020 00:00:00 +0000</pubDate>
+      <guid>https://manueleleonelli.github.io/publication/spectrum/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>The R package stagedtrees for structural learning of stratified staged trees</title>
+      <link>https://manueleleonelli.github.io/publication/jss/</link>
+      <pubDate>Wed, 01 Apr 2020 00:00:00 +0000</pubDate>
+      <guid>https://manueleleonelli.github.io/publication/jss/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>A geometric characterization of sensitivity analysis in monomial models</title>
+      <link>https://manueleleonelli.github.io/publication/geometric/</link>
+      <pubDate>Sat, 01 Dec 2018 00:00:00 +0000</pubDate>
+      <guid>https://manueleleonelli.github.io/publication/geometric/</guid>
+      <description></description>
+    </item>
+    
+  </channel>
+</rss>

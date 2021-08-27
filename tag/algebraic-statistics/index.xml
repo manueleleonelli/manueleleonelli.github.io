@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Algebraic statistics | Manuele Leonelli</title>
+    <link>https://manueleleonelli.github.io/tag/algebraic-statistics/</link>
+      <atom:link href="https://manueleleonelli.github.io/tag/algebraic-statistics/index.xml" rel="self" type="application/rss+xml" />
+    <description>Algebraic statistics</description>
+    <generator>Wowchemy (https://wowchemy.com)</generator><language>en-us</language><lastBuildDate>Thu, 01 Oct 2020 00:00:00 +0000</lastBuildDate>
+    <image>
+      <url>https://manueleleonelli.github.io/media/icon_hua2ec155b4296a9c9791d015323e16eb5_11927_512x512_fill_lanczos_center_3.png</url>
+      <title>Algebraic statistics</title>
+      <link>https://manueleleonelli.github.io/tag/algebraic-statistics/</link>
+    </image>
+    
+    <item>
+      <title>The curved exponential family of a staged tree</title>
+      <link>https://manueleleonelli.github.io/publication/exponential/</link>
+      <pubDate>Thu, 01 Oct 2020 00:00:00 +0000</pubDate>
+      <guid>https://manueleleonelli.github.io/publication/exponential/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Model-preserving sensitivity analysis for families of Gaussian distributions</title>
+      <link>https://manueleleonelli.github.io/publication/jmlr/</link>
+      <pubDate>Sat, 09 May 2020 00:00:00 +0000</pubDate>
+      <guid>https://manueleleonelli.github.io/publication/jmlr/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Coherent combination of probabilistic outputs for group decision making, an algebraic approach</title>
+      <link>https://manueleleonelli.github.io/publication/spectrum/</link>
+      <pubDate>Thu, 09 Apr 2020 00:00:00 +0000</pubDate>
+      <guid>https://manueleleonelli.github.io/publication/spectrum/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Sensitivity analysis beyond linearity</title>
+      <link>https://manueleleonelli.github.io/publication/beyond/</link>
+      <pubDate>Wed, 09 Oct 2019 00:00:00 +0000</pubDate>
+      <guid>https://manueleleonelli.github.io/publication/beyond/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>A geometric characterization of sensitivity analysis in monomial models</title>
+      <link>https://manueleleonelli.github.io/publication/geometric/</link>
+      <pubDate>Sat, 01 Dec 2018 00:00:00 +0000</pubDate>
+      <guid>https://manueleleonelli.github.io/publication/geometric/</guid>
+      <description></description>
+    </item>
+    
+  </channel>
+</rss>

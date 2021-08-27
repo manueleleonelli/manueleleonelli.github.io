@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Extremes | Manuele Leonelli</title>
+    <link>https://manueleleonelli.github.io/tag/extremes/</link>
+      <atom:link href="https://manueleleonelli.github.io/tag/extremes/index.xml" rel="self" type="application/rss+xml" />
+    <description>Extremes</description>
+    <generator>Wowchemy (https://wowchemy.com)</generator><language>en-us</language><lastBuildDate>Fri, 01 Jan 2021 00:00:00 +0000</lastBuildDate>
+    <image>
+      <url>https://manueleleonelli.github.io/media/icon_hua2ec155b4296a9c9791d015323e16eb5_11927_512x512_fill_lanczos_center_3.png</url>
+      <title>Extremes</title>
+      <link>https://manueleleonelli.github.io/tag/extremes/</link>
+    </image>
+    
+    <item>
+      <title>A change-point approach for the identification of financial extreme regimes</title>
+      <link>https://manueleleonelli.github.io/publication/changepoint/</link>
+      <pubDate>Fri, 01 Jan 2021 00:00:00 +0000</pubDate>
+      <guid>https://manueleleonelli.github.io/publication/changepoint/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Tracking change-points in multivariate extremes</title>
+      <link>https://manueleleonelli.github.io/publication/multi_change/</link>
+      <pubDate>Sun, 01 Nov 2020 00:00:00 +0000</pubDate>
+      <guid>https://manueleleonelli.github.io/publication/multi_change/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Semiparametric bivariate modelling with flexible extremal dependence</title>
+      <link>https://manueleleonelli.github.io/publication/sc/</link>
+      <pubDate>Mon, 09 Mar 2020 00:00:00 +0000</pubDate>
+      <guid>https://manueleleonelli.github.io/publication/sc/</guid>
+      <description></description>
+    </item>
+    
+  </channel>
+</rss>

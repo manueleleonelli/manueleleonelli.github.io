@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Probabilistic graphical models | Manuele Leonelli</title>
+    <link>https://manueleleonelli.github.io/tag/probabilistic-graphical-models/</link>
+      <atom:link href="https://manueleleonelli.github.io/tag/probabilistic-graphical-models/index.xml" rel="self" type="application/rss+xml" />
+    <description>Probabilistic graphical models</description>
+    <generator>Wowchemy (https://wowchemy.com)</generator><language>en-us</language><lastBuildDate>Sun, 01 Aug 2021 00:00:00 +0000</lastBuildDate>
+    <image>
+      <url>https://manueleleonelli.github.io/media/icon_hua2ec155b4296a9c9791d015323e16eb5_11927_512x512_fill_lanczos_center_3.png</url>
+      <title>Probabilistic graphical models</title>
+      <link>https://manueleleonelli.github.io/tag/probabilistic-graphical-models/</link>
+    </image>
+    
+    <item>
+      <title>Staged trees and asymmetry-labeled DAGs</title>
+      <link>https://manueleleonelli.github.io/publication/aldag/</link>
+      <pubDate>Sun, 01 Aug 2021 00:00:00 +0000</pubDate>
+      <guid>https://manueleleonelli.github.io/publication/aldag/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Sensitivity and robustness analysis in Bayesian networks with the bnmonitor R package</title>
+      <link>https://manueleleonelli.github.io/publication/bnmonitor/</link>
+      <pubDate>Thu, 01 Jul 2021 00:00:00 +0000</pubDate>
+      <guid>https://manueleleonelli.github.io/publication/bnmonitor/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Context-specific causal discovery for categorical data using staged trees</title>
+      <link>https://manueleleonelli.github.io/publication/causal/</link>
+      <pubDate>Tue, 01 Jun 2021 00:00:00 +0000</pubDate>
+      <guid>https://manueleleonelli.github.io/publication/causal/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>A new class of generative classifiers based on staged tree models</title>
+      <link>https://manueleleonelli.github.io/publication/classifier/</link>
+      <pubDate>Tue, 01 Dec 2020 00:00:00 +0000</pubDate>
+      <guid>https://manueleleonelli.github.io/publication/classifier/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>The curved exponential family of a staged tree</title>
+      <link>https://manueleleonelli.github.io/publication/exponential/</link>
+      <pubDate>Thu, 01 Oct 2020 00:00:00 +0000</pubDate>
+      <guid>https://manueleleonelli.github.io/publication/exponential/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Model-preserving sensitivity analysis for families of Gaussian distributions</title>
+      <link>https://manueleleonelli.github.io/publication/jmlr/</link>
+      <pubDate>Sat, 09 May 2020 00:00:00 +0000</pubDate>
+      <guid>https://manueleleonelli.github.io/publication/jmlr/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Coherent combination of probabilistic outputs for group decision making, an algebraic approach</title>
+      <link>https://manueleleonelli.github.io/publication/spectrum/</link>
+      <pubDate>Thu, 09 Apr 2020 00:00:00 +0000</pubDate>
+      <guid>https://manueleleonelli.github.io/publication/spectrum/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>The R package stagedtrees for structural learning of stratified staged trees</title>
+      <link>https://manueleleonelli.github.io/publication/jss/</link>
+      <pubDate>Wed, 01 Apr 2020 00:00:00 +0000</pubDate>
+      <guid>https://manueleleonelli.github.io/publication/jss/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Sensitivity analysis beyond linearity</title>
+      <link>https://manueleleonelli.github.io/publication/beyond/</link>
+      <pubDate>Wed, 09 Oct 2019 00:00:00 +0000</pubDate>
+      <guid>https://manueleleonelli.github.io/publication/beyond/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>A geometric characterization of sensitivity analysis in monomial models</title>
+      <link>https://manueleleonelli.github.io/publication/geometric/</link>
+      <pubDate>Sat, 01 Dec 2018 00:00:00 +0000</pubDate>
+      <guid>https://manueleleonelli.github.io/publication/geometric/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Directed expected utility networks</title>
+      <link>https://manueleleonelli.github.io/publication/deca/</link>
+      <pubDate>Tue, 09 May 2017 00:00:00 +0000</pubDate>
+      <guid>https://manueleleonelli.github.io/publication/deca/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Bayesian decision support for complex systems with many distributed experts</title>
+      <link>https://manueleleonelli.github.io/publication/anor/</link>
+      <pubDate>Wed, 12 Aug 2015 00:00:00 +0000</pubDate>
+      <guid>https://manueleleonelli.github.io/publication/anor/</guid>
+      <description></description>
+    </item>
+    
+  </channel>
+</rss>
