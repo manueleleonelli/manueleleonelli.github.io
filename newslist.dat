@@ -1,3 +1,6 @@
-**[05/08/21]** New preprint on [Staged trees and asymmetry-labeled DAGS](/publication/ALDAG/index/) available on arXiv [here](https://arxiv.org/abs/2108.01994).
-**[12/02/20]** Seminar presentation on [Data-driven decentralised control design in Active Distribution Networks](/talk/2020-feb-ucy/) at [UCY](http://ucy.ac.cy).
-**[31/12/19]** New paper on [ A Robust Coordinated Expansion Planning Model For Wind Farm-Integrated Power Systems With Flexibility Sources Using Affine Policies](/publication/2020jdehghan/) published on IEEE Systems Journal.
+**[05/08/21]** New preprint on [Staged trees and asymmetry-labeled DAGs](/publication/aldag) with Gherardo Varando and Federico Carli.
+**[27/07/21]** New preprint on [Sensitivity and robustness analysis in Bayesian networks with the bnmonitor R package](/publication/bnmonitor/) with Ramsiya Ramanathan and Rachel L. Wilkerson.
+**[08/07/21]** New release of the bnmonitor R package
+**[21/06/21]** New release of the stagedtrees R package
+**[08/06/21]** The article [A changepoint approach for the identification of financial extreme regimes](/publication/changepoint) with Chiara Lattanzi is accepted for publication in the Brazilian Journal of Probability and Statistics.
+**[08/06/21]** New preprint on [Context-specific causal discovery for discrete data using staged trees](/publication/causal/) with Gherardo Varando.

@@ -359,7 +359,7 @@ data.head()
 &lt;p&gt;Demo:&lt;/p&gt;
 
 
-&lt;div id=&#34;chart-189327456&#34; class=&#34;chart&#34;&gt;&lt;/div&gt;
+&lt;div id=&#34;chart-481762395&#34; class=&#34;chart&#34;&gt;&lt;/div&gt;
 &lt;script&gt;
   (function() {
     let a = setInterval( function() {
@@ -369,7 +369,7 @@ data.head()
       clearInterval( a );
 
       Plotly.d3.json(&#34;./line-chart.json&#34;, function(chart) {
-        Plotly.plot(&#39;chart-189327456&#39;, chart.data, chart.layout, {responsive: true});
+        Plotly.plot(&#39;chart-481762395&#39;, chart.data, chart.layout, {responsive: true});
       });
     }, 500 );
   })();
@@ -824,9 +824,12 @@ Three
 
 
 
-&lt;p&gt;&lt;strong&gt;[05/08/21]&lt;/strong&gt; New preprint on &lt;a href=&#34;https://manueleleonelli.github.io/publication/ALDAG/index/&#34;&gt;Staged trees and asymmetry-labeled DAGS&lt;/a&gt; available on arXiv &lt;a href=&#34;https://arxiv.org/abs/2108.01994&#34;&gt;here&lt;/a&gt;.&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;[12/02/20]&lt;/strong&gt; Seminar presentation on &lt;a href=&#34;https://manueleleonelli.github.io/talk/2020-feb-ucy/&#34;&gt;Data-driven decentralised control design in Active Distribution Networks&lt;/a&gt; at &lt;a href=&#34;http://ucy.ac.cy&#34;&gt;UCY&lt;/a&gt;.&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;[31/12/19]&lt;/strong&gt; New paper on &lt;a href=&#34;https://manueleleonelli.github.io/publication/2020jdehghan/&#34;&gt; A Robust Coordinated Expansion Planning Model For Wind Farm-Integrated Power Systems With Flexibility Sources Using Affine Policies&lt;/a&gt; published on IEEE Systems Journal.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;[05/08/21]&lt;/strong&gt; New preprint on &lt;a href=&#34;https://manueleleonelli.github.io/publication/aldag&#34;&gt;Staged trees and asymmetry-labeled DAGs&lt;/a&gt; with Gherardo Varando and Federico Carli.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;[27/07/21]&lt;/strong&gt; New preprint on &lt;a href=&#34;https://manueleleonelli.github.io/publication/bnmonitor/&#34;&gt;Sensitivity and robustness analysis in Bayesian networks with the bnmonitor R package&lt;/a&gt; with Ramsiya Ramanathan and Rachel L. Wilkerson.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;[08/07/21]&lt;/strong&gt; New release of the bnmonitor R package&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;[21/06/21]&lt;/strong&gt; New release of the stagedtrees R package&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;[08/06/21]&lt;/strong&gt; The article &lt;a href=&#34;https://manueleleonelli.github.io/publication/changepoint&#34;&gt;A changepoint approach for the identification of financial extreme regimes&lt;/a&gt; with Chiara Lattanzi is accepted for publication in the Brazilian Journal of Probability and Statistics.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;[08/06/21]&lt;/strong&gt; New preprint on &lt;a href=&#34;https://manueleleonelli.github.io/publication/causal/&#34;&gt;Context-specific causal discovery for discrete data using staged trees&lt;/a&gt; with Gherardo Varando.&lt;/p&gt;
 
 </description>
     </item>
