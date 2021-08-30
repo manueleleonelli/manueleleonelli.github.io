@@ -359,7 +359,7 @@ data.head()
 &lt;p&gt;Demo:&lt;/p&gt;
 
 
-&lt;div id=&#34;chart-481762395&#34; class=&#34;chart&#34;&gt;&lt;/div&gt;
+&lt;div id=&#34;chart-871493265&#34; class=&#34;chart&#34;&gt;&lt;/div&gt;
 &lt;script&gt;
   (function() {
     let a = setInterval( function() {
@@ -369,7 +369,7 @@ data.head()
       clearInterval( a );
 
       Plotly.d3.json(&#34;./line-chart.json&#34;, function(chart) {
-        Plotly.plot(&#39;chart-481762395&#39;, chart.data, chart.layout, {responsive: true});
+        Plotly.plot(&#39;chart-871493265&#39;, chart.data, chart.layout, {responsive: true});
       });
     }, 500 );
   })();
@@ -596,20 +596,6 @@ You found me!
     </item>
     
     <item>
-      <title>An example preprint / working paper</title>
-      <link>https://manueleleonelli.github.io/publication/preprint/</link>
-      <pubDate>Sun, 07 Apr 2019 00:00:00 +0000</pubDate>
-      <guid>https://manueleleonelli.github.io/publication/preprint/</guid>
-      <description>&lt;div class=&#34;alert alert-note&#34;&gt;
-  &lt;div&gt;
-    Create your slides in Markdown - click the &lt;em&gt;Slides&lt;/em&gt; button to check out the example.
-  &lt;/div&gt;
-&lt;/div&gt;
-&lt;p&gt;Supplementary notes can be added here, including &lt;a href=&#34;https://wowchemy.com/docs/writing-markdown-latex/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;code, math, and images&lt;/a&gt;.&lt;/p&gt;
-</description>
-    </item>
-    
-    <item>
       <title>Display Jupyter Notebooks with Academic</title>
       <link>https://manueleleonelli.github.io/post/jupyter/</link>
       <pubDate>Tue, 05 Feb 2019 00:00:00 +0000</pubDate>
@@ -826,12 +812,20 @@ Three
 
 &lt;p&gt;&lt;strong&gt;[05/08/21]&lt;/strong&gt; New preprint on &lt;a href=&#34;https://manueleleonelli.github.io/publication/aldag&#34;&gt;Staged trees and asymmetry-labeled DAGs&lt;/a&gt; with Gherardo Varando and Federico Carli.&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;[27/07/21]&lt;/strong&gt; New preprint on &lt;a href=&#34;https://manueleleonelli.github.io/publication/bnmonitor/&#34;&gt;Sensitivity and robustness analysis in Bayesian networks with the bnmonitor R package&lt;/a&gt; with Ramsiya Ramanathan and Rachel L. Wilkerson.&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;[08/07/21]&lt;/strong&gt; New release of the bnmonitor R package&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;[21/06/21]&lt;/strong&gt; New release of the stagedtrees R package&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;[08/07/21]&lt;/strong&gt; New release of the &lt;a href=&#34;https://github.com/manueleleonelli/bnmonitor&#34;&gt;bnmonitor&lt;/a&gt; R package available on &lt;a href=&#34;https://cran.r-project.org/web/packages/stagedtrees/index.html&#34;&gt;CRAN&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;[21/06/21]&lt;/strong&gt; New release of the &lt;a href=&#34;https://github.com/gherardovarando/stagedtrees&#34;&gt;stagedtrees&lt;/a&gt; R package available on &lt;a href=&#34;https://cran.r-project.org/web/packages/bnmonitor/index.html&#34;&gt;CRAN&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;[08/06/21]&lt;/strong&gt; The article &lt;a href=&#34;https://manueleleonelli.github.io/publication/changepoint&#34;&gt;A changepoint approach for the identification of financial extreme regimes&lt;/a&gt; with Chiara Lattanzi is accepted for publication in the Brazilian Journal of Probability and Statistics.&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;[08/06/21]&lt;/strong&gt; New preprint on &lt;a href=&#34;https://manueleleonelli.github.io/publication/causal/&#34;&gt;Context-specific causal discovery for discrete data using staged trees&lt;/a&gt; with Gherardo Varando.&lt;/p&gt;
 
 </description>
+    </item>
+    
+    <item>
+      <title>A symbolic algebra for the computation of expected utilities in multiplicative influence diagrams</title>
+      <link>https://manueleleonelli.github.io/publication/amai/</link>
+      <pubDate>Fri, 09 Jun 2017 00:00:00 +0000</pubDate>
+      <guid>https://manueleleonelli.github.io/publication/amai/</guid>
+      <description></description>
     </item>
     
     <item>
@@ -843,43 +837,35 @@ Three
     </item>
     
     <item>
-      <title>External Project</title>
-      <link>https://manueleleonelli.github.io/project/external-project/</link>
-      <pubDate>Wed, 27 Apr 2016 00:00:00 +0000</pubDate>
-      <guid>https://manueleleonelli.github.io/project/external-project/</guid>
+      <title>Sensitivity analysis in multilinear probabilistic models</title>
+      <link>https://manueleleonelli.github.io/publication/is/</link>
+      <pubDate>Tue, 09 May 2017 00:00:00 +0000</pubDate>
+      <guid>https://manueleleonelli.github.io/publication/is/</guid>
       <description></description>
     </item>
     
     <item>
-      <title>Internal Project</title>
-      <link>https://manueleleonelli.github.io/project/internal-project/</link>
+      <title>bnmonitor</title>
+      <link>https://manueleleonelli.github.io/project/bnmonitor/</link>
       <pubDate>Wed, 27 Apr 2016 00:00:00 +0000</pubDate>
-      <guid>https://manueleleonelli.github.io/project/internal-project/</guid>
-      <description>&lt;p&gt;Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis posuere tellus ac convallis placerat. Proin tincidunt magna sed ex sollicitudin condimentum. Sed ac faucibus dolor, scelerisque sollicitudin nisi. Cras purus urna, suscipit quis sapien eu, pulvinar tempor diam. Quisque risus orci, mollis id ante sit amet, gravida egestas nisl. Sed ac tempus magna. Proin in dui enim. Donec condimentum, sem id dapibus fringilla, tellus enim condimentum arcu, nec volutpat est felis vel metus. Vestibulum sit amet erat at nulla eleifend gravida.&lt;/p&gt;
-&lt;p&gt;Nullam vel molestie justo. Curabitur vitae efficitur leo. In hac habitasse platea dictumst. Sed pulvinar mauris dui, eget varius purus congue ac. Nulla euismod, lorem vel elementum dapibus, nunc justo porta mi, sed tempus est est vel tellus. Nam et enim eleifend, laoreet sem sit amet, elementum sem. Morbi ut leo congue, maximus velit ut, finibus arcu. In et libero cursus, rutrum risus non, molestie leo. Nullam congue quam et volutpat malesuada. Sed risus tortor, pulvinar et dictum nec, sodales non mi. Phasellus lacinia commodo laoreet. Nam mollis, erat in feugiat consectetur, purus eros egestas tellus, in auctor urna odio at nibh. Mauris imperdiet nisi ac magna convallis, at rhoncus ligula cursus.&lt;/p&gt;
-&lt;p&gt;Cras aliquam rhoncus ipsum, in hendrerit nunc mattis vitae. Duis vitae efficitur metus, ac tempus leo. Cras nec fringilla lacus. Quisque sit amet risus at ipsum pharetra commodo. Sed aliquam mauris at consequat eleifend. Praesent porta, augue sed viverra bibendum, neque ante euismod ante, in vehicula justo lorem ac eros. Suspendisse augue libero, venenatis eget tincidunt ut, malesuada at lorem. Donec vitae bibendum arcu. Aenean maximus nulla non pretium iaculis. Quisque imperdiet, nulla in pulvinar aliquet, velit quam ultrices quam, sit amet fringilla leo sem vel nunc. Mauris in lacinia lacus.&lt;/p&gt;
-&lt;p&gt;Suspendisse a tincidunt lacus. Curabitur at urna sagittis, dictum ante sit amet, euismod magna. Sed rutrum massa id tortor commodo, vitae elementum turpis tempus. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean purus turpis, venenatis a ullamcorper nec, tincidunt et massa. Integer posuere quam rutrum arcu vehicula imperdiet. Mauris ullamcorper quam vitae purus congue, quis euismod magna eleifend. Vestibulum semper vel augue eget tincidunt. Fusce eget justo sodales, dapibus odio eu, ultrices lorem. Duis condimentum lorem id eros commodo, in facilisis mauris scelerisque. Morbi sed auctor leo. Nullam volutpat a lacus quis pharetra. Nulla congue rutrum magna a ornare.&lt;/p&gt;
-&lt;p&gt;Aliquam in turpis accumsan, malesuada nibh ut, hendrerit justo. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Quisque sed erat nec justo posuere suscipit. Donec ut efficitur arcu, in malesuada neque. Nunc dignissim nisl massa, id vulputate nunc pretium nec. Quisque eget urna in risus suscipit ultricies. Pellentesque odio odio, tincidunt in eleifend sed, posuere a diam. Nam gravida nisl convallis semper elementum. Morbi vitae felis faucibus, vulputate orci placerat, aliquet nisi. Aliquam erat volutpat. Maecenas sagittis pulvinar purus, sed porta quam laoreet at.&lt;/p&gt;
-</description>
+      <guid>https://manueleleonelli.github.io/project/bnmonitor/</guid>
+      <description></description>
     </item>
     
     <item>
-      <title>An example journal article</title>
-      <link>https://manueleleonelli.github.io/publication/journal-article/</link>
-      <pubDate>Tue, 01 Sep 2015 00:00:00 +0000</pubDate>
-      <guid>https://manueleleonelli.github.io/publication/journal-article/</guid>
-      <description>&lt;div class=&#34;alert alert-note&#34;&gt;
-  &lt;div&gt;
-    Click the &lt;em&gt;Cite&lt;/em&gt; button above to demo the feature to enable visitors to import publication metadata into their reference management software.
-  &lt;/div&gt;
-&lt;/div&gt;
-&lt;div class=&#34;alert alert-note&#34;&gt;
-  &lt;div&gt;
-    Create your slides in Markdown - click the &lt;em&gt;Slides&lt;/em&gt; button to check out the example.
-  &lt;/div&gt;
-&lt;/div&gt;
-&lt;p&gt;Supplementary notes can be added here, including &lt;a href=&#34;https://wowchemy.com/docs/writing-markdown-latex/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;code, math, and images&lt;/a&gt;.&lt;/p&gt;
-</description>
+      <title>extrememix</title>
+      <link>https://manueleleonelli.github.io/project/extrememix/</link>
+      <pubDate>Wed, 27 Apr 2016 00:00:00 +0000</pubDate>
+      <guid>https://manueleleonelli.github.io/project/extrememix/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>stagedtrees</title>
+      <link>https://manueleleonelli.github.io/project/stagedtrees/</link>
+      <pubDate>Wed, 27 Apr 2016 00:00:00 +0000</pubDate>
+      <guid>https://manueleleonelli.github.io/project/stagedtrees/</guid>
+      <description></description>
     </item>
     
     <item>
@@ -891,22 +877,43 @@ Three
     </item>
     
     <item>
-      <title>An example conference paper</title>
-      <link>https://manueleleonelli.github.io/publication/conference-paper/</link>
-      <pubDate>Mon, 01 Jul 2013 00:00:00 +0000</pubDate>
-      <guid>https://manueleleonelli.github.io/publication/conference-paper/</guid>
-      <description>&lt;div class=&#34;alert alert-note&#34;&gt;
-  &lt;div&gt;
-    Click the &lt;em&gt;Cite&lt;/em&gt; button above to demo the feature to enable visitors to import publication metadata into their reference management software.
-  &lt;/div&gt;
-&lt;/div&gt;
-&lt;div class=&#34;alert alert-note&#34;&gt;
-  &lt;div&gt;
-    Create your slides in Markdown - click the &lt;em&gt;Slides&lt;/em&gt; button to check out the example.
-  &lt;/div&gt;
-&lt;/div&gt;
-&lt;p&gt;Supplementary notes can be added here, including &lt;a href=&#34;https://wowchemy.com/docs/writing-markdown-latex/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;code, math, and images&lt;/a&gt;.&lt;/p&gt;
-</description>
+      <title>Decision focused inference on networked probabilistic systems, with applications to food security</title>
+      <link>https://manueleleonelli.github.io/publication/jsm/</link>
+      <pubDate>Sat, 01 Aug 2015 00:00:00 +0000</pubDate>
+      <guid>https://manueleleonelli.github.io/publication/jsm/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>A differential approach for staged trees</title>
+      <link>https://manueleleonelli.github.io/publication/differential/</link>
+      <pubDate>Wed, 01 Jul 2015 00:00:00 +0000</pubDate>
+      <guid>https://manueleleonelli.github.io/publication/differential/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Coherent frameworks for statistical inference serving integrating decision support systems</title>
+      <link>https://manueleleonelli.github.io/publication/coherent/</link>
+      <pubDate>Wed, 01 Jul 2015 00:00:00 +0000</pubDate>
+      <guid>https://manueleleonelli.github.io/publication/coherent/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Dynamic uncertainty handling for coherent decision making in nuclear emergency response</title>
+      <link>https://manueleleonelli.github.io/publication/nuclear/</link>
+      <pubDate>Fri, 01 Nov 2013 00:00:00 +0000</pubDate>
+      <guid>https://manueleleonelli.github.io/publication/nuclear/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Using graphical models and multi-attribute utility theory for probabilistic uncertainty handling in large systems, with application to the nuclear emergency management</title>
+      <link>https://manueleleonelli.github.io/publication/brisbane/</link>
+      <pubDate>Mon, 01 Apr 2013 00:00:00 +0000</pubDate>
+      <guid>https://manueleleonelli.github.io/publication/brisbane/</guid>
+      <description></description>
     </item>
     
     <item>
@@ -915,6 +922,164 @@ Three
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       <guid>https://manueleleonelli.github.io/admin/config.yml</guid>
       <description></description>
+    </item>
+    
+    <item>
+      <title>Bayesian Statistics</title>
+      <link>https://manueleleonelli.github.io/teaching/bayesian/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>https://manueleleonelli.github.io/teaching/bayesian/</guid>
+      <description>&lt;h2 id=&#34;subject-description&#34;&gt;Subject Description&lt;/h2&gt;
+&lt;p&gt;We often use probabilities informally to express our information and beliefs about unknown quantities. However, the use of probabilities to express information can be made formal: In a precise mathematical sense, it can be shown that probabilities can numerically represent a set of rational beliefs, that there is a relationship between probability and information, and that Bayes’ rule provides a rational method for updating beliefs in light of new information. The process of inductive learning via Bayes’ rule is referred to as Bayesian Inference.&lt;/p&gt;
+&lt;p&gt;More generally, Bayesian methods are data analysis tools that are derived from the principles of Bayesian inference. In addition to their formal interpretation as a means of induction, Bayesian methods provide:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;parameter estimates with good statistical properties;&lt;/li&gt;
+&lt;li&gt;parsimonious descriptions of observed data;&lt;/li&gt;
+&lt;li&gt;predictions for missing data and forecasts of future data;&lt;/li&gt;
+&lt;li&gt;a computational framework for model estimation, selection and validation.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Thus, the use of Bayesian methods goes beyond the formal task of induction for which the methods are derived. Throughout this module we will explore the broad uses of Bayesian methods for a variety of inferential and statistical tasks.&lt;/p&gt;
+&lt;h2 id=&#34;objectives-and-skills&#34;&gt;Objectives and Skills&lt;/h2&gt;
+&lt;p&gt;At the end of the course, you will be able to:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Summarize the basic steps of a Bayesian inferential analysis.&lt;/li&gt;
+&lt;li&gt;Perform prior to posterior updating of probabilities.&lt;/li&gt;
+&lt;li&gt;Model real-world data with Bayesian methods.&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Graphical Modelling of Data Dependance</title>
+      <link>https://manueleleonelli.github.io/teaching/pgms/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>https://manueleleonelli.github.io/teaching/pgms/</guid>
+      <description>&lt;h2 id=&#34;subject-description&#34;&gt;Subject Description&lt;/h2&gt;
+&lt;p&gt;Probabilistic graphical models (PGMs) are a rich framework for encoding probability distributions over complex domains: joint (multivariate) distributions over large numbers of random variables that interact with each other. These representations sit at the intersection of statistics and computer science, relying on concepts from probability theory, graph algorithms, machine learning, and more. They are the basis for the state-of-the-art methods in a wide variety of applications, such as medical diagnosis, image understanding, speech recognition, natural language processing, and many, many more. They are also a foundational tool in formulating many machine learning problems.&lt;/p&gt;
+&lt;p&gt;The module focus on a specific PGM called Bayesian network, which is the most commonly used to explore the dependence structure in datasets. The course discusses both its theoretical properties as well as its use in practice. The focus will then move to inferential problems, i.e. how a Bayesian network can be used to answer questions, and learning algorithms, i.e. how the structure of the Bayesian network can be inferred from data.&lt;/p&gt;
+&lt;h2 id=&#34;objectives-and-skills&#34;&gt;Objectives and Skills&lt;/h2&gt;
+&lt;p&gt;At the end of the course, you will be able to:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;Describe the relationship between variables by means of a Bayesian network&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Use Bayesian networks to perform inferential tasks&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Learn Bayesian networks from data&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Implement Bayesian networks in R.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Maths for Computing</title>
+      <link>https://manueleleonelli.github.io/teaching/maths/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>https://manueleleonelli.github.io/teaching/maths/</guid>
+      <description>&lt;h2 id=&#34;learning-objectives&#34;&gt;Learning Objectives&lt;/h2&gt;
+&lt;p&gt;The main goal of this course is to provide a mathematical foundation for analyzing data and drawing inferences from that analysis. Moreover, the course aims to increase the student&amp;rsquo;s mastery of the deductive nature of reasoning and understanding the nature of critical thinking while increasing the student&amp;rsquo;s problem-solving abilities and abstract deduction.&lt;/p&gt;
+&lt;p&gt;In this course, students will learn a particular set of mathematical facts and how to apply them. They will work with discrete structures including sets and graphs. Students will investigate the basic techniques of counting as well as the foundations of both linear algebra and calculus. Real world applications will motivate and illustrate the methodology.&lt;/p&gt;
+&lt;p&gt;The course is divided into four modules:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Introduction to mathematical reasoning&lt;/li&gt;
+&lt;li&gt;Matrices and linear algebra&lt;/li&gt;
+&lt;li&gt;Calculus&lt;/li&gt;
+&lt;li&gt;Additional topics in mathematics&lt;/li&gt;
+&lt;/ol&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Maths Lab</title>
+      <link>https://manueleleonelli.github.io/teaching/math/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>https://manueleleonelli.github.io/teaching/math/</guid>
+      <description>&lt;h2 id=&#34;learning-objectives&#34;&gt;Learning Objectives&lt;/h2&gt;
+&lt;p&gt;The course has two major objectives: first, to provide an overview of the R programming language for statistical analysis; second, to discuss the reporting of a statistical analysis. Throughout the course the following topics will be discussed:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;An introduction to R and data manipulation&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Plots in R and exploratory data analysis&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Implementation of linear regression and interpretation&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Throughout the course students will implement their own data analysis and report it in a concise manner. Feedback from both the professor and the peers will be given at various points.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Probability for Computing Science</title>
+      <link>https://manueleleonelli.github.io/teaching/probability/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>https://manueleleonelli.github.io/teaching/probability/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Simulating and Modeling to Understand Change</title>
+      <link>https://manueleleonelli.github.io/teaching/simulation/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>https://manueleleonelli.github.io/teaching/simulation/</guid>
+      <description>&lt;h2 id=&#34;subject-description&#34;&gt;Subject Description&lt;/h2&gt;
+&lt;p&gt;Simulation and modeling is an emerging area of scientific investigation. Putting it simple, simulation and modeling is a substitute for physical experimentation in which computers are used to explore some physical phenomenon. It can then facilitate understanding of a particular system without testing the system in the real world. It also has some advantages over physical experimentation. For example, simulations can be more realistic than traditional experiments, and can be conducted faster. Simulation is used in many areas of natural and social sciences, such as mathematics, physics, engineering, psychology, and biology.&lt;/p&gt;
+&lt;p&gt;This course covers Monte Carlo simulation, and will discuss how simulation and modeling can be used to solve real-life problems. Students will learn and practice statistics and programming. At the end of the course, the students will know how to conduct a simulation study and to model some real-life scenarios. The students will also learn how to write scientific reports to communicate their findings clearly and in a rigorous form.&lt;/p&gt;
+&lt;p&gt;The 7 Core Topics or Modules of the course will be:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Module 1: R programming for Simulation and Modeling&lt;/li&gt;
+&lt;li&gt;Module 2: Random Variables Simulation&lt;/li&gt;
+&lt;li&gt;Module 3: Monte Carlo Methods&lt;/li&gt;
+&lt;li&gt;Module 4: Beyond Monte Carlo&lt;/li&gt;
+&lt;li&gt;Module 5: Discrete Event Simulation&lt;/li&gt;
+&lt;li&gt;Module 6: Introduction to Modelling&lt;/li&gt;
+&lt;li&gt;Module 7: Modelling Approaches&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;objectives-and-skills&#34;&gt;Objectives and Skills&lt;/h2&gt;
+&lt;p&gt;At the end of the course, you will:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Understand simulation models and simulation studies.&lt;/li&gt;
+&lt;li&gt;Learn the statistical concepts behind random variable generation.&lt;/li&gt;
+&lt;li&gt;Use R to conduct modeling and simulation studies.&lt;/li&gt;
+&lt;li&gt;Understand basic modelling strategies&lt;/li&gt;
+&lt;li&gt;Apply statistical modelling in real-world settings.&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Statistics and Probability</title>
+      <link>https://manueleleonelli.github.io/teaching/stats/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>https://manueleleonelli.github.io/teaching/stats/</guid>
+      <description>&lt;h2 id=&#34;learning-objectives&#34;&gt;Learning Objectives&lt;/h2&gt;
+&lt;p&gt;Statistics is the science of data. This course is an introduction to statistics for students that may have not been exposed to the subject based on this principle. Methods of basic statistics are presented in a way that emphasizes working with data and mastering statistical reasoning. The course is elementary in mathematical level but conceptually rich in statistical ideas. After completing the course, students should be able to think objectively about conclusions drawn from data and use statistical methods in their own work.&lt;/p&gt;
+&lt;p&gt;The course is divided in four modules:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;pre&gt;&lt;code&gt;Introduction to Statistics
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;pre&gt;&lt;code&gt;Probability and Mathematical Statistics
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;pre&gt;&lt;code&gt;Statistical Modelling
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;pre&gt;&lt;code&gt;Advanced Topics in Statistics&lt;/code&gt;&lt;/pre&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+</description>
     </item>
     
   </channel>

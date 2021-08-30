@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Martine J. Barons | Manuele Leonelli</title>
+    <link>https://manueleleonelli.github.io/author/martine-j.-barons/</link>
+      <atom:link href="https://manueleleonelli.github.io/author/martine-j.-barons/index.xml" rel="self" type="application/rss+xml" />
+    <description>Martine J. Barons</description>
+    <generator>Wowchemy (https://wowchemy.com)</generator><language>en-us</language><lastBuildDate>Sat, 01 Aug 2015 00:00:00 +0000</lastBuildDate>
+    <image>
+      <url>https://manueleleonelli.github.io/media/icon_hua2ec155b4296a9c9791d015323e16eb5_11927_512x512_fill_lanczos_center_3.png</url>
+      <title>Martine J. Barons</title>
+      <link>https://manueleleonelli.github.io/author/martine-j.-barons/</link>
+    </image>
+    
+    <item>
+      <title>Decision focused inference on networked probabilistic systems, with applications to food security</title>
+      <link>https://manueleleonelli.github.io/publication/jsm/</link>
+      <pubDate>Sat, 01 Aug 2015 00:00:00 +0000</pubDate>
+      <guid>https://manueleleonelli.github.io/publication/jsm/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Coherent frameworks for statistical inference serving integrating decision support systems</title>
+      <link>https://manueleleonelli.github.io/publication/coherent/</link>
+      <pubDate>Wed, 01 Jul 2015 00:00:00 +0000</pubDate>
+      <guid>https://manueleleonelli.github.io/publication/coherent/</guid>
+      <description></description>
+    </item>
+    
+  </channel>
+</rss>

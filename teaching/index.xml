@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Teachings | Manuele Leonelli</title>
+    <link>https://manueleleonelli.github.io/teaching/</link>
+      <atom:link href="https://manueleleonelli.github.io/teaching/index.xml" rel="self" type="application/rss+xml" />
+    <description>Teachings</description>
+    <generator>Wowchemy (https://wowchemy.com)</generator><language>en-us</language>
+    <image>
+      <url>https://manueleleonelli.github.io/media/icon_hua2ec155b4296a9c9791d015323e16eb5_11927_512x512_fill_lanczos_center_3.png</url>
+      <title>Teachings</title>
+      <link>https://manueleleonelli.github.io/teaching/</link>
+    </image>
+    
+    <item>
+      <title>Bayesian Statistics</title>
+      <link>https://manueleleonelli.github.io/teaching/bayesian/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>https://manueleleonelli.github.io/teaching/bayesian/</guid>
+      <description>&lt;h2 id=&#34;subject-description&#34;&gt;Subject Description&lt;/h2&gt;
+&lt;p&gt;We often use probabilities informally to express our information and beliefs about unknown quantities. However, the use of probabilities to express information can be made formal: In a precise mathematical sense, it can be shown that probabilities can numerically represent a set of rational beliefs, that there is a relationship between probability and information, and that Bayes’ rule provides a rational method for updating beliefs in light of new information. The process of inductive learning via Bayes’ rule is referred to as Bayesian Inference.&lt;/p&gt;
+&lt;p&gt;More generally, Bayesian methods are data analysis tools that are derived from the principles of Bayesian inference. In addition to their formal interpretation as a means of induction, Bayesian methods provide:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;parameter estimates with good statistical properties;&lt;/li&gt;
+&lt;li&gt;parsimonious descriptions of observed data;&lt;/li&gt;
+&lt;li&gt;predictions for missing data and forecasts of future data;&lt;/li&gt;
+&lt;li&gt;a computational framework for model estimation, selection and validation.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Thus, the use of Bayesian methods goes beyond the formal task of induction for which the methods are derived. Throughout this module we will explore the broad uses of Bayesian methods for a variety of inferential and statistical tasks.&lt;/p&gt;
+&lt;h2 id=&#34;objectives-and-skills&#34;&gt;Objectives and Skills&lt;/h2&gt;
+&lt;p&gt;At the end of the course, you will be able to:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Summarize the basic steps of a Bayesian inferential analysis.&lt;/li&gt;
+&lt;li&gt;Perform prior to posterior updating of probabilities.&lt;/li&gt;
+&lt;li&gt;Model real-world data with Bayesian methods.&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Graphical Modelling of Data Dependance</title>
+      <link>https://manueleleonelli.github.io/teaching/pgms/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>https://manueleleonelli.github.io/teaching/pgms/</guid>
+      <description>&lt;h2 id=&#34;subject-description&#34;&gt;Subject Description&lt;/h2&gt;
+&lt;p&gt;Probabilistic graphical models (PGMs) are a rich framework for encoding probability distributions over complex domains: joint (multivariate) distributions over large numbers of random variables that interact with each other. These representations sit at the intersection of statistics and computer science, relying on concepts from probability theory, graph algorithms, machine learning, and more. They are the basis for the state-of-the-art methods in a wide variety of applications, such as medical diagnosis, image understanding, speech recognition, natural language processing, and many, many more. They are also a foundational tool in formulating many machine learning problems.&lt;/p&gt;
+&lt;p&gt;The module focus on a specific PGM called Bayesian network, which is the most commonly used to explore the dependence structure in datasets. The course discusses both its theoretical properties as well as its use in practice. The focus will then move to inferential problems, i.e. how a Bayesian network can be used to answer questions, and learning algorithms, i.e. how the structure of the Bayesian network can be inferred from data.&lt;/p&gt;
+&lt;h2 id=&#34;objectives-and-skills&#34;&gt;Objectives and Skills&lt;/h2&gt;
+&lt;p&gt;At the end of the course, you will be able to:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;Describe the relationship between variables by means of a Bayesian network&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Use Bayesian networks to perform inferential tasks&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Learn Bayesian networks from data&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Implement Bayesian networks in R.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Maths for Computing</title>
+      <link>https://manueleleonelli.github.io/teaching/maths/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>https://manueleleonelli.github.io/teaching/maths/</guid>
+      <description>&lt;h2 id=&#34;learning-objectives&#34;&gt;Learning Objectives&lt;/h2&gt;
+&lt;p&gt;The main goal of this course is to provide a mathematical foundation for analyzing data and drawing inferences from that analysis. Moreover, the course aims to increase the student&amp;rsquo;s mastery of the deductive nature of reasoning and understanding the nature of critical thinking while increasing the student&amp;rsquo;s problem-solving abilities and abstract deduction.&lt;/p&gt;
+&lt;p&gt;In this course, students will learn a particular set of mathematical facts and how to apply them. They will work with discrete structures including sets and graphs. Students will investigate the basic techniques of counting as well as the foundations of both linear algebra and calculus. Real world applications will motivate and illustrate the methodology.&lt;/p&gt;
+&lt;p&gt;The course is divided into four modules:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Introduction to mathematical reasoning&lt;/li&gt;
+&lt;li&gt;Matrices and linear algebra&lt;/li&gt;
+&lt;li&gt;Calculus&lt;/li&gt;
+&lt;li&gt;Additional topics in mathematics&lt;/li&gt;
+&lt;/ol&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Maths Lab</title>
+      <link>https://manueleleonelli.github.io/teaching/math/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>https://manueleleonelli.github.io/teaching/math/</guid>
+      <description>&lt;h2 id=&#34;learning-objectives&#34;&gt;Learning Objectives&lt;/h2&gt;
+&lt;p&gt;The course has two major objectives: first, to provide an overview of the R programming language for statistical analysis; second, to discuss the reporting of a statistical analysis. Throughout the course the following topics will be discussed:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;An introduction to R and data manipulation&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Plots in R and exploratory data analysis&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Implementation of linear regression and interpretation&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Throughout the course students will implement their own data analysis and report it in a concise manner. Feedback from both the professor and the peers will be given at various points.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Probability for Computing Science</title>
+      <link>https://manueleleonelli.github.io/teaching/probability/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>https://manueleleonelli.github.io/teaching/probability/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Simulating and Modeling to Understand Change</title>
+      <link>https://manueleleonelli.github.io/teaching/simulation/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>https://manueleleonelli.github.io/teaching/simulation/</guid>
+      <description>&lt;h2 id=&#34;subject-description&#34;&gt;Subject Description&lt;/h2&gt;
+&lt;p&gt;Simulation and modeling is an emerging area of scientific investigation. Putting it simple, simulation and modeling is a substitute for physical experimentation in which computers are used to explore some physical phenomenon. It can then facilitate understanding of a particular system without testing the system in the real world. It also has some advantages over physical experimentation. For example, simulations can be more realistic than traditional experiments, and can be conducted faster. Simulation is used in many areas of natural and social sciences, such as mathematics, physics, engineering, psychology, and biology.&lt;/p&gt;
+&lt;p&gt;This course covers Monte Carlo simulation, and will discuss how simulation and modeling can be used to solve real-life problems. Students will learn and practice statistics and programming. At the end of the course, the students will know how to conduct a simulation study and to model some real-life scenarios. The students will also learn how to write scientific reports to communicate their findings clearly and in a rigorous form.&lt;/p&gt;
+&lt;p&gt;The 7 Core Topics or Modules of the course will be:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Module 1: R programming for Simulation and Modeling&lt;/li&gt;
+&lt;li&gt;Module 2: Random Variables Simulation&lt;/li&gt;
+&lt;li&gt;Module 3: Monte Carlo Methods&lt;/li&gt;
+&lt;li&gt;Module 4: Beyond Monte Carlo&lt;/li&gt;
+&lt;li&gt;Module 5: Discrete Event Simulation&lt;/li&gt;
+&lt;li&gt;Module 6: Introduction to Modelling&lt;/li&gt;
+&lt;li&gt;Module 7: Modelling Approaches&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;objectives-and-skills&#34;&gt;Objectives and Skills&lt;/h2&gt;
+&lt;p&gt;At the end of the course, you will:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Understand simulation models and simulation studies.&lt;/li&gt;
+&lt;li&gt;Learn the statistical concepts behind random variable generation.&lt;/li&gt;
+&lt;li&gt;Use R to conduct modeling and simulation studies.&lt;/li&gt;
+&lt;li&gt;Understand basic modelling strategies&lt;/li&gt;
+&lt;li&gt;Apply statistical modelling in real-world settings.&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Statistics and Probability</title>
+      <link>https://manueleleonelli.github.io/teaching/stats/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>https://manueleleonelli.github.io/teaching/stats/</guid>
+      <description>&lt;h2 id=&#34;learning-objectives&#34;&gt;Learning Objectives&lt;/h2&gt;
+&lt;p&gt;Statistics is the science of data. This course is an introduction to statistics for students that may have not been exposed to the subject based on this principle. Methods of basic statistics are presented in a way that emphasizes working with data and mastering statistical reasoning. The course is elementary in mathematical level but conceptually rich in statistical ideas. After completing the course, students should be able to think objectively about conclusions drawn from data and use statistical methods in their own work.&lt;/p&gt;
+&lt;p&gt;The course is divided in four modules:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;pre&gt;&lt;code&gt;Introduction to Statistics
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;pre&gt;&lt;code&gt;Probability and Mathematical Statistics
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;pre&gt;&lt;code&gt;Statistical Modelling
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;pre&gt;&lt;code&gt;Advanced Topics in Statistics&lt;/code&gt;&lt;/pre&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

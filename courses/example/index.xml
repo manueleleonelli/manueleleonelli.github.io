@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>📊 Learn Data Science | Manuele Leonelli</title>
+    <title>Maths for Computing | Manuele Leonelli</title>
     <link>https://manueleleonelli.github.io/courses/example/</link>
       <atom:link href="https://manueleleonelli.github.io/courses/example/index.xml" rel="self" type="application/rss+xml" />
-    <description>📊 Learn Data Science</description>
-    <generator>Wowchemy (https://wowchemy.com)</generator><language>en-us</language><lastBuildDate>Sun, 24 Jan 2021 00:00:00 +0000</lastBuildDate>
+    <description>Maths for Computing</description>
+    <generator>Wowchemy (https://wowchemy.com)</generator><language>en-us</language><lastBuildDate>Fri, 01 Jan 2021 00:00:00 +0000</lastBuildDate>
     <image>
       <url>https://manueleleonelli.github.io/courses/example/featured.jpg</url>
-      <title>📊 Learn Data Science</title>
+      <title>Maths for Computing</title>
       <link>https://manueleleonelli.github.io/courses/example/</link>
     </image>
     

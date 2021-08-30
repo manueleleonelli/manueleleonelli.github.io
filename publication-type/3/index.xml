@@ -69,24 +69,18 @@
     </item>
     
     <item>
-      <title>An example preprint / working paper</title>
-      <link>https://manueleleonelli.github.io/publication/preprint/</link>
-      <pubDate>Sun, 07 Apr 2019 00:00:00 +0000</pubDate>
-      <guid>https://manueleleonelli.github.io/publication/preprint/</guid>
-      <description>&lt;div class=&#34;alert alert-note&#34;&gt;
-  &lt;div&gt;
-    Create your slides in Markdown - click the &lt;em&gt;Slides&lt;/em&gt; button to check out the example.
-  &lt;/div&gt;
-&lt;/div&gt;
-&lt;p&gt;Supplementary notes can be added here, including &lt;a href=&#34;https://wowchemy.com/docs/writing-markdown-latex/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;code, math, and images&lt;/a&gt;.&lt;/p&gt;
-</description>
-    </item>
-    
-    <item>
       <title>A geometric characterization of sensitivity analysis in monomial models</title>
       <link>https://manueleleonelli.github.io/publication/geometric/</link>
       <pubDate>Sat, 01 Dec 2018 00:00:00 +0000</pubDate>
       <guid>https://manueleleonelli.github.io/publication/geometric/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Coherent frameworks for statistical inference serving integrating decision support systems</title>
+      <link>https://manueleleonelli.github.io/publication/coherent/</link>
+      <pubDate>Wed, 01 Jul 2015 00:00:00 +0000</pubDate>
+      <guid>https://manueleleonelli.github.io/publication/coherent/</guid>
       <description></description>
     </item>
     

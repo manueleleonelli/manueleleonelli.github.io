@@ -71,12 +71,6 @@
     <loc>https://manueleleonelli.github.io/publication/causal/</loc>
     <lastmod>2021-06-01T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://manueleleonelli.github.io/courses/</loc>
-    <lastmod>2021-01-24T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>https://manueleleonelli.github.io/courses/example/</loc>
-    <lastmod>2021-01-24T00:00:00+00:00</lastmod>
-  </url><url>
     <loc>https://manueleleonelli.github.io/publication-type/2/</loc>
     <lastmod>2021-01-01T00:00:00+00:00</lastmod>
   </url><url>
@@ -90,6 +84,12 @@
     <lastmod>2021-01-01T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://manueleleonelli.github.io/tag/extremes/</loc>
+    <lastmod>2021-01-01T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://manueleleonelli.github.io/courses/example/</loc>
+    <lastmod>2021-01-01T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://manueleleonelli.github.io/courses/</loc>
     <lastmod>2021-01-01T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://manueleleonelli.github.io/tag/academic/</loc>
@@ -185,12 +185,6 @@
     <loc>https://manueleleonelli.github.io/post/writing-technical-content/</loc>
     <lastmod>2019-07-12T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://manueleleonelli.github.io/publication/preprint/</loc>
-    <lastmod>2019-04-07T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>https://manueleleonelli.github.io/tag/source-themes/</loc>
-    <lastmod>2019-04-07T00:00:00+00:00</lastmod>
-  </url><url>
     <loc>https://manueleleonelli.github.io/post/jupyter/</loc>
     <lastmod>2019-09-05T00:00:00+00:00</lastmod>
   </url><url>
@@ -206,40 +200,68 @@
     <loc>https://manueleleonelli.github.io/news/</loc>
     <lastmod>2017-12-01T00:00:00+00:00</lastmod>
   </url><url>
+    <loc>https://manueleleonelli.github.io/publication/amai/</loc>
+    <lastmod>2017-06-09T00:00:00+00:00</lastmod>
+  </url><url>
     <loc>https://manueleleonelli.github.io/publication/deca/</loc>
     <lastmod>2017-05-09T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://manueleleonelli.github.io/tag/deep-learning/</loc>
+    <loc>https://manueleleonelli.github.io/publication/is/</loc>
+    <lastmod>2017-05-09T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://manueleleonelli.github.io/project/bnmonitor/</loc>
     <lastmod>2016-04-27T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://manueleleonelli.github.io/tag/demo/</loc>
-    <lastmod>2016-04-27T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>https://manueleleonelli.github.io/project/external-project/</loc>
-    <lastmod>2016-04-27T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>https://manueleleonelli.github.io/project/internal-project/</loc>
+    <loc>https://manueleleonelli.github.io/project/extrememix/</loc>
     <lastmod>2016-04-27T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://manueleleonelli.github.io/project/</loc>
     <lastmod>2016-04-27T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://manueleleonelli.github.io/publication/journal-article/</loc>
-    <lastmod>2015-09-01T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>https://manueleleonelli.github.io/author/robert-ford/</loc>
-    <lastmod>2015-09-01T00:00:00+00:00</lastmod>
+    <loc>https://manueleleonelli.github.io/project/stagedtrees/</loc>
+    <lastmod>2016-04-27T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://manueleleonelli.github.io/publication/anor/</loc>
     <lastmod>2015-08-12T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://manueleleonelli.github.io/publication-type/1/</loc>
-    <lastmod>2013-07-01T00:00:00+00:00</lastmod>
+    <lastmod>2015-08-01T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://manueleleonelli.github.io/publication/conference-paper/</loc>
-    <lastmod>2013-07-01T00:00:00+00:00</lastmod>
+    <loc>https://manueleleonelli.github.io/publication/jsm/</loc>
+    <lastmod>2015-08-01T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://manueleleonelli.github.io/author/martine-j.-barons/</loc>
+    <lastmod>2015-08-01T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://manueleleonelli.github.io/publication/differential/</loc>
+    <lastmod>2015-07-01T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://manueleleonelli.github.io/publication/coherent/</loc>
+    <lastmod>2015-07-01T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://manueleleonelli.github.io/publication/nuclear/</loc>
+    <lastmod>2013-11-01T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://manueleleonelli.github.io/publication/brisbane/</loc>
+    <lastmod>2013-04-01T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://manueleleonelli.github.io/admin/</loc>
+  </url><url>
+    <loc>https://manueleleonelli.github.io/teaching/bayesian/</loc>
+  </url><url>
+    <loc>https://manueleleonelli.github.io/teaching/pgms/</loc>
+  </url><url>
+    <loc>https://manueleleonelli.github.io/teaching/maths/</loc>
+  </url><url>
+    <loc>https://manueleleonelli.github.io/teaching/math/</loc>
+  </url><url>
+    <loc>https://manueleleonelli.github.io/teaching/probability/</loc>
+  </url><url>
+    <loc>https://manueleleonelli.github.io/teaching/simulation/</loc>
+  </url><url>
+    <loc>https://manueleleonelli.github.io/teaching/stats/</loc>
+  </url><url>
+    <loc>https://manueleleonelli.github.io/teaching/</loc>
   </url><url>
     <loc>https://manueleleonelli.github.io/author/%E5%90%B3%E6%81%A9%E9%81%94/</loc>
   </url>
