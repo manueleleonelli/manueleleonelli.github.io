@@ -1,0 +1,1014 @@
+% Chapter Template
+
+\chapter{Distributed Propagation in Integrating Systems} 
+
+\label{chapter4} % Change X to a consecutive number; for referencing this chapter elsewhere, use \ref{ChapterX}
+
+\lhead{Chapter 4. \emph{Distributed Propagation in Integrating Models}} % Change X to a consecutive number; this is for the header on each page - perhaps a shortened title
+
+The \gls{IDSS} methodology introduced in Chapter \ref{chapter3} provides a coherent framework for combining expert judgements and models into a unique entity. Inference can be also distributed in such systems as extensively illustrated in the previous chapter. We now focus on methods to exactly compute the expected utility scores of the available decisions to support decision centres in policy choices. Some of these results have been already reported in \citet{Leonelli2015}.
+
+A commonly used naive method is for the group to simply plug in estimates of observables to compare the efficacy of different policies. However, in general, a proper risk analysis of the composite must also fold in measures of uncertainty about the outputs different panels deliver to the \gls{IDSS}. It has been known for some time that, even in very simple scenarios, ignoring uncertainties can lead a decision centre into choosing the wrong course of action \citep[see e.g.][and the examples of Section \ref{sec:exalgo}]{Leonelli2013}. This is because expected utility scores for competing suites of countermeasures often formally depend on these uncertainties. 
+
+In this chapter we consider a rather large \gls{CK-class}, describing a new family of highly asymmetric and dynamic decision problems with partial utility independence structures, and deduce conditions that ensure expected utilities can be written as functions of the panels' delivered beliefs only.  This can be done by introducing five structural assumptions specifying the group's agreement in this setting. To our knowledge this is the first application of partial utility specifications to the computation of expected utilities in graphical decision models.  We  then develop distributed propagation algorithms over the network of Expert Systems (ESs) of the \gls{IDSS} between the panels and the \gls{SB}. We are able to demonstrate that it is surprisingly simple to calculate propagation algorithms based on the autonomous panels' computations using standard backward induction, albeit in this novel and potentially very complex setting. These recursions extend standard evaluation algorithms to dynamic asymmetric domains with both probabilities and utilities individually delivered by groups of experts. Distributivity conditions  imply that the \gls{IDSS} is able to quickly produce forecasts and expected utility scores, enabling users to interrogate the system in real time. 
+
+For ease of notation, in this chapter we suppress the dependence on the parameter vectors and develop algorithms for the marginal distribution over the observables only. We have extensively studied in Chapter \ref{chapter3} conditions over the parameters that can guarantee that the marginal distribution over the whole \gls{IDSS} can be written as the product of the ones associated to each individual panel. Specifically, this is the case whenever panel independence holds. We explicitly label again the dependence on the parameter vectors in the examples of Section \ref{sec:exalgo}.
+
+The chapter is organised as follows. Section \ref{sec:asyclass} introduces the five structural assumptions defining a \gls{CK-class} comprising many of the models commonly used in practice. In Section \ref{sec:relation} we show that these assumptions correspond to an instance of the common knowledge axioms introduced in Chapter \ref{chapter3}. In Section \ref{sec:algorithms} we define our distributed propagation algorithms to compute various expected utility scores. Section \ref{sec:exalgo} presents the workings of the algorithms for a variety of examples \citep[that can also be found in][]{Leonelli2013,Leonelli2013a,Leonelli2015,Smith2015}. These examples also demonstrate the dangers associated to a non complete uncertainty handling due to the lack of integration of the modules. We conclude with a discussion.
+
+\section{An Instance of an Asymmetric and Dynamic Integrating System}
+\label{sec:asyclass}
+\subsection{The Common Knowledge Class}
+Let $\{\bm{Y}(t)\}_{t\in [T]}$, $[T]=\{1,2,\dots,T\}$, be a multivariate time series with finite horizon $T $ partitioned into $n$ multivariate time series $\{\bm{Y}_i(t)\}_{t\in [T]}$, with $i\in[n]$.  Each individual time series $\{\bm{Y}_i(t)\}_{t\in [T]}$ is overseen by the panel of experts $G_i$ and includes all the variables associated to the $i$-th \gls{DSS}. The sample space of $\bm{Y}(t)$ is $\bm{\mathcal{Y}}=\bigtimes_{i\in[n]}\bm{\mathcal{Y}}_i$, where $\bm{\mathcal{Y}}_i$ is the sample space of $\bm{Y}_i(t)$, $i\in[n]$, $t\in[T]$. We denote with lower case letters instantiations of these random vectors and, for any $t\in[T-1]$, the sample space of $(Y(t), Y(t+1))$ is $\bm{\mathcal{Y}}\bigtimes\bm{\mathcal{Y}}$. Recall that $\bm{Y}^t=(\bm{Y}(1)^\T,\dots,\bm{Y}(t)^\T)^\T$ and let $\Pi_i\subseteq[i{-1}]$. Just as in Chapter \ref{chapter3} we  assume here that the collective is jointly responsible for the definition of the necessary overarching probabilistic, preferential and decision structures. The structure within each individual module is on the other hand agreed  by the members of the relevant panel only \citep[as often in practice, see e.g.][]{von1986}. For ease of notation in Section \ref{sec:ddm} we suppress the dependence on the decisions $\bm{d}$ with no loss of generality. We again explicitly label this dependence from Section \ref{sec:asydd}.
+  
+\subsubsection{Distributed Dynamic Models.}
+The overall statistical model the collective needs to agree upon is, for the purpose of this chapter, a new dynamic graphical Bayesian model customised to the needs of multi-\glspl{ES}, here called \textbf{\gls{DDM}}. In a \gls{DDM}, just as for \glspl{MDM} and \glspl{DCG}, relationships between time series are depicted by a \gls{DAG} whose vertices are $\bm{Y}^T_i$, $i\in[n]$. Here we assume that the vector $\bm{Y}^T$ includes all the variables the collective is planning to take into account during the analysis. 
+
+We are now ready to formally define the \gls{DDM} model class. 
+
+\begin{figure}
+\entrymodifiers={++[o][F-]}
+\centerline{\scalebox{0.8}{
+\xymatrix{
+\mbox{\large$\bm{Y}^T_4$}&\mbox{\large$\bm{Y}^T_2$}\ar[d]\\
+\mbox{\large$\bm{Y}^T_1$}\ar[u]\ar[ur]\ar[r]&\mbox{\large$\bm{Y}^T_3$}
+}
+}}
+\caption{
+Example of a  directed acyclic graph of a distributed dynamic model depicting relationships between processes, not variables. \label{fig:DAGDDM}}
+\end{figure}
+
+
+\begin{definition}
+A \emph{\gls{DDM}} for the time series $\{\bm{Y}(t)\}_{t\in [T]}$ consists of:
+\begin{itemize}
+\item $n-1$ conditional independence statements for each time point $t\in[T]$  of the form 
+\begin{equation}
+\bm{Y}_i(t)\independent \bm{Y}^t_{[i{-1}]\setminus \Pi_i}\;|\; \bm{Y}^t_{\Pi_i},\bm{Y}^{t-1}_i;
+\label{eq:indDDM}
+\end{equation}
+\item a \gls{DAG} $\Gr$ with vertex set $V(\Gr)=\{\bm{Y}^T_i:i\in[n]\}$ and edge set $E(\Gr)$ including an element $(\bm{Y}^T_j,\bm{Y}^T_i)$ if $j\in\Pi_i$, $i\in[n]$.
+\end{itemize}
+\end{definition}
+
+The conditional independence structure of the \gls{DDM} implies that the only information to infer $\bm{Y}_i(t)$ from $\bm{Y}^t_{[i{-1}]\setminus \Pi_i}$, $\bm{Y}^t_{\Pi_i}$ and $\bm{Y}^{t-1}_i$ is from $\bm{Y}^t_{\Pi_i}$ and $\bm{Y}^{t-1}_i$. 
+
+An example of a \gls{DAG} associated to a \gls{DDM} is presented in Figure \ref{fig:DAGDDM}, corresponding to a dynamic variant of the \gls{BN} in Figure \ref{fig:BNexample}.  Such a \gls{DAG}, in contrast to the more common \gls{BN} whose \gls{DAG} represents relationships between single variables, specifies relationships across the components of different multivariate time series. It is important to note once more that statements embodied within this \gls{DAG} are \textit{qualitative} in nature and so in particular can more easily provide the framework for a \gls{CK-class} \citep{Smith1996a}. 
+
+Since the vertices of the underlying graph are time series, the topology of the \gls{DAG} does not change through time. Therefore, each time slice $\bm{Y}(t)$ of a \gls{DDM}, conditionally on the past, can also be described graphically by a \gls{DAG} with the same topology. This topology remains constant as time progresses. On the other hand the associated probabilities are allowed to be dynamically updated through time, using for example the \gls{DLM} approach illustrated in Section \ref{sec:DLM}. Each  time slice \gls{DAG} has vertex set equal to $\{\bm{Y}_i(t):i\in[n]\}$ and edges $\left(\bm{Y}_j(t),\bm{Y}_i(t)\right)$ if $j\in\Pi_i$, $i,j\in[n]$. We call this \gls{DAG} the \textbf{time slice \gls{DAG}} of the \gls{DDM}. 
+
+Just as for other Bayesian graphical models in the literature, the \gls{DDM} can be associated with a factorisation of the probability density function, which depends on the topology of the associated \gls{DAG}. Specifically, as a direct consequence of the conditional independence structure associated with a \gls{DDM}, we have the following result.
+ 
+\begin{proposition}
+\label{prop1}
+The joint probability density function $f$ associated to a \gls{DDM} for the time series $\{\bm{Y}(t)\}_{t\in [T]}$ can be written as
+\begin{equation*}
+\label{fact}
+f\left(\bm{y}^T\right)=\prod_{t\in[T]}\prod_{i\in[n]} f_{t,i}\left(\bm{y}_i(t)\;|\;\bm{y}_{\Pi_i}^t,\bm{y}^{t-1}_i\right).
+\end{equation*}
+\end{proposition}
+\begin{proof}
+The result follows by first applying the chain rule of probabilities so that 
+\begin{equation*}
+f(\bm{y}^T)=\prod_{t\in[T]}\prod_{i\in[n]}f_{t,i}(\bm{y}_i(t)\;|\;\bm{y}_1(t),\dots,\bm{y}_{i-1}(t),\bm{y}^{t-1}),
+\end{equation*}
+and then applying the conditional independences in equation (\ref{eq:indDDM}).
+\end{proof}
+
+For the purpose of the collective specification of the overarching probability model,   it is only relevant that the probability density can be \textit{qualitatively} written as a product of the terms $f_{t,i}$. The actual algebraic form of these terms and the \textit{quantitative} specification of the associated parameters is agreed, as we specify below and as usual in practice, by the members of the relevant panel only.  In this sense the algorithms we derive in Section \ref{sec:algorithms} are built on the agreed \textit{qualitative} framework within the collective \gls{CK-class} and are driven by the topology of the agreed \gls{DAG}.
+
+We note here that  the \gls{DDM} model class is very large. Particular instances of the \gls{DDM} have been extensively studied in the literature. For example, from Proposition \ref{prop:MDM2} it follows that the \gls{MDM} model class, and therefore also the \gls{LMDM} one, is a particular instance of a \gls{DDM}. Proposition \ref{prop:BNasDDM} guarantees that \glspl{BN} with appropriate global independence conditions are a member of the \gls{DDM} class. It can be similarly shown that \glspl{PCG} and \gls{DCG} (Sections \ref{sec:PCG} and \ref{sec:DCG} respectively) can be thought of as instances of a \gls{DDM} under certain assumptions. Consequently, all these models can be used to embellish the qualitative structure of a \gls{DDM} with explicit probabilistic specifications. 
+
+We are now ready to make the following assumption. Recall that $A_i'$ is the index set of the non-descendants of $\bm{Y}^T_i$, $i\in[n]$.
+\begin{assumption}
+The collective agrees to:
+\begin{itemize}
+\item describe the predictive factorisation of $\bm{Y}^T$ by a \gls{DDM}, whose  \gls{DAG} is connected and decomposable;
+\item assume that the elements of $\{\bm{Y}(t)\}_{t\in[T]}$ are observed according to the order defined by the following rules:
+\begin{itemize}
+\item  $\bm{Y}_{i}(t_1)$ is observed before $\bm{Y}_{j}(t_2)$ if $t_1<t_2$, for $i,j\in[n]$;
+\item  $\bm{Y}_{j}(t)$ is observed before $\bm{Y}_{i}(t)$ if $j\in A_i'$.
+\end{itemize}
+\end{itemize}
+\label{strutass1}
+\end{assumption}
+
+The requirement that the graph is decomposable is simply a technical one, similar to those used in junction trees propagation algorithms \citep[see e.g.][]{Lauritzen1992, Lauritzen1996a,Smith2010}. This condition provides the basis for fast computational algorithms for \glspl{BN}. In particular this ensures that no new dependencies are introduced in the \gls{IDSS} through the backward induction steps we define below. Note that any \gls{DAG} can be converted into a decomposable one which then gives a valid (albeit inefficient) representation of the underlying processes \citep[see e.g.][for an explicit description of this embedding, and Appendix \ref{appendixB}]{Smith2010}. In this sense this assumption is not too fierce. Furthermore, we can assume without any loss of generality that the network is connected, since if this were not the case, then, when the structural assumptions we introduce below hold, the overall problem could be decomposed into smaller and independent ones that could be treated separately.
+
+However, more critical is the assumption, as expressed in the second bullet, that it is possible to observe all the quantities the collective planned to observe in the order they happen. It has long been known that when the delivery of some of the data is delayed, the underlying conditional independence structure associated to certain instances of a \gls{DDM} breaks down \citep{Queen1993} and previously uncorrelated time series  overseen by different panels could then become highly correlated, thus destroying the distributivity of the system and the validity of the propagation algorithms.  For the purpose of this chapter we assume that the receipt of information is never delayed. We briefly discuss two potential practical ways of addressing violations of this assumption in Chapter \ref{chapter6}.
+
+\label{sec:ddm}
+\subsubsection{An Asymmetric Decision Space.}
+\label{sec:asydd}
+As we specify below, the structure of the decision space the collective shares assumes  that a potential decision centre has the possibility of intervening after having observed any variable in the system. For $i\in[n]$ and $t\in [T]$, let $\mathcal{D}_i(t)$ be the decision space available after having observed $\bm{Y}_i(t)$, and $\mathcal{D}(0)$ be the decision space associated to an initial decision. We also let $\bm{\mathcal{D}}_B(t)=(\mathcal{D}_i(t))_{i\in B}^\T$,   $\bm{\mathcal{D}}^t_B=(\mathcal{D}(0), \bm{\mathcal{D}}_B(1),\dots, \bm{\mathcal{D}}_B(t))^\T$ and $\bm{\mathcal{D}}^t=\bm{\mathcal{D}}^t_{[n]}$, for $B\subseteq[n]$. We also denote with $\bm{d}_B(t)$ and $\bm{d}^t_B$ generic elements of $\bm{\mathcal{D}}_B(t)$ and $\bm{\mathcal{D}}^t_B$ respectively.
+
+We next make the following assumption. Recall that $A_i$ is the set of the indices of the vectors in the ancestral set of $\bm{Y}^T_i$, $i\in[n]$.
+\begin{assumption}
+\label{strutass2}
+The collective agrees:
+\begin{itemize}
+\item the specification of the  decision spaces $\mathcal{D}(0)$ and $\mathcal{D}_i(t)$, $i\in[n]$, $t\in[T]$, defining the acts a decision centre might take;
+\item  to assume that the choice of  a decision $d_i(t_2)\in\mathcal{D}_i(t_2)$ is not constrained by a decision $d_j(t_1)\in\mathcal{D}_j(t_1)$ if $j\not\in A'_i$ in the \gls{DAG} of the \gls{DDM}, $j<i$, $t_1\leq t_2$;
+\item to commit to a decision $d_i(t)\in\mathcal{D}_i(t)$ only after having observed the value of $\bm{Y}_{A_i}(t)$ and $\bm{Y}^{t-1}$, and having already committed to decisions $\bm{d}_{A_i}(t)$ and $\bm{d}^{t-1}$;
+\item that the underlying \gls{DDM} remains valid under any policy choice open to the centre.
+\end{itemize}
+
+\end{assumption}
+
+Structural Assumption \ref{strutass2} guarantees that the graphical framework of the \gls{IDSS} remains unaffected after a decision is taken, so that the system  provides a coherent picture of the problem throughout the unfolding of events and actions. This is because under the assumption above  the topology of the time slice \glspl{DAG} does not change. So the algorithms we define in Section \ref{sec:algorithms} are still able to compute coherent expected utility scores through propagation. Of course we can still allow for the possibility that the probability judgements \textit{within} that structure might change in response to a decision - they usually do.
+
+\begin{example}
+\label{ex:chapter4}
+To illustrate Structural Assumption \ref{strutass2} we consider the diagram of the time slice \gls{DAG} at time $t$ of our network, reported in Figure \ref{idstyle}, which includes four decision spaces $\mathcal{D}_i(t)$, $i\in[4]$. Note that this is not a simple \gls{ID} in reduced form since Structural Assumption \ref{strutass2} does not guarantee that the decision spaces are totally ordered. In fact these decision spaces only need to be  partially ordered consistently with the \gls{DAG} of the \gls{DDM}. Therefore, for instance, there is no fixed order in which a decision centre commits to decisions $d_2(t)\in\mathcal{D}_2(t)$ and $d_4(t)\in\mathcal{D}_4(t)$. The constraints associated with this partial order are denoted in Figure \ref{idstyle} by the absence of an edge between these two decision spaces.   A decision centre needs to commit to one of these decisions, $d_i(t)\in\mathcal{D}_i(t)$ say, only after having observed the value of $\bm{Y}_i(t)$, $i\in[4]$: in our notation only after having observed $\bm{Y}_{A_i}(t)$ and $\bm{Y}^{t-1}$ as specified by the third bullet of Structural Assumption \ref{strutass2}. Of course a decision  $d_i(t)\in\mathcal{D}_i(t)$ is made after having already committed to $\bm{d}^{t-1}\in\bm{\mathcal{D}}^{t-1}$. We further assume that the overall decision space is such that $\mathcal{D}_4(t)\bigtimes\mathcal{D}_2(t)$, so that in particular these two decision spaces do not constrain one another. In general decision spaces that are not connected by an edge in the non-reduced representation of the network in Figure \ref{idstyle} cannot be mutually constrained.
+\end{example}
+
+\begin{figure}
+\entrymodifiers={++[o][F-]}
+\centerline{
+\xymatrix{
+\bm{Y}_4(t)\ar[r]&*+[F]{\mathcal{D}_4(t)}&*+[F]{\mathcal{D}_2(t)}\ar[r]\ar[rd]&*+[F]{\mathcal{D}_3(t)}\\
+\bm{Y}_1(t)\ar[u]\ar[r]\ar@/_1.5pc/[rr]\ar@/_2.2pc/[rrr]&*+[F]{\mathcal{D}_1(t)}\ar[u]\ar[r]\ar[ur]\ar@/_1.2pc/[rr]&\bm{Y}_2(t)\ar[r]\ar[u]&\bm{Y}_3(t)\ar[u]
+}
+}
+\vspace{0.5cm}
+\caption{A time slice directed acyclic graph of the distributed dynamic model in Figure \ref{fig:DAGDDM} including decision nodes. \label{idstyle}}
+\end{figure}
+
+The second assumption about the structure of the decision problem concerns a set of irrelevance statements. 
+\begin{assumption}
+The collective agrees that
+\begin{equation}
+\label{irr}
+f_{t,i}\left(\bm{y}_i(t)\;|\;\bm{d}^T, \bm{y}^t_{\Pi_i}, \bm{y}^{t-1}_i\right)=f_{t,i}\left(\bm{y}_i(t)\;|\;\bm{d}^t_{A'_i}, \bm{y}^t_{\Pi_i}, \bm{y}^{t-1}_i\right),
+\end{equation}
+for $i\in[n]$ and $t\in [T]$.
+\label{strutass3}
+\end{assumption}
+Equation (\ref{irr}) states that a random vector $\bm{Y}_i(t)$ does not functionally depend on the decisions that are not included in $\bm{\mathcal{D}}^t_{A'_i}$. Alternatively this structural assumption could be represented as a set of extended conditional independences \citep{Dawid2014}. This assumption is a very weak  one. For example  the \textit{sufficiency theorem} of \citet{Smith1989, Smith1989a}  guarantees that a decision centre can always find \textit{one} Bayes optimal decision based on a decision rule which respects these statements. We further note here that within each time slice this assumption is an instance of the \textit{causal consistency lemma} of \citet{Cowell1999a}, but applied to this more general setting. The lemma guarantees that decisions can have a direct influence only on variables that are yet to be observed. More generally here Structural Assumption \ref{strutass3} implies the lemma holds for partially ordered decisions and decision spaces that are not simply product spaces.
+
+\begin{example}
+Consider the setting of Example \ref{ex:chapter4}. Since there is no fixed order between $\bm{Y}_2(t)$ and $\bm{Y}_4(t)$, Structural Assumption \ref{strutass3} demands that $\bm{Y}_4(t)$  does not functionally depend on $d_2(t)\in\mathcal{D}_2(t)$.  Similarly,  we require that $\bm{Y}_2(t)$ does not functionally depend on $d_4(t)\in\mathcal{D}_4(t)$. This can be noted in the diagram of Figure \ref{idstyle} by the absence of edges between these nodes. 
+\end{example}
+
+These are the irrelevances the collective \textit{needs} to be ready to assume. Of course they might believe that some decisions do not have any direct effect to additional variables and thus assume further irrelevances. For example they might believe that the initial decision space $\mathcal{D}(0)$ is irrelevant for the outcomes of the variables at the first time point, $\bm{Y}(1)$. Such additional assumptions do not affect the validity of our algorithms.
+
+
+
+\subsubsection{Compatible Utility Factorisations.}
+\label{sec:comput}
+The last overarching agreement the collective needs to find concerns the utility factorisation. We suppose the time series with index in $\UT\subseteq[n]$ to be the attributes of the decision problem. For $i\in\UT$, define $\bm{r}_i=\bm{r}_i\left(\bm{y}^T_i,\bm{d}^T_{A_i}\right)$ to be a function of both $\bm{y}^T_i$  and $\bm{d}^T_{A_i}$ and let $\bm{r}_{B}^\T=(\bm{r}_i)_{i\in B}$ for $B\subseteq[n]$. Note that each vertex $\bm{Y}^T_i$ of the \gls{DAG} of the \gls{DDM}, for $i\in\UT$, can be uniquely associated with an $\bm{r}_i$.  We show below that this notation is very  concise in depicting utility independent statements between time series under the responsibility of different panels. For simplicity we assume that $i\in\UT$ for all  $i\in Le$, where $Le$ is the index set  of the leaves of the \gls{DAG}, since otherwise the associated variables could be simply deleted without affecting the results of the analysis.
+
+In the multi-expert setting we study here joint utility elicitations across different panels in a single integrating decision conference are only rarely possible \citep[see e.g. Chapter 11 of][and our review in Section \ref{sec:decconf}]{French2009}. So for example it is typically possible to elicit the scores associated with the overall weight of one attribute over another, for example as expressed by the \textit{criterion weights} of multiattribute independent utilities. But other more detailed elicitations, for example the appropriate forms of the marginal utility functions, are better delegated to those closest to understanding the consequences of such attributes \citep[for an illustration of why this is so, see][]{von1986}. However, for this type of delegation to be formally justified, it is first necessary to assume that the collective is prepared to entertain certain sets of preferential independences in order to be able to elicit, through individual panels' assessments, a joint utility function. 
+
+Here we define a new multiattribute utility factorisation compatible with the \gls{DAG} of the multi-expert \gls{DDM} we introduced above. Specifically, this first assumes that the time series with index in $\UT$ belonging to different ancestral components of the \gls{DAG} of the \gls{DDM} are \gls{GAI} (see Definition \ref{def:GAI}). The utility independence structure within each of these components is then assumed to be described by a member of a certain class of \textit{directional utility diagrams} introduced in Definition \ref{def:dirutdia}.
+
+\begin{definition}
+\label{compatible}
+ Let $\Gr$ be the \gls{DAG} of a \gls{DDM} of a time series $\{\bm{Y}(t)\}_{t\in [T]}$ and relabel a vertex $\bm{Y}^T_i$ of $\Gr$ with $\bm{r}_i$, $i\in[n]$. Let $\UT\subseteq [n]$  be the index set of the attributes of the decision problem. We say that a utility function $u$ is in the class $\mathcal{U}^{\Gr}$ of utilities \textbf{compatible} to the graph $\Gr$, if:
+\begin{itemize}
+\item the ancestral components of the subgraph $\Gr'$ of $\Gr$ induced by $\{\bm{r}_i:i\in \UT\}$ are \gls{GAI};
+\item the independence structure associated to an ancestral component of $\Gr'$, $A_i$ say, can be described by a subgraph of the utility diagram obtained by the following procedure:
+\begin{enumerate}
+\item derive the subgraph $\Gr''$ of $\Gr'$ induced by $\{\bm{r}_j:j\in A_i\}$; 
+\item reverse the direction of every edge in $\Gr''$;
+\end{enumerate} 
+\end{itemize}
+\end{definition}
+
+\begin{example}
+\label{ex:utcomp}
+Consider the \gls{DAG} in Figure \ref{fig:DAGDDM} and let $\UT=[4]_1$. Recall that $\{4\}$ and $\{2,3\}$ are in different ancestral components and therefore in the class of compatible utility factorisations $\bm{r}_4$ and $\{\bm{r}_2,\bm{r}_3\}$ are \gls{GAI}. The two utility diagrams derived following the procedure in Definition \ref{compatible} would then correspond to the following two networks: one including only the vertex $\bm{r}_4$, the other with vertices $\bm{r}_2$ and $\bm{r}_3$ and an edge from $\bm{r}_3$ to $\bm{r}_2$. 
+\end{example}
+
+We next show that compatible utility functions enjoy a useful factorisation. Recall that $D_i$ is the index set of the descendants of $\bm{r}_i$.
+\begin{proposition}
+\label{prop:comput}
+A utility function $u$ over $\bm{r}_{\UT}$ compatible with the graph $\Gr$ can be written as
+\begin{equation}
+\label{eq:utfact}
+u^\Gr(\bm{r}_{\UT})=\sum_{i\in Le}u_i^\Gr(\bm{r}_{A_i})=\sum_{i\in Le}\sum_{\bm{r}_{A_i}^{*0}\in \bm{\mathcal{R}}_{A_i}^{*0}}u\left(\bm{r}_{A_i}^{*0}\right)\prod_{j\in A_i}g_j\left(\bm{r}_j\;|\;\bm{r}_{D_j}^{*0},\bm{r}_{\Pi_j}^{*0}\right),
+\end{equation}
+where 
+\begin{equation*}
+g_j\left(\bm{r}_j\;|\;\bm{r}_{D_j}^{*0},\bm{r}_{\Pi_j}^{*0}\right)=\left\{
+\begin{array}{lcccl}
+u\left(\bm{r}_j\;|\;\bm{r}_{D_j}^{*0},\bm{r}_{\Pi_j}^{*0}\right),&&&& \mbox{if } \bm{r}_j=\bm{r}_j^* \mbox{ in } u\left(\bm{r}^{*0}_{A_i}\right),\\
+\check{u}\left(\bm{r}_j\;|\;\bm{r}_{D_j}^{*0},\bm{r}_{\Pi_j}^{*0}\right),&&&& \mbox{otherwise.}
+\end{array}
+\right.
+\end{equation*}
+\end{proposition}
+\begin{proof}
+This result follows by first using the \gls{GAI} factorisation in equation (\ref{eq:GAI}) over the ancestral components and then applying the expansion in equation (\ref{eq:genut}) to each of these ancestral terms in decreasing order over their indices. The utility independence structure associated to each directed utility diagram then guarantees the result follows, as specified by Lemma \ref{lemma:ut}.
+\end{proof}
+
+ Each of the utilities $u_i^\Gr$ in equation (\ref{eq:utfact}) is the product of terms $u(\bm{r}_{A_i}^{*0})$, corresponding to functions of criterion weights \citep{French2000b} and $g_j(\bm{r}_j\;|\;\bm{r}_{D_j}^{*0},\bm{r}_{\Pi_j}^{*0})$ which, from Lemma \ref{lemma:ut}, is a function of $\bm{r}_j$ only since the attributes  $\bm{r}_{D_j}$ and $\bm{r}_{\Pi_j}$ are fixed to a certain instantiation. An important consequence of Proposition \ref{prop:comput} in this multiexpert setting is that a compatible utility factorisation is a function of the criterion weights and utilities whose arguments are overseen by individual panels only.
+ 
+ \begin{example}
+ Under the conditions of Example \ref{ex:utcomp}, the most general compatible utility factorisation for the \gls{DAG} in Figure \ref{fig:DAGDDM} can be written as
+ \begin{multline*}
+ u(\bm{r}_2,\bm{r}_3,\bm{r}_4)=u_4(\bm{r}_4)+u(\bm{r}^*_2,\bm{r}^*_3)u(\bm{r}_3\;|\bm{r}_2^*)u(\bm{r}_2\;|\;\bm{r}_3^*)+u(\bm{r}^*_2,\bm{r}^0_3)\check{u}(\bm{r}_3\;|\bm{r}_2^*)u(\bm{r}_2\;|\;\bm{r}_3^0)\\+u(\bm{r}^0_2,\bm{r}^*_3)u(\bm{r}_3\;|\bm{r}_2^0)\check{u}(\bm{r}_2\;|\;\bm{r}_3^*)+u(\bm{r}^0_2,\bm{r}^0_3)\check{u}(\bm{r}_3\;|\bm{r}_2^0)\check{u}(\bm{r}_2\;|\;\bm{r}_3^0).
+ \end{multline*}
+ \end{example}
+ 
+  We now make the following assumption.
+\begin{assumption}
+\label{strutass4}
+The collective is able to identify an agreed compatible multiattribute utility decomposition over $\bm{r}_{\UT}$ within the class $\mathcal{U}^{\Gr}$ and to elicit the common $u(\bm{r}_{A_i}^{*0})$, $i\in Le$. 
+\end{assumption}
+ 
+\subsubsection{Distributed Expected Utilities.}
+Under the structural assumptions introduced above, which specify the qualitative structure of the decision problem, the expected utility function factorises into separate factors of the beliefs that particular individual panels can provide themselves.  To show this, let,  for $t\in [T-1]$,
+\begin{align*}
+\bar{u}^{T}\left(\bm{y}^{T-1},\bm{d}^{T}\right)&=\int_{\bm{\mathcal{Y}}}u^{\Gr}\left(\bm{r}_{\UT}\right)f\left(\bm{y}(T)\;|\;\bm{y}^{T-1},\bm{d}^T\right)\dr\bm{y}(T),\\
+\bar{u}^{t-1}\left(\bm{y}^{t-1},\bm{d}^{T}\right)&=\int_{\bm{\mathcal{Y}}}\bar{u}^{t}\left(\bm{y}^{t},\bm{d}^T\right)f\left(\bm{y}(t)\;|\;\bm{y}^{t-1},\bm{d}^T\right)\dr\bm{y}(t).
+\end{align*}
+These two terms correspond to the expected utility scores after marginalisation steps have been performed over all the variables with time index bigger or equal than $t$ in the algorithms we define below. 
+
+We now show that any function $\bar{u}^t$, $t\in [T]$, can be deduced recursively as a function of the individual panels' statements. Recall that $S_j$  is the set of the indices of the sons of $\bm{Y}_j(t)$ in a \gls{DAG} $\Gr$ (see Appendix \ref{appendixB}).
+
+\begin{theorem}
+\label{teo:teo1}
+Under Structural Assumptions \ref{strutass1}, \ref{strutass2}, \ref{strutass3} and \ref{strutass4}, $\bar{u}^t$, for $t\in[T]$, can be written as
+\begin{equation}
+\label{teo11}
+\bar{u}^{t}=\int_{\bm{\mathcal{Y}}_1}\tilde{u}_{t,1}\left(\bm{y}^t_1, \bm{d}^{T}\right)f_{t,1}\left(\bm{y}_1(t)\;|\;\bm{y}^{t-1}_1,\bm{d}^{t-1}_1\right)\dr \bm{y}_1(t),
+\end{equation}
+where
+\begin{align}
+&\tilde{u}_{t,i}\left(\bm{y}^t_{A_i},  \bm{d}^T\right)=\left\{
+\begin{array}{lcl}
+\label{teo14}
+\sum_{\bm{r}_{A_i}^{*0}\in \bm{\mathcal{R}}_{A_i}^{*0}}u\left(\bm{r}_{A_i}^{*0}\right)\prod_{j\in A_i}g_j\left(\bm{r}_j\;|\;\bm{r}_{D_j}^{*0},\bm{r}_{\Pi_j}^{*0}\right), &&i\in Le,\; t=T,\\
+\\
+\hat{u}_{t+1,i}\left(\bm{y}^t_{A_i},\bm{d}^T\right), &&i\in Le,\; t\neq T,\\
+\\
+\sum_{j\in S_i}\bar{u}_{t,j}\left(\bm{y}^t_{A'_j}, \bm{y}^{t-1}_j, \bm{d}^{T}\right), &&\mbox{otherwise},
+\end{array}
+\right.
+\end{align}
+\begin{align}
+&\bar{u}_{t,i}\left(\bm{y}^t_{A'_j}, \bm{y}^{t-1}_j, \bm{d}^{T}\right)=\int_{\bm{\mathcal{Y}}_i}\tilde{u}_{t,i}\left(\bm{y}^t_{A_i},  \bm{d}^T\right)f_{t,i}\left(\bm{y}_i(t)\;|\;\bm{d}^t_{A'_i}, \bm{y}^t_{\Pi_i}, \bm{y}^{t-1}_i\right)\dr \bm{y}_i(t),\label{teo13}
+\end{align}
+and $\hat{u}_{t,i}$ is uniquely defined as the function for which 
+\begin{equation}
+\bar{u}^{t+1}=\sum_{i\in Le}\hat{u}_{t,i}(\bm{y}^t_{A_i},\bm{d}^T),
+\label{teo15}
+\end{equation}
+\end{theorem}
+The proof of this theorem is provided in Appendix \ref{proofone}.
+
+Theorem \ref{teo:teo1} assures that the expected utility scores for any policy of an \gls{IDSS} respecting our new structural assumptions can be computed. We proceed to show in Section \ref{sec:exalgo} below that the computation of these scores can be performed in a distributed fashion.
+
+We note here that again the actual algebraic form of the terms in equations (\ref{teo11})-(\ref{teo15}) is not fundamental to the construction of a coherent distributed \gls{IDSS}. This form depends on the individual panels' agreements concerning the quantities under their particular jurisdiction. Importantly, however, any $\bar{u}^t$ can be written as a function of these terms, whatever they are. Its computation, as we  show in Section \ref{sec:algorithms}, can therefore be obtained through a propagation algorithm, guided by the topology of the \gls{DAG} of the \gls{DDM}, between each individual panel and the \gls{SB}.
+
+The quantities appearing in Theorem \ref{teo:teo1} are fundamental to later developments of this chapter. So we now discuss their interpretation. The definition of $\tilde{u}_{t,i}$ in equation (\ref{teo14}) depends on whether or not  $\bm{Y}_i(t)$ is a leaf vertex of the time slice  \gls{DAG} $\Gr$.  In the former case, for $t=T$, this corresponds to the utility function over the appropriate ancestral component, whilst, if $t\neq T$, this is simply equal to $\hat{u}_{t+1,i}$. If $i\not\in Le$ then equation (\ref{teo14}) consists of the sum of the terms $\bar{u}_{t,j}$ for $j\in S_i$. Equation (\ref{teo13}) defines $\bar{u}_{t,i}$ which consists of the result of a marginalisation of $\tilde{u}_{t,i}$ with respect to the conditional density function $f_{t,i}$. Finally, the theorem asserts that $\bar{u}^{t+1}$ can be uniquely written as a linear combination of the functions $\hat{u}_{t,i}$, for $i\in Le$.  Throughout this chapter, for ease of notation, we use the convention of writing the arguments of the utility functions $u$ and $g$ in terms of the attributes $\bm{r}$, whilst for the other functions, e.g. $\tilde{u}_{t,i}$, the arguments are written in terms of the random variables $\bm{Y}^T$ and the decisions $\bm{d}^T$.
+
+\subsection{Components Agreement}
+It is often recommended that the evaluation of both the conditional utilities and the conditional probabilities should be delegated to groups of individuals best able to compare the efficacy and the likelihood of different value of that attribute \citep[see for example][]{VonNeumann2007,von1986}. We therefore assume the following.
+
+\begin{assumption}
+Every expert within a panel $G_i$ agrees on a probabilistic model for the associated component DSS,  $f_{t,i}$, $i\in[n]$, $t\in [T]$, as a function of its inputs. In addition every expert in $G_i$ shares  a marginal utility function over $\bm{r}_i$, if $i\in \UT$.
+\label{strutass5}
+\end{assumption}
+
+It is possible to encourage the experts within a panel to come to these agreements in a variety of ways, appropriate depending on the context, for example through decision conferencing or  by following  a Delphi Protocol (see Section \ref{sec:decconf}). Similarly, the probabilistic individual agreement might consist of  following certain pooling axioms (see Section \ref{sec:pool}) or by using agreed  software on expert inputs,  for example a probabilistic emulator (see Section \ref{sec:emu}).
+
+\section{Relation to the Axioms}
+\label{sec:relation}
+In the previous section we followed the construction of an \gls{IDSS} given in \citet{Leonelli2015}. This is because the structural assumptions of Section \ref{sec:asyclass} more intuitively describe the features of the types of \glspl{IDSS} we consider in this chapter than the common knowledge axioms of Chapter \ref{chapter3}. However, we can simply note here that these structural assumptions represent an instance of the axioms of Chapter \ref{chapter3}.
+
+The utility consensus in Axiom \ref{axiom:utility} simply corresponds in this chapter to the agreement of a utility factorisation within the class of compatible utility functions as specified in Structural Assumption \ref{strutass4}. 
+
+The policy consensus in Axiom \ref{axiom:policy} consists of Structural Assumption \ref{strutass2} defining a multivariate and asymmetric decision space. 
+
+The structural consensus in Axiom \ref{axiom:structural} is specified by Structural Assumptions \ref{strutass1} and \ref{strutass3}, which respectively consist of the agreement of using a \gls{DDM} model and of a shared set of extended conditional independences.
+
+Lastly, the quantitative delegation consensus in Axiom \ref{axiom:quantitative} coincides with Structural Assumption \ref{strutass5} where in this case panels agree to deliver conditional density functions of the agreed \gls{DDM} and conditional utilities of the shared compatible utility function.
+ 
+\section{Distributed Algorithms}
+\label{sec:algorithms}
+Now that the structure of the \gls{IDSS} has  been fully defined,  we can proceed to discuss the computation of the expected utilities through propagation over the network of \glspl{ES}.  We first introduce an algorithm which includes partial optimisation steps to deduce an optimal expected utility score. We then consider two special cases of this algorithm. The first one does not include  optimisation steps and computes the expected utility score of a specific policy, whilst the second works over a non-dynamic network of \glspl{ES}.
+
+\subsection{Dynamic Optimisation Algorithm}
+In contrast to the quantities defined  in equations (\ref{teo11})-(\ref{teo15}), which compute the expected utility score of a \textit{particular policy}, we now include additional optimisation steps to the algorithms. These  enable us to identify an optimal policy. In fact we can use exactly the same propagation procedure in this case. For this slight generalisation we need to first define a new quantity, $u_{t,i}^*$, which accounts for optimisations over decision spaces. Let
+\begin{equation}
+\label{opt1}
+u_{t,i}^*\left(\bm{y}^t_{A_i}, \bm{d}^{t-1},\bm{d}_{A_i'}(t)\right)=\max_{\mathcal{D}_i(t)}\tilde{u}_{t,i}\left(\bm{y}^t_{A_i}, \bm{d}^{t-1},\bm{d}_{A_i}(t)\right).
+\end{equation}
+This function is  an optimised version, over the decision space $\mathcal{D}_i(t)$, of $\tilde{u}_{t,i}$. We also let $\bar{u}^*_{t,i}$ be the result of the marginalisation of $u^*_{t,i}$. Specifically, 
+\begin{equation}
+\label{opt2}
+\bar{u}_{t,i}^*\left(\bm{y}^t_{A_i'}, \bm{y}_i^{t-1}, \bm{d}^{t-1}, \bm{d}_{A_i'}(t)\right)=\int_{\bm{\mathcal{Y}}_i}u_{t,i}^*\left(\bm{y}^t_{A_i}, \bm{d}^{t-1},\bm{d}_{A_i'}(t)\right)f_{t,i}\dr \bm{y}_i(t).
+\end{equation}
+ 
+Before illustrating the algorithm using the network of Figure \ref{fig:DAGDDM}, we  introduce a new notation which is also used in the formal algorithms below.  We let $G_i$: or \gls{SB}: denote the entity that is responsible for the corresponding operation, whilst we represent with $\longrightarrow G_i$ or $\longrightarrow$ \gls{SB} the fact that panel $G_i$ and the \gls{SB}, respectively, receives the value of an appropriate function. So, for instance, $G_i$:  $\tilde{u}_{t,i}\longrightarrow$ \gls{SB}  denotes that panel $G_i$ computes the function $\tilde{u}_{t,i}$ and communicates its value to the \gls{SB}.
+
+The following example describes the steps of the distributed propagation algorithm for \glspl{IDSS} whose structural consensus includes a \gls{DDM} with associated \gls{DAG} in Figure \ref{fig:DAGDDM}.
+
+\begin{example}
+\begin{figure}
+\centerline{
+\scalebox{0.56}{
+\xymatrix{
+&&\mbox{\Large{SB}}\ar@/^1pc/^{\mbox{\Large{$u^*_{T,4}$}}}@{~>}[ddll]\ar@/^6pc/_(.2){\mbox{\Large{$u^*_{T,3}$}}}@{~>}[ddddrr]&&\\
+\\
+{\mbox{\Large$\bm{Y}_4(T)$}}\ar@/^1pc/^{\mbox{\Large{$\tilde{u}_{T,4}$}}}@{.>}[uurr]\ar@/^1pc/^{\mbox{\Large{$\bar{u}_{T,4}^*$}}}@{-->}[dd]&&&&{\mbox{\Large$\bm{Y}_2(T)$}}\ar[dd]\\
+\\
+{\mbox{\Large$\bm{Y}_1(T)$}}\ar[uu]\ar[rrrr]\ar[uurrrr]&&&&{\mbox{\Large$\bm{Y}_3(T)$}}\ar@/_8pc/_{\mbox{\Large{$\tilde{u}_{T,3}$}}}@{.>}[uuuull]\ar@/^1pc/^{\mbox{\Large{$\bar{u}_{T,3}^*$}}}@{-->}[uu]
+}
+\xymatrix{
+&&\mbox{\Large{SB}}\ar@/_1pc/_{\mbox{\Large{$u^*_{T,2}$}}}@{~>}[ddrr]&&\\
+\\
+{\mbox{\Large$\bm{Y}_4(T)$}}&&&&{\mbox{\Large$\bm{Y}_2(T)$}}\ar[dd]\ar@/_2pc/_{\mbox{\Large{$\tilde{u}_{T,2}$}}}@{.>}[uull]\ar@/^1pc/^{\mbox{\Large{$\bar{u}^*_{T,2}$}}}@{-->}[ddllll]\\
+\\
+{\mbox{\Large$\bm{Y}_1(T)$}}\ar[uu]\ar[rrrr]\ar[uurrrr]&&&&{\mbox{\Large$\bm{Y}_3(T)$}}
+}
+\;\;\;\;
+\xymatrix{
+&&\mbox{\Large{SB}}\ar@/^0.5pc/^(.5){\mbox{\Large{$u^*_{T,1}$}}}@{~>}[ddddll]&&\\
+\\
+{\mbox{\Large$\bm{Y}_4(T)$}}&&&&*{\mbox{\Large$\bm{Y}_2(T)$}}\ar[dd]\\
+\\
+{\mbox{\Large$\bm{Y}_1(T)$}}\ar[uu]\ar[rrrr]\ar[uurrrr]\ar@/^1pc/^(0.75){\mbox{\Large{$\tilde{u}_{T,1}$}}}@{.>}[uuuurr]\ar@/_3pc/_(.7){\mbox{\Large{$\bar{u}^*_{T,1}$}}}@{-->}[uuuurr]&&&&{\mbox{\Large$\bm{Y}_3(T)$}}
+	}
+}}
+\caption{Collective optimal expected utility algorithm over the last time slice of the network in Figure \ref{fig:DAGDDM}.\label{algofig}}
+\end{figure}
+The algorithm starts from the leaves of the last (time $T$) time slice \gls{DAG} and assumes that each panel overseeing a leaf of the time slice \gls{DAG}, $\bm{Y}_i(T) $ say, has been provided with the term $u_i^\Gr$. Panels $G_i$: $\tilde{u}_{T,i}\longrightarrow$ \gls{SB}, for $i\in[4]_2$. Note that in this case $\tilde{u}_{T,i}$ simply corresponds to $u_{i}^\Gr$. This step is represented by the dotted arrows on the left network of Figure \ref{algofig} from $\bm{Y}_3(T)$ and $\bm{Y}_4(T)$ to the \gls{SB}. Then \gls{SB}: $u^*_{T,i}\longrightarrow G_i$ as in equation (\ref{opt1}) for $i\in[4]_2$. This is depicted by the curly arrows in the left network of Figure \ref{algofig}. At this stage $G_4$: $\bar{u}^*_{T,4}\longrightarrow G_1$ and $G_3$ :$\bar{u}^*_{T,3}\longrightarrow G_2$, since $\bm{Y}_2(T)$ is the father of $\bm{Y}_3(T)$ and $\bm{Y}_1(T)$ is the father of $\bm{Y}_4(T)$ (recall that $F_i$ is the index of the father of $\bm{Y}_i(T)$). These two operations are described by the dashed arrows on the left network of Figure \ref{algofig}. 
+
+Now $G_2$: $\tilde{u}_{T,2}\longrightarrow$ \gls{SB}, where $\tilde{u}_{T,2}=\bar{u}_{T,3}^*$ since $\bm{Y}_2(T)$ has only one son. Then, as before, \gls{SB}: $u^*_{T,2}
+\longrightarrow G_2$  and $ G_2$: $\bar{u}^*_{T,2}\longrightarrow G_1$, since $\bm{Y}_1(T)$ is the father of $\bm{Y}_2(T)$.  The whole process is depicted by the network in the middle of Figure \ref{algofig}, where, as before, a dotted arrow is associated to $\tilde{u}_{T,i}$, a curly arrow to $u^*_{T,i}$ and a dashed one to $\bar{u}^*_{T,i}$. 
+
+\begin{figure}
+\centerline{
+\scalebox{0.6}{
+\xymatrix{
+&&\mbox{\Large{SB}}\ar@/^1pc/^{\mbox{\Large{$\hat{u}_{T-1,4}$}}}@{=>}[ddll]\ar@/^8pc/_{\mbox{\Large{$\hat{u}_{T-1,3}$}}}@{=>}[ddddrr]&&\\
+\\
+{\mbox{\Large$\bm{Y}_{4}(T{-1})$}}\ar@/^1pc/^{\mbox{\Large{$\tilde{u}_{T-1,4}$}}}@{.>}[uurr]&&&&{\mbox{\Large$\bm{Y}_{2}(T{-1})$}}\ar[dd]\\
+\\
+{\mbox{\Large$\bm{Y}_{1}(T{-1})$}}\ar[uu]\ar[rrrr]\ar[uurrrr]&&&&{\mbox{\Large$\bm{Y}_{3}(T{-1})$}}\ar@/_10pc/_{\mbox{\Large{$\tilde{u}_{T-1,3}$}}}@{.>}[uuuull]
+}
+\;\;\;\;
+\xymatrix{
+&&\mbox{\Large{SB}}\ar@/_1pc/^{\mbox{\Large{$u^*_{T-1,4}$}}}@{~>}[ddll]\ar@/^8pc/^{\mbox{\Large{$u^*_{T-1,3}$}}}@{~>}[ddddrr]&&\\
+\\
+{\mbox{\Large$\bm{Y}_{4}(T{-1})$}}\ar@/^1pc/^{\mbox{\Large{$\bar{u}^*_{T-1,4}$}}}@{-->}[dd]&&&&{\mbox{\Large$\bm{Y}_{2}(T{-1})$}}\ar[dd]\\
+\\
+{\mbox{\Large$\bm{Y}_{1}(T{-1})$}}\ar[uu]\ar[rrrr]\ar[uurrrr]&&&&{\mbox{\Large$\bm{Y}_{3}(T{-1})$}}\ar@/^1pc/^{\mbox{\Large{$\bar{u}^*_{T-1,3}$}}}@{-->}[uu]
+}}}
+\caption{Collective optimal expected utility algorithm over the $T-1$ time slice of the network in Figure \ref{fig:DAGDDM}. \label{algofig2}}
+\end{figure}
+
+Because $\bm{Y}_1(T)$ is the  father of both $\bm{Y}_2(T)$ and $\bm{Y}_4(T)$, now  $G_1$: $\tilde{u}_{T,1}\longrightarrow$ \gls{SB}, by simply adding $\bar{u}^*_{T,2}$ and $\bar{u}^*_{T,4}$, received from panels $G_2$ and $G_4$ respectively. Panel $G_1$ then repeats the same procedure as the other panels, with the only difference that  $ \bar{u}^*_{T,1}\longrightarrow$ \gls{SB} and not to another panel, since $G_1$ oversees the unique root of the \gls{DAG}. This is depicted by the dashed arrow in the right network of Figure \ref{algofig}. 
+
+
+
+Theorem \ref{teo:teo1} states that $\bar{u}^*_{T,1}=\bar{u}^{T}$ is equal to the sum of the terms $\hat{u}_{T-1,i}$, $i\in Le$. So,  if $i$ is the index of a leaf vertex,  \gls{SB}: $\hat{u}_{T-1,i}\longrightarrow G_i$. This is denoted in the left network of Figure \ref{algofig2} by the double arrows. Panels $G_i$: $\tilde{u}_{T-1,i}\longrightarrow$ \gls{SB}, $i\in Le$, where $\tilde{u}_{T-1,i}=\hat{u}_{T-1,i}$. From this stage on, the message passing algorithm copies the calculations and the actions of the previous time slice. So the  arrows in Figure \ref{algofig2} match the ones on the left network of Figure \ref{algofig}. The algorithm  repeats the same sequence depicted by the  dashed, curly, dotted and double arrows in Figure \ref{algofig} and \ref{algofig2}, until it reaches the root vertex of the first time slice. When this happens  the \gls{SB}, after receiving $\bar{u}^*_{1,1}$ from panel $G_1$, computes a final optimisation step over the decision space $\mathcal{D}(0)$. The algorithm has now been completed and can return  the expected utility score of the optimal sequence of decisions. 
+\label{ex:algoex}
+\end{example}
+
+\begin{figure}
+\begin{center}
+\begin{pseudocode}[ruled]{collective optimal expected utility}{\bm{u},\bm{f},\Gr}
+\label{algo31}
+\FOR t \GETS T \DOWNTO 1 \hspace{9.08cm}(1)  \DO \BEGIN
+\FOR i \GETS n \DOWNTO 1 \hspace{7.85cm}(2)\DO \BEGIN
+\IF i\in Le\hspace{8.63cm}(3)\\ \BEGIN  \IF t=T \hspace{8.43cm}(4)\\
+\BEGIN G_i:\tilde{u}_{t,i}=u^{\Gr}_i\longrightarrow SB \hspace{5.92cm}(5) \END
+\ELSE G_i:\tilde{u}_{t,i}=\hat{u}_{t,i}\longrightarrow SB \hspace{4.91cm}(6)
+\END
+\ELSE G_i:\tilde{u}_{t,i}=\sum_{j\in S_i}\bar{u}^*_{t,j}\longrightarrow SB \hspace{4.09cm}(7) \\
+ SB: u_{t,i}^*=\max_{\mathcal{D}_i(t)}\tilde{u}_{t,i} \longrightarrow G_i \hspace{4.87cm}(8)\\
+\IF (i\neq 1) \hspace{8.53cm}(9)  \THEN \BEGIN G_i: \bar{u}^*_{t,i}=\int_{\bm{\mathcal{Y}}_i}u^*_{t,i}f_{t,i}\dr \bm{y}_i(t) \longrightarrow G_{F_i}  \hspace{2.41cm}(10)\END
+\ELSE \BEGIN G_i:\bar{u}^*_{t,i}=\int_{\bm{\mathcal{Y}}_i}u^*_{t,i}f_{t,i}\dr \bm{y}_i(t) \longrightarrow SB \hspace{2.55cm}(11)\\
+\IF t\neq 1 \hspace{7.12cm}(12) \THEN \BEGIN \FOREACH j\in Le \hspace{3.935cm}(13)\DO \BEGIN  SB: \hat{u}_{t-1,j} \longrightarrow G_j \hspace{2.37cm}(14)\END \END
+\ELSE SB:u^*_0=\max_{\mathcal{D}(0)}\bar{u}^*_{t,i}  \hspace{3.47cm}(15)
+\END
+\END \END 
+\end{pseudocode}
+\end{center}
+\end{figure}
+
+Having described the algorithm on the running example, we now introduce it for a generic \gls{DDM} and in particular for more realistic scenarios. Specifically, this algorithm takes as inputs the utilities $u^{\Gr}_i$ associated to the ancestral components of $\Gr$, denoted as $\bm{u}$, all the conditional density functions $f_{t,i}$, denoted as $\bm{f}$, and all the information concerning the \gls{DAG} $\Gr$.  A formal definition of the algorithm can be found in Algorithm \ref{algo31}, which is henceforth called  \textbf{collective optimal expected utility algorithm}.  For simplicity, we have left implicit the arguments of various quantities the panels and the \gls{SB} communicate to each other. 
+\begin{theorem}
+Under  Structural Assumptions  \ref{strutass1}, \ref{strutass2}, \ref{strutass3}, \ref{strutass4} and \ref{strutass5},  Algorithm  \ref{algo31}  produces  an  optimal  expected utility score resulting from a unique Baye-sian probability model, informed only by the individual judgements delivered by the panels.
+\label{teoalgo}
+ \end{theorem}
+The proof of this theorem is provided in Appendix \ref{prooftwo}.
+
+We highlight the relations between our algorithm and standard backward inductive evaluation in Section \ref{sec:nondynalg} below.
+
+The utility function is often a polynomial function in its attributes. When this is so, its expectation is a polynomial in which the indeterminates are, in the continuous case, low order moments. This can dramatically simplify the message passing algorithm for computing the optimal policy as we illustrate below. As a result the \gls{IDSS} often needs as inputs only a few low order moments to work coherently. This is the main topic of Chapter \ref{chapter5}. Even in rather complex domains this in turn means that we can expect  the algorithms defined above to be almost instantaneous if each component module can produce the values of these uncertainties under various policy choices efficiently.  A study of the polynomial structure of expected utilities in the rather more complex discrete domain is reviewed in Section \ref{sec:symbolic} and in \citet{Leonelli2015a}.
+
+
+\subsection{The Expected Utility of a Policy}
+
+Algorithm \ref{algo31} provides an operational guideline on how to compute the score associated to an optimal policy. Recall however that the aim of a \gls{DSS} is not only to identify the decisions with highest expected utilities, but also to provide explanations and the reasoning behind the outputs it provides \citep{French2009}. It is therefore also relevant to compute the expected utility score associated with any policy that might be adopted. These scores then allow decision centres to compare the different available options in more detail, possibly following the route described in Figure \ref{possuse}. To accommodate this feature  a simple variant of Algorithm \ref{algo31}  not including any  optimisation steps is presented in Algorithm \ref{algo:exput}, henceforth called \textbf{collective expected utility} algorithm. Note that this is derived from Algorithm \ref{algo31} by dropping lines (8) and (15) and by replacing $\bar{u}^{*}_{t,j}$ with $\bar{u}_{t,j}$.
+
+\begin{figure}
+\begin{center}
+\begin{pseudocode}[ruled]{ collective expected utility}{\bm{u},\bm{f},\Gr,\bm{d}}
+\label{algo:exput}
+\FOR t \GETS T \DOWNTO 1 \DO \BEGIN
+\FOR i \GETS n \DOWNTO 1 \DO \BEGIN
+\IF i\in Le\\ \BEGIN  \IF t=T \\
+\BEGIN G_i:\tilde{u}_{t,i}=u^{\Gr}_i\longrightarrow SB  \END
+\ELSE G_i:\tilde{u}_{t,i}=\hat{u}_{t,i}\longrightarrow SB 
+\END
+\ELSE G_i:\tilde{u}_{t,i}=\sum_{j\in S_i}\bar{u}_{t,j}\longrightarrow SB  \\
+\IF (i\neq 1)   \THEN \BEGIN G_i: \bar{u}_{t,i}=\int_{\bm{\mathcal{Y}}_i}\tilde{u}_{t,i}f_{t,i}\dr \bm{y}_i(t) \longrightarrow G_{F_i}  \END
+\ELSE \BEGIN G_i:\bar{u}_{t,i}=\int_{\bm{\mathcal{Y}}_i}\tilde{u}_{t,i}f_{t,i}\dr \bm{y}_i(t) \longrightarrow SB \\
+\IF t\neq 1  \THEN \BEGIN \FOREACH j\in Le  \DO \BEGIN  SB: \hat{u}_{t-1,j} \longrightarrow G_j \END \END
+\END
+\END \END 
+\end{pseudocode}
+\end{center}
+\end{figure}
+
+\subsection{The non Dynamic Case}
+\label{sec:nondynalg}
+In some domains it can be more appropriate to model decision problems using a non-dynamic probabilistic model, such as a \gls{BN}. Within the \gls{IDSS} framework, this is possible by simply adapting Algorithm \ref{algo31} to the non-dynamic case. Algorithm \ref{algo32}, which we  call henceforth \textbf{non-dynamic optimal EU} algorithm, shows how this can be done. Note that we adapt the notation to the non-dynamic case by dropping the dependence on the time-varying index: therefore we are now using the standard notation of non-dynamic domains of the previous chapters. Although some symbols in the algorithm are new, these are self-explanatory and follow straightforwardly from the dynamic one. It is easy to notice that this algorithm works, since the last time slice of a dynamic \gls{DDM} alone can be thought of as a non dynamic network. For this time slice, Theorem \ref{teoalgo} guarantees the algorithm computes exact expected utility scores. 
+
+In the non dynamic case it is easier to highlight the relationships between our algorithms and standard backward induction evaluation of \glspl{ID} introduced in Proposition \ref{i-th}. Consider the time slice \gls{DAG} of Figure \ref{idstyle}, which can be related to a non-dynamic problem. The conditions imposed our structural assumptions guarantee that a standard evaluation can be performed over each ancestral set of the \gls{DAG} considering only the utility function over that component. Furthermore, as stated by Theorem \ref{teo:teo1}, the evaluation of each of these ancestral components can be distributed to the different panels since the expected utility factorises accordingly.
+
+\begin{figure}
+\begin{center}
+\begin{pseudocode}[ruled]{non-dynamic collective optimal EU}{\bm{u},\bm{f},\Gr}
+\label{algo32}
+\FOR i \GETS n \DOWNTO 1 \DO \BEGIN
+\IF i\in Le\\ \BEGIN  
+ G_i:\tilde{u}_{i}=u^{\Gr}_i\longrightarrow SB  \END
+\ELSE G_i:\tilde{u}_{i}=\sum_{j\in S_i}\bar{u}^*_{j}\longrightarrow SB  \\
+ SB: u_{i}^*=\max_{\mathcal{D}_i}\tilde{u}_{i} \longrightarrow G_i \\
+\IF (i\neq 1)  \THEN \BEGIN G_i: \bar{u}^*_{i}=\int_{\bm{\mathcal{Y}}_i}u^*_{i}f_i\dr \bm{y}_i \longrightarrow G_{F_i} \END
+\ELSE \BEGIN G_i:\bar{u}^*_{i}=\int_{\bm{\mathcal{Y}}_i}u^*_{i}f_i\dr \bm{y}_i \longrightarrow SB \\
+SB:u^*_0=\max_{\mathcal{D}_0}\bar{u}^*_{i}  
+\END
+\END 
+\end{pseudocode}
+\end{center}
+\end{figure}
+\section{Examples}
+\label{sec:exalgo}
+The previous section formally presented distributed propagation algorithms for \glspl{IDSS}. These work in general and for any network of \glspl{ES} that respect the structural assumptions of Section \ref{sec:asyclass}.  We now illustrate how the different  panels of experts can communicate with each other through a suite of different \glspl{IDSS} concerning the policies after an accidental release of contaminants at a nuclear power plant. 
+
+\subsection{A Simple Bayesian Network}
+Consider a simple example consisting of two dependent random variables, $Y_1$ and $Y_2$, overseen by two different panels. The variable $Y_1$ measures the number of people experiencing negative symptoms after a nuclear accident, whilst $Y_2$ estimates the financial implications  of that accident. Assume both variables to be continuous and defined through the simple \gls{DAG} linear regressions in equation (\ref{eq:GausBN}). Therefore $Y_1=\theta_{01}+\varepsilon_1$ and $Y_2=\theta_{02}+\theta_{12}Y_1+\varepsilon_2$, where $\varepsilon_i$, $i\in[2]$, is a random error with mean zero and variance $\psi_i$. Further let $\E(\theta_{ij}\;|\;d)=a_{ij}$, $\V(\theta_{01}\;|\;d)=c_{01}$ and $E(\psi_1\;|\;d)=b_1$, where $d$ denotes an available policy. This is a first example of a partially defined \gls{IDSS} that we study in depth in Chapter \ref{chapter5}.  This situation can be described by the simple \gls{BN} in Figure \ref{fig:simpleBNex} where in this case we have also added the parameters and the hyperparameters as vertices \citep[this is often done in practice, as discussed in][]{O'Hagan2004a}. Note that the edge set of this \gls{DAG} implies panel independence a priori since there are no edges between $\{\theta_{01},\psi_{1}\}$ and $\{\theta_{02},\theta_{12},\psi_2\}$. Furthermore this \gls{DAG} implies local independence since there are no edges between any two parameters. 
+
+\begin{figure}
+\centerline{
+\xymatrix{
+&Y_1\ar[rrr]&&&Y_2&\\
+\theta_{0,1}\ar[ur]&&\psi_1\ar[ul]&\theta_{0,2}\ar[ur]&\theta_{1,2}\ar[u]&\psi_2\ar[ul]\\
+a_{0,1}\ar[u]&c_{0,1}\ar[ul]&b_{1}\ar[u]&a_{0,2}\ar[u]&a_{1,2}\ar[u]&
+}}
+\caption{Bayesian network describing the example in Section \ref{perfigura}, including the parameters and the hyperparameters in its vertex set. \label{fig:simpleBNex}}
+\end{figure}
+
+Assume  $r_i=y_i$, $i\in[2]$, and $U(r_1,r_2)=y_1y_2$. Suppose also the decision space simply consists of an initial decision space $\mathcal{D}(0)=\{d_1,d_2\}$, where $d_1$ denotes evacuation, whilst $d_2$ corresponds to the delivery of protective measures. For ease of notation, suppress the dependence on decision $d\in\mathcal{D}(0)$.
+
+Since in this setting the \gls{DAG} has a unique ancestral component, we have that $\tilde{u}_2=y_1y_2$ and in order to compute $\bar{u}_2$, panel $G_2$ simply needs to compute the expected value of this function. By sequentially applying the tower rule for expectations and the properties of the expectation operator in Propositions \ref{prop:propmom} and \ref{prop:towerrules} respectively, and letting $\bm{\theta}$ denote the overall parameter vector, panel $G_2$ computes 
+\begin{align*}
+\E(Y_1Y_2)&=\E(\E(Y_1Y_2\;|\;\bm{\theta},Y_1))=\E((\theta_{02}+\theta_{12}Y_1)Y_1)=\E(\theta_{02}Y_1+\theta_{12}Y_1^2)\\
+&=\E(\theta_{02})\E(Y_1)+\E(\theta_{12})\E(Y_1^2)=\bar{u}_2
+\end{align*}
+The function $\bar{u}_2$ coincides with $\tilde{u}_1$ since $Y_2$ is the only son of $Y_1$. Therefore now panel $G_1$ can compute $\bar{u}_1$ as
+\begin{align}
+\E(\tilde{u}_1)&=\E(\theta_{02})\E(Y_1)+\E(\theta_{12})\E(Y_1^2)=\E(\theta_{02})\E(\E(Y_1\;|\;\bm{\theta}))+\E(\theta_{12})(\E(Y_1)^2+\V(Y_1))\nonumber\\
+&=\E(\theta_{02})\E(\theta_{01})+\E(\theta_{12})(\E(\E(Y_1\;|\;\bm{\theta}))^2+\V(\E(Y_1\;|\;\bm{\theta}))+\E(\V(Y_1\;|\;\bm{\theta}))\nonumber\\
+&=\E(\theta_{02})\E(\theta_{01})+\E(\theta_{12})(\E(\theta_{01})^2+\V(\theta_{01})+\E(\psi_1))\nonumber\\
+&=a_{02}a_{01}+a_{12}(a_{01}^2+c_{01}+b_1)\label{eq:exexput}
+\end{align}
+
+The form of the expected utility in equation (\ref{eq:exexput}) informs the \gls{IDSS} about the beliefs panels need to deliver. Suppose panel $G_1$ delivers the beliefs $\Psi^{\bm{y}}_1(d_1)=\Psi^{\bm{\theta}}_1(d_1)=\{a_{01}=2,c_{01}=4,b_1=4\}$ and $\Psi^{\bm{y}}_1(d_2)=\Psi^{\bm{\theta}}_1(d_2)=\{a_{01}=2.5,c_{01}=1,b_1=2\}$, whilst panel $G_2$ delivers $\Psi^{\bm{y}}_2(d_1)=\Psi^{\bm{\theta}}_2(d_1)=\{a_{02}=2.5,a_{12}=2\}$ and $\Psi^{\bm{y}}_2(d_2)=\Psi^{\bm{\theta}}_2(d_2)=\{a_{02}=2,a_{12}=2\}$. 
+
+A short note on the values assigned to this hyperparameters. The hyperparameter $a_{01}$ corresponds to the expectation of the expected number of people with adverse symptoms, whilst $a_{02}$ represents the expectation of expected amount of financial cost. It is then reasonable to provide a higher value for $a_{01}$ in the case of protective measures than in the evacuation scenario. By the same logic, even though protective measures may lead to more expenses for medical cures, the costs of an evacuation are incredibly high and significantly greater than for the other available option. The hyperparameter $a_{12}$ represents the strength of the causal relationship between the two variables. A priori, $G_2$ may not be very well informed about this quantity and decide to provide the same value for the two decisions available. The expectation of the variance of the number of people with negative symptoms is $b_1$: in the case of delivering protective measures this value is definitively lower, since it is easier to provide shelter to most of the population. On the other hand during an evacuation, it may not be possible to help all the people in danger and only a subset of them may be moved to safer areas: as a consequence, the expectation of the variance of $Y_1$ for decision $d_1$ is higher. The last hyperparameter $c_{01}$ corresponds to the variance of the expectation of $Y_1$ and, by the same argument, it is higher in the evacuation case than in the protective measures one.  
+
+Note that the \gls{IDSS} would have not been able to compute the expected utility of equation (\ref{eq:exexput}) if panels had only delivered the mean estimates of the variables under their jurisdiction. The quantities $c_{01}$ and $b_1$ represent levels of uncertainty concerning these means. If we just plug in the  expectations of relevant means and set equal to zero the above measures of uncertainty, we obtain a spurious evaluation of an expected utility score corresponding to 
+\begin{equation*}
+a_{01}a_{02}+a_{12}a_{01}^2.
+\end{equation*}
+In this case, plugging in the values provided by the panels, the expected utility for the evacuation scenario is $13$, whilst the expected value for delivering protective measures is $17.5$: the optimal choice, when no variation in the estimates is allowed, is to evacuate the population.\footnote{Note that in this case the expected utility needs to be minimised since the attributes of the example represent negative consequences.} Consider now the actual expected utility expression  in equation (\ref{eq:exexput}), including the second-order uncertainty. In this situation the expected utility of $d_1$ is $29$, whilst the expected utility under $d_2$ is $23.5$, from which it follows that the optimal decision consists of delivering protective measures. The misjudgement of uncertainty in this case has led to an indefensible decision, highlighting the need for a complete  uncertainty handling.
+
+\label{perfigura}
+\subsection{A Multiregression Dynamic Model}
+We now consider a very simple initial example of a dynamic framework, consisting of a dynamic extension of the model of the previous section. Assume a decision centre needs to decide whether to evacuate or not the population of a small village close to a nuclear reactor which is contaminating the surrounding area.  The course of action can be decided at two time points only with associated binary decision spaces $\mathcal{D}(0)$ and $\mathcal{D}(1)$, where $\mathcal{D}(t)=\{d_1(t),d_2(t)\}$, $t\in[1]^0$. Let $d_1(t)$ be the option of evacuation, whilst $d_2 (t)$ corresponds to do nothing, $t\in[1]^0$.  Suppose the system is asked to identify the expected utility scores of a specific policy (i.e. no optimisation steps are required) and suppress this dependence.
+
+ Assume also that the centre plans to observe the value of two continuous univariate time series $\{Y_1 (t)\}_{t\in[2]}$  and $\{Y_2(t)\}_{t\in[2]}$ only at time $t=1$, i.e. after having committed to a decision in $\mathcal{D}(0)$ but before having to choose an option in $\mathcal{D}(1)$. Assume further that it is only considered relevant for the analysis the next value of these two series at time $t=2$, which is not observed.  As before, at time $t$,  $Y_1(t)$ measures the number of people experiencing negative symptoms after a nuclear accident, whilst $Y_t(2)$  estimates the financial costs of the accident.
+      
+Assume that during decision conferences the structural consensus of the \gls{IDSS} has been agreed by the collective to include an \gls{LMDM} where $\bm{Y}^2_1$ is the parent of $\bm{Y}_2^2$. Further assume the collective agrees that the two series are the only attributes of the problem and that the utility consensus includes a simple linear utility, which can be written as      
+\begin{equation}
+\label{eq:utfact2}
+u(y_1 (1),y_1 (2),y_2 (1),y_2 (2))=u(y_1 (1))+u(y_1 (2))+                                                               u(y_2 (1))+u(y_2 (2)) .
+\end{equation}
+Assume also that the \gls{LMDM} is specifically defined by the following equations:
+\begin{multicols}{2}
+\begin{itemize}
+\item	$Y_2 (2)=\theta_{12}(2) Y_1 (2)+v_2 (2)$;
+\item	$\theta_{12}(2)=\theta_{12}(1)+w_2 (2)$;
+\item 	$Y_2(1)=\theta_{12}(1) Y_1 (1)+v_2 (1)$;
+\item $Y_1(2)=\theta_{01} (2)+v_1 (2)$;
+\item  $\theta_{01}(2)=\theta_{01} (1)+w_1 (2)$;
+\item $Y_1(1)=\theta_{01} (1)+v_1 (1)$.
+\end{itemize}
+\end{multicols}
+Recall that in an \gls{LMDM} the errors $v_i(t)$ and  $w_i (2)$ are independent of each other with mean zero and variance $V_i(t)$   and $W_i (2)$, respectively, for $i,t\in[2]$. Each panel individually assumed these variances to be unknown but has provided a prior mean estimate $b_i (t)$ for $V_i(t)$ and $r_i(2)$ for $W_i (2)$. Assume further that the panels provided prior information about the parameter vector at time $t=1$, such that $a_{01} $ and $a_{12}$ are the mean estimates for $\theta_{01}(1)$ and  $\theta_{12}(1)$, respectively. The variances of  $\theta_{01}(1)$ and  $\theta_{12}(1)$ are elicited to be $c_{01}$ and $c_{12}$ respectively. Assume further that each panel individually believes that the marginal utilities under their jurisdiction are quadratic, so that $u(y_t (i))=-y_i (t)^2$, $t,i\in[2]$.
+       
+Note that all the above panels’ specifications are delivered separately, as required by the quantitative delegation consensus. Specifically, the form of the first three equations in the list above is decided by panel  $G_2$, whilst the remaining ones are specified by $G_1$.  
+      
+Now that the \gls{IDSS} has been fully defined for this example, we can show how the algorithm works  when the overarching structure is the \gls{LMDM}. As in the previous case, because of the polynomial form of the utility function, the algorithm consists of a sequential use of the tower rules of moments introduced in Proposition \ref{prop:towerrules}. Because the associated \gls{DAG} consists of one single ancestral component, we have that $\tilde{u}_{2,2}$ coincides with the \gls{rhs} of equation (\ref{eq:utfact2}). Then, letting $\dot{u}_{2,2}=u(y_1(1))+u(y_1(2))+u(y_2(1))$, panel $G_2$ computes a marginalisation by performing the following steps
+
+\begin{align}
+ E(\tilde{u}_{2,2})=&\dot{u}_{2,2}-\E(Y_2(2))^2-\V(Y_2(2))\nonumber\\
+ =&\dot{u}_{2,2}-\E(\E(Y_2(2)|\cdot))^2-\V(\E(Y_2(2)|\cdot))-\E(\V(Y_2(2)|\cdot))\nonumber\\
+ =&\dot{u}_{2,2}-\E(\theta_{12}(2)Y_1(2))^2-\V(\theta_{12}(2)Y_1(2))-\E(V_2(2))\nonumber\\
+ =&\dot{u}_{2,2}- \E(\theta_{12}(2)Y_1(2))^2-\V(\E(\theta_{12}(2)Y_1(2)|\cdot))-\E(\V(\theta_{12}(2)Y_1(2)|\cdot))-b_2(2)\nonumber\\
+ =&\dot{u}_{2,2}-\E(\E(\theta_{12}(2)|\cdot))^2\E(Y_1(2))^2-\V(Y_1(2)\theta_{12}(1))-\E(Y_1(2)^2W_2(2))-b_2(2)\nonumber\\
+ =&\dot{u}_{2,2}-\E(\theta_{12}(1))^2\E(Y_1(2))^2-\V(\E(Y_1(2)\theta_{12}(1)|\cdot))-\E(\V(Y_1(2)\theta_{12}(1)|\cdot))\nonumber\\
+ & -\E(Y_1(2)^2)\E(W_2(2))-b_2(2)\nonumber\\
+ =&\dot{u}_{2,2}-a_{12}^2\E(Y_1(2))^2-\V(Y_1(2)a_{12})-\E(Y_1(2)^2c_{12})\nonumber\\
+ &-r_{2}(2)\E(Y_1(2)^2)-b_2(2)\nonumber\\
+ =&\dot{u}_{2,2}-(a_{12}^2+c_{12}+r_2(2))\E(Y_1(2)^2)-b_{2}(2)=\bar{u}_{2,2}\nonumber
+ \end{align}
+
+This expression consists  of non-random quantities, terms that are overseen by $G_1$, or elements associated to the previous time slice only. Therefore, $G_2$: $ \bar{u}_{2,2} \longrightarrow G_1$.  Note that $\tilde{u}_{2,1}$ coincides with $\bar{u}_{2,2}$ since $G_2$ oversees the only son of the vertex overseen by $G_1$. Letting $\dot{u}_{2,1}=u(y_1(1))+u(y_2(1))-b_{2}(2)$ and $g_{2,1}=1+a_{12}^2+c_{12}+r_2(2)$, panel $G_1$: 
+
+\begin{align}
+\E(\tilde{u}_{2,1})=&\dot{u}_{2,1}-g_{2,1}(\E(Y_1(2)^2+\V(Y_1(2))\nonumber\\
+=&   \dot{u}_{2,1}-g_{2,1}(\E(\E(Y_1(2)|\cdot))^2+\V(\E(Y_1(2)|\cdot))+\E(\V(Y_1(2)|\cdot)))\nonumber\\
+=&\dot{u}_{2,1}-g_{2,1}( \E(\theta_{01}(2))^2+\V(\theta_{01}(2))+\E(V_1(2)) )\nonumber\\
+=&\dot{u}_{2,1}-g_{2,1}(\E(\E(\theta_{01}(2)|\cdot))^2+\V(\E(\theta_{01}(2)|\cdot))+\E(\V(\theta_{01}(2)|\cdot))+b_1(2) )\nonumber\\
+=&\dot{u}_{2,1}-g_{2,1}( \E(\theta_{01}(1))^2+\V(\theta_{01}(1))+\E(W_1(2))+b_1(2)   ) \nonumber\\
+=&\dot{u}_{2,1}-g_{2,1}(a_{01}^2+c_{01}+r_1(2)+b_1(2))=\bar{u}_{2,1}\nonumber
+\end{align}
+
+All the variables associated to the second time slice have now been marginalised and the algorithm continues with the marginalisation of $Y_2(1)$. Letting $\dot{u}_{1,2}=u(y_1(1))-g_{2,1}(a_{01}^2+c_{01}+r_1(2)+b_1(2))-b_2(2)$ we have that 
+\begin{align}
+\E(\tilde{u}_{1,2})&=\dot{u}_{1,2}-E(\E(Y_2(1)|\cdot))^2-\V(\E(Y_2(1)|\cdot))-\E(\V(Y_2(1)|\cdot))\nonumber\\
+&=\dot{u}_{1,2}- \E(\theta_{12}(1)Y_1(1))^2-\V(\E(\theta_{12}(1)Y_1(1)|\cdot))-\E(\V(\theta_{12}(1)Y_1(1)|\cdot))-b_2(1)\nonumber\\
+&=\dot{u}_{1,2}-a_{12}^2\E(Y_1(1))^2-a_{12}^2\V(Y_1(1))-c_{12}\E(Y_1(1)^2)-b_2(1)\nonumber\\
+&=\dot{u}_{1,2}-(a_{12}^2+c_{12})\E(Y_1(1)^2)-b_{2}(1)=\bar{u}_{1,2}.\nonumber
+\end{align}
+
+Now letting 
+\[
+\dot{u}_{1,1}=-g_{2,1}(a_{01}^2+c_{01}+r_1(2)+b_1(2))-b_2(2)-b_2(1)
+\]
+and $g_{1,1}=1+a_{12}^2+c_{12}$, $G_1$:
+\begin{align}
+\E(\tilde{u}_{1,1})&=\dot{u}_{1,1}-g_{1,1}(\E(\E(Y_1(2)|\cdot))^2+\V(\E(Y_1(2)|\cdot))+\E(\V(Y_1(2)|\cdot)))\nonumber\\
+&=\dot{u}_{1,1}-g_{1,1}(a_{01}^2+c_{01}+b_1(2))=\bar{u}_{1,1}.\nonumber
+\end{align}
+The algorithm is now completed and the overall expected utility, coinciding with $\bar{u}_{1,1}$, can be written as 
+\begin{equation*}
+\bar{u}_{1,1}=-\bar{u}(1)-\bar{u}(2)-b_2(1)-b_{2}(2),
+\end{equation*}
+     where 
+     \begin{align*}
+     \bar{u}(1)=&(1+a_{12}(1)^2+c_{12}(1))(a_{01}(1)^2+c_{01}(1)+b_1(2)),\\
+     \bar{u}(2)=&(1+a_{12}(1)^2+c_{12}(1)+r_2(2))(a_{01}(1)^2+c_{01}(1)+r_1(2)+b_1(2)).
+     \end{align*}
+Although straightforward, the recursions in the simplest possible dynamic example enabled us to clearly illustrate symbolically the algorithm in practice. In the following sections we first consider a numerical example and then much more complex dynamic models.
+\label{sec:wash}
+\subsection{A Discrete Bayesian Network}
+
+\begin{table}
+\begin{center}
+\begin{tabular}{|c|c|c|c|c|}
+\hline
+$d_0$&$d_1$&$d_2$&$d_3$&$k_du_d(\cdot)$\\
+\hline\hline
+1&0&0&0&\textbf{0.15}\\
+0&1&0&1&\textbf{0.2}\\
+0&1&1&1&\textbf{0}\\
+0&0&1&1&0.15\\
+0&0&1&0&\textbf{0.2}\\
+0&0&0&1&0.25\\
+0&0&0&0&\textbf{0.3}\\
+\hline
+\end{tabular}
+\end{center}
+\caption{List of available policies and their utility scores. \label{table:ex1}}
+\end{table}
+Consider again a non dynamic domain with four random variables $Y_i$, $i\in[4]$, each overseen by a different panel of experts and represented by the \gls{DAG} in Figure \ref{fig:BNexample} (the non-dynamic variant of Figure \ref{fig:DAGDDM}). Suppose in this case that the variables are binary taking values $\mathcal{Y}_i=[1]^0$, $i\in[4]$, and that these have the same meaning as in Example \ref{example:BN}: specifically $Y_1$ is an indicator of radioactive contamination in the environment, $Y_2$ is an indicator of radioactive intake in the population, $Y_3$ is an indicator of adverse health effects and $Y_4 $ is an indicator of political disruption in the affected area. Suppose the collective agreed on five binary decision spaces $\mathcal{D}_i$, $i\in[4]^0$. The initial decision $\mathcal{D}_0$ has two options: evacuation or do nothing. The decision after observing the amount of radiation, $\mathcal{D}_1$, consists of providing iodine tablets or not. These can be distributed if evacuation was not chosen as initial decision. The space $\mathcal{D}_2$ consists of the option of setting up a medical field support centre in the area. The centre can be built only if the population was not evacuated. The decision space $\mathcal{D}_3$ is the same as $\mathcal{D}_1$ and the former cannot be equal to not distributing iodine tablets if it was decided to do
+so after observing the contamination of the area. Finally the decision space $\mathcal{D}_4$ consists of two options: whether or not to proceed with a diplomatic action. Assume further that the collective agrees on a set of extended conditional independences so that the overall density of the \gls{IDSS} can be written as 
+\begin{equation*}
+f(\bm{y}\;|\;\bm{d})=f_4(y_4\;|\;y_1,d_0)f_3(y_3\;|\;y_2,y_1,d_0)f_2(y_2\;|\;y_1,d_0)f_1(y_1).
+\end{equation*}
+Note that in particular the distributions of $Y_2$, $Y_3$ and $Y_4$ depend on their parents and on $\mathcal{D}_0$ only.
+
+\begin{table}
+\begin{center}
+\begin{tabular}{|c|c|}
+\hline
+$d_4$&$k_{d_4}u_{d_4}(d_4)$\\
+\hline\hline
+1&0\\
+0&\textbf{0.05}\\
+\hline
+\end{tabular}
+\hspace{0.5cm}
+\begin{tabular}{|c|c|}
+\hline
+$y_4$&$k_4u_4(y_4)$\\
+\hline\hline
+1&0\\
+0&0.1\\
+\hline
+\end{tabular}
+\hspace{0.5cm}
+\begin{tabular}{|c|c|}
+\hline
+$y_3$&$k_3u_3(y_3)$\\
+\hline\hline
+1&0\\
+0&0.45\\
+\hline
+\end{tabular}
+\hspace{0.5cm}
+\begin{tabular}{|c|c|}
+\hline
+$y_2$&$k_2u_2(y_2)$\\
+\hline\hline
+1&0\\
+0&0.1\\
+\hline
+\end{tabular}
+\end{center}
+\caption{Specification of the other required utilities. \label{table:ex2}}
+\end{table}
+
+As before, assume $\UT=\{2,3,4\}$ and suppose the agreed utility function can be written as
+\begin{equation}
+\label{eq:utfactex}
+u^{\Gr}=k_4u_4(y_4)+k_3u_3(y_3)+k_2u_2(y_2)+k_{d_4}u_{d_4}(d_4)+k_{d}u_{d}(d_0,d_1,d_2,d_3).
+\end{equation}
+Note that this utility factorisation is in the compatible class for the \gls{DAG} associated to this example. The first three terms on the \gls{rhs} of equation (\ref{eq:utfactex}) are provided by the corresponding panels, whilst we envisage the remaining ones to be agreed by the collective.
+
+Suppose panels and the collective delivered the utility specifications summarised in Tables \ref{table:ex1} and \ref{table:ex2}. We see that Table \ref{table:ex1} includes only the policies that respect the constraints introduced above. Further assume that the panels delivered the probabilistic beliefs summarised in Table \ref{table:ex3}.
+
+\begin{table}
+\begin{center}
+\begin{tabular}{|c|c|c|c|}
+\hline
+$d_0$&$y_1$&$\mathbb{P}(Y_4=1|\cdot)$&$\mathbb{P}(Y_2=1|\cdot)$\\
+\hline\hline
+1&1&0.85&0.7\\
+1&0&0.7&0.9\\
+0&1&0.5&0.1\\
+0&0&0.2&0.2\\
+\hline
+\end{tabular}
+\hspace{0.15cm}
+\begin{tabular}{|c|c|c|c|}
+\hline
+$y_2$&$y_1$&$d_0$&$\mathbb{P}(Y_3=1|\cdot)$\\
+\hline\hline
+1&1&1&0.7\\
+1&0&1&0.7\\
+0&1&1&0.5\\
+0&0&1&0.2\\
+1&1&0&0.9\\
+1&0&0&0.8\\
+0&1&0&0.6\\
+0&0&0&0.3\\
+\hline
+\end{tabular}
+\hspace{0.15cm}
+\begin{tabular}{|c|c|}
+\hline 
+$y_1$&$\mathbb{P}(Y_1=y_1)$\\
+\hline
+1&0.8\\
+\hline
+0&0.2 \\
+\hline
+\end{tabular}
+\end{center}
+\caption{Probability specifications delivered by the panels. \label{table:ex3}}
+\end{table}
+
+\begin{table}
+\begin{center}
+\begin{tabular}{|c|c|c|}
+\hline
+$d_0$&$y_1$&$\bar{u}_4(d_0,y_1)$\\
+\hline\hline
+1&1&0.065\\
+1&0&0.08\\
+0&1&0.1\\
+0&0&0.13\\
+\hline
+\end{tabular}
+\caption{Values of $\bar{u}^*_4$ after the marginalisation step of $G_4$. \label{table:ex4}}
+\end{center}
+\end{table}
+
+In this setting the algorithm starts computing $\tilde{u}_3=u_3+u_d$ and $\tilde{u}_4=u_4+u_{d_4}$. These are sent to the \gls{SB} that performs the optimisation step over these quantities. The result of these optimisation depends on the available decisions only and is represented in Tables \ref{table:ex1} and \ref{table:ex2} by a bold expected utility score. These are the scores of the policies the \gls{SB} transmits to the appropriate panels in our algorithm.  At this stage, following Algorithm \ref{algo32}, panels $G_4$ and $G_3$ perform marginalisation steps to compute respectively 
+\begin{equation*}
+\bar{u}_4^*=\sum_{y_4\in\mathcal{Y}_4}u^*_4\mathbb{P}(Y_4=y_4\;|\;Y_1=y_1,d_0),\hspace{0.5cm} \bar{u}_3^*=\sum_{y_3\in\mathcal{Y}_3}u^*_3\mathbb{P}(Y_3=y_3\;|\;Y_2=y_2,Y_1=y_1,d_0).
+\end{equation*} 
+ Table \ref{table:ex4} shows the result of the marginalisation step performed by Panel $G_4$ which is then communicated to panel $G_1$. Similarly, Table \ref{table:ex5} shows $\bar{u}^*_3$ which  coincides with $\tilde{u}_2$ since $Y_3$ is the only son of $Y_2$ in the associated \gls{DAG}.  Therefore the \gls{SB} can now identify an optimal policy for each combination of the parent variables and decisions: this again is reported by a bold score on leftmost column of Table \ref{table:ex5}. 
+
+
+\begin{table}
+\begin{center}
+\begin{tabular}{|c|c|c|c|c|c|c|}
+\hline
+$d_0$&$d_1$&$d_2$&$d_3$&$y_1$&$y_2$&$\tilde{u}_2(\cdot)$\\
+\hline\hline
+1&0&0&0&1&1&\textbf{0.465}\\
+0&1&0&1&1&1&\textbf{0.605}\\
+0&1&1&1&1&1&0.405\\
+0&0&1&0&1&1&0.605\\
+0&0&0&0&1&1&\textbf{0.705}\\
+1&0&0&0&0&1&\textbf{0.465}\\
+0&1&0&1&0&1&\textbf{0.56}\\
+0&1&1&1&0&1&0.36\\
+0&0&1&0&0&1&0.56\\
+0&0&0&0&0&1&\textbf{0.66}\\
+1&0&0&0&1&0&\textbf{0.475}\\
+0&1&0&1&1&0&\textbf{0.57}\\
+0&1&1&1&1&0&0.37\\
+0&0&1&0&1&0&0.57\\
+0&0&0&0&1&0&\textbf{0.67}\\
+1&0&0&0&0&0&\textbf{0.34}\\
+0&1&0&1&0&0&\textbf{0.435}\\
+0&1&1&1&0&0&0.235\\
+0&0&1&0&0&0&0.435\\
+0&0&0&0&0&0&\textbf{0.535}\\
+\hline
+\end{tabular}
+\end{center}
+\caption{Value of the functions $\tilde{u}_2$ and $\bar{u}_3^*$ computed respectively by $G_2$ and $G_3$. \label{table:ex5}}
+\end{table}
+
+Following Algorithm \ref{algo32}, panel $G_2$ performs a marginalisation step and communicates the result to $G_1$, which can then compute $\tilde{u}_1$ by summing $\bar{u}^*_2$ and $\bar{u}^*_4$ computed respectively by $G_2$ and  $G_4$. The \gls{SB} then performs the optimisation step which is summarised in Table \ref{table:ex6} by the bold scores: there are at this stage four potential optimal policies, one for each combination of $y_1$ and $d_0$. 
+
+\begin{table}
+\begin{center}
+\begin{tabular}{|c|c|c|c|c|c|c|}
+\hline
+$d_0$&$d_1$&$d_2$&$d_3$&$d_4$&$y_1$&$\tilde{u}_1(\cdot)$\\
+\hline\hline
+1&0&0&0&0&1&\textbf{0.533}\\
+0&1&0&0&0&1&0.7015\\
+0&0&0&0&0&1&\textbf{0.8015}\\
+1&0&0&0&0&0&\textbf{0.4325}\\
+0&1&0&0&0&0&0.59\\
+0&0&0&0&0&0&\textbf{0.69}\\
+\hline
+\end{tabular}
+\end{center}
+\caption{Values of $\tilde{u}_1$ computed by summing $\bar{u}^*_4$ and $\bar{u}^*_2$. \label{table:ex6}}
+\end{table}
+
+The final two steps of the algorithm consist of a marginalisation over $\mathcal{Y}_1$, performed by panel $G_1$, and the final optimisation step over the initial decision space $\mathcal{D}_0$, performed by the \gls{SB}. Given the beliefs delivered by $G_1$, the \gls{IDSS} derives the expected utility scores for the two only remaining policies as:
+\begin{align*}
+\bar{u}(d_0=1,d_1=0,d_2=0,d_3=0,d_4=0)&=0.4526,\\ 
+\bar{u}(d_0=0,d_1=0,d_2=0,d_3=0,d_4=0)&=0.7123.
+\end{align*}
+Thus, the \gls{IDSS}, following Algorithm \ref{algo32}, would suggest that the optimal policy consists of not intervening at any point. 
+
+In Section \ref{sec:symbolic} we  briefly demonstrate that evaluations in discrete domains like this one can be performed symbolically and written as a simple arithmetic expression. 
+
+
+
+\subsection{Gaussian Recursions}
+We consider now a dynamic variant of the previous example, where the processes depicted by the \gls{DAG} in Figure \ref{fig:DAGDDM} have the same meaning as before. As discussed in Chapter \ref{chapter1}, many applications we have in mind  have a geographical structure, in the sense that many of the values of the required variables are recorded at several locations in an area of interest. This is for example the case in a nuclear emergency, where levels of contamination are collected at many different locations in the surroundings of a power plant. Thus, the processes \glspl{IDSS} usually  deal with are high dimensional. However, the associated utilities are usually low dimensional and can consequently be evaluated transparently. Note that if the impacts of the countermeasures need to be considered at a regional level, it is straightforward to implement these into an \gls{IDSS} framework. Panels then simply need to provide different scores for the different regions of interest.  
+
+Because for real problems the number of equations required to define the problem scales up to an extent where the outworkings of the algorithm are obscured, the example below illustrates how a  geographic component can be included into the analysis in the simplest possible case. However in much larger scenarios the calculations are still very feasible and just as straightforward to calculate as in this example because everything is distributed and in closed form. Furthermore, each of the unknown quantities are in practice numbers, rather than algebraic entities, provided by the component \gls{DSS} and so quick to integrate within the composite system.
+
+For the purpose of this example, suppose the \gls{IDSS} needs to identify the expected utility score associated to a specific policy and suppress this dependence. Further suppose each vector $\bm{Y}_i(t)=(Y_i^1(t),\dots, Y_i^r(t))^\T$, $i\in[4]$, $t\in [T]$, is such that $Y_i^l(t)$ is a univariate continuous random variable observed at location $l\in [r]$. The locations are the same for all the time series and do not change through time. To keep this illustration simple  we  consider here a simple \gls{LMDM} over a finite time horizon $T$ equal to $2$. Specifically, for  $i\in[4]_1$, $t\in[2]$ and  $l\in[r]$, we let
+\begin{eqnarray}
+Y^l_i(t)=\sum_{j\in \Pi_i}\theta_{ji}^l(t)Y_j^l(t)+v_i^l(t), \;\;\;\;\; \mbox{ and }\;\;\;\;\;
+\theta^l_{ji}(2)=\theta^l_{ji}(1)+w^l_{ji}(2)\label{lmdm1}.
+\end{eqnarray}
+
+Equation (\ref{lmdm1}) implicitly makes the simplifying assumption that the processes at different locations are independent of each other. We are further assuming that the intercepts are equal to zero and that 
+\begin{equation}
+Y_1^l(t)=\theta_{11}^l(t)+v_{1}^l(t),\;\;\;\;\;\;\; \theta_{11}^l(2)=\theta_{11}^l(1)+w_{11}^l(2).
+\label{lmdm2}
+\end{equation}
+  The errors $v_i^l(t)$, $w^l_{ji}(2)$ are assumed by the collective to be mutually independent of each other  following a Gaussian distribution with mean zero and known variance $V_i^l(t)$ and $W^l_{ji}(2)$ respectively. Assume further that each panel has provided prior information about the parameter vector at time $t=1$, such that $a^l_{ji}$ is the mean prior estimate of $\theta^l_{ji}(1)$, whilst its variance is elicited to be $c^l_{ji}$. 
+
+Now assume that the collective has agreed on a linear utility factorisation over the attributes and that each panel has individually agreed to model every individual conditional utility function as a cubic. Let $r_i^l(t)=y_i^l(t)$ and assume that decisions are not arguments of the utility function. We let
+\begin{equation}
+\label{utex}
+u^{\Gr}(\cdot)=\sum_{i\in[4]_1}\sum_{t\in[2]}\sum_{l\in[r]} -\gamma_i(t)y_i^l(t)^3,
+\end{equation}
+where $\gamma_i(t)\in\mathbb{R}_{>0}$. It is easy to deduce by comparing equations (\ref{eq:utfact}) and (\ref{utex}) that this factorisation is a member of the class of compatible utilities.  Furthermore the utility function, for each attribute of the decision problem, is assumed to be the same for the $r$ geographical locations and that the overall score of an attribute is equal to the sum of the scores of each region for that attribute.
+The cubic utility function is a member of the family of constant relative risk aversion utilities, used in the literature to model risk aversion \citep[see][]{wakker2008}. 
+
+Now that the \gls{IDSS} has been fully defined for this example, we can show how the algorithm works symbolically when the overarching structure is the \gls{LMDM}. Recall that the third  moment of a Gaussian distribution with mean $\mu$ and variance $\psi$ is equal to $\mu^3+3\mu\psi$. Since this is a function of the first two moments (as for any high-order moment of a Gaussian, see Appendix \ref{sec:nig}), the algorithm again consists of a sequential use of the tower property for the first two conditional moments. This starts with panels $G_3$ and $G_4$ computing, respectively, $\bar{u}_{2,3}$ and $\bar{u}_{2,4}$. Specifically, we have that   
+\begin{align}
+\label{4ex}\bar{u}_{2,4}&=-\sum_{l\in[r]}\big(\gamma_4(1)
+y_4^l(1)^3+\gamma_4(2)\big(\E(\theta_{14}^l(2)^3Y_1^l(2)^3)+3V_4^l(2)\E(\theta_{14}^l(2)Y_1^l(2))\big)\big),\\
+\label{3ex}\bar{u}_{2,3}&=-\sum_{l\in[r]}\big(\gamma_3(1)
+y_3^l(1)^3+\gamma_2(1)
+y_2^l(1)^3+\gamma_2(2)
+y_2^l(2)^3+\gamma_3(2)h_3\big),
+\end{align}
+where $h_3=\E(\E(Y_3^l(2)^3\;|\;\cdot))+3V_3^l(2)\E(\E(Y_3^l(2)\;|\;\cdot))$ and 
+\begin{align}
+\label{31ex}\E(Y_3^l(2)\;|\;\cdot)&=\theta_{13}^l(2)Y_1^l(2)+\theta_{23}^l(2)Y_2^l(2),
+\\
+\label{32ex}\E(Y_3^l(2)^3\;|\;\cdot)&=\sum_{i\in[2]}(\theta_{i3}^l(2)Y_i^l(2))^3+3\sum_{\substack{j+k=3\\j\neq k\in\mathbb{Z}_{\geq 1}}}(\theta_{j3}^l(2)Y_j^l(2))^2\theta_{k3}^l(2)Y_k^l(2).
+\end{align}
+Now, equations (\ref{3ex})-(\ref{32ex}) are functions of $Y_2^l(2)$ and $Y_2^l(1)$ only and can therefore $\longrightarrow G_2$. Then panel $G_2:\bar{u}_{2,2}$ which can be written as the sum of the terms $h_{2}(i)$, $i\in[6]$, defined in Table \ref{pr}.
+\begin{table}
+\renewcommand{\arraystretch}{2}
+\begin{center}
+\begin{tabular}{|l|}
+\hline
+$h_3(1)=-\sum_{l\in[r]}\Big(\sum_{i=2}^3\gamma_i(1)y_i^l(1)^3+3\gamma_3(2)\E\big(\theta_{13}^l(2)^2\theta_{23}^l(2)\theta_{12}^l(2)Y_1^l(2)^3\big)\Big)$\\
+\hline
+$h_3(2)=-\gamma_3(2)\sum_{l\in[r]}\Big(3V_3^l(2)\E\big((\theta_{13}^l(2)+\theta_{23}^l(2)\theta_{12}^l(2))Y_1^l(2)\big)+\E\big( (\theta_{13}^l(2)Y_1^l(2))^3\big)\Big)$\\
+\hline
+$
+h_3(3)=-\sum_{l\in[r]}\Big(\gamma_2(2)+\gamma_3(2)\E\big(\theta_{23}^l(2)^3\big)\Big)\E\big(\theta_{12}^l(2)^3Y_1^l(2)^3\big)$\\
+\hline
+$h_3(4)=-\sum_{l\in[r]}\Big(\gamma_2(2)+\gamma_3(2)\E\big(\theta_{23}^l(2)^3\big)\Big)3V_2^l(2)\E\big(\theta_{12}^l(2)Y_1^l(2)\big)$\\
+\hline
+$h_3(5)=-3\gamma_3(2)\sum_{l\in[r]}\E\big(\theta_{13}^l(2)\theta_{23}^l(2)^2Y_1^l(2)\big)\Big(\E\big(\theta_{12}^l(2)^2Y_1^l(2)^2\big)+\V\big(\theta_{12}^l(2)Y_1^l(2)\big)\Big)$\\
+\hline
+$h_3(6)=-3\gamma_3(2)\sum_{l\in[r]}\E\big(\theta_{13}^l(2)\theta_{23}^l(2)^2Y_1^l(2)\big)V_2^l(2)$\\
+\hline
+\end{tabular}
+\end{center}
+\caption{Definition of the terms $h_2(i)$ in $\bar{u}_{2,2}$.\label{pr}}
+\end{table}
+
+All the terms in Table \ref{pr}, as well as the \gls{rhs} of equation (\ref{4ex}), are a function of $Y_1^l(2)$ only and can therefore be  sent to panel $G_1$, which sums these two incoming messages. Panel $G_1$ then applies sequentially the tower rules to compute $\bar{u}_{2,1}$. This corresponds to the sum of the \gls{rhs} of (\ref{4ex}) and the terms in Table \ref{pr} where $Y_1^l(2)$ and $Y_1^l(2)^3$ are substituted with $\theta_{11}^l(2)$ and $\theta_{11}^l(2)^3+3\theta_{11}^l(2)V_1(2)$ respectively.
+
+The algorithm then considers the first time slice. Because of the very regular structure of the \gls{LMDM} the expressions resulting from the first time slice are identical to the ones at the second time point. Since in an \gls{LMDM} the parameters are all independent of each other, the expected utility function can be deduced by simply computing the expectation of each of these. Specifically, letting for $i\in[2]$ and $j\in[4]_1$
+\begin{align*}
+&k_{11}^l(2)=\E(\theta_{11}^l(2)^3)=((a_{11}^l)^3+3a_{11}^l(c_{11}^l+V_1^l(2)+W_{11}^l(2))),\\
+ &k_{11}^l(1)=\E(\theta_{11}^l(1)^3)=((a_{11}^l)^3+3a_{11}^l(c_{11}^l+V_1^l(1))),\\
+ &k_{ij}^l(1)=\E(\theta_{ij}^l(1)^3)=((a_{ij}^l)^3+3a_{ij}^lc_{ij}^l),\\
+ &k_{ij}^l(2)=\E(\theta_{ij}^l(2)^3)=((a_{ij}^l)^3+3a_{ij}^l(c_{ij}^l+W_{ij}^l(2))),\\
+&d_{ij}^l(2)=\E(\theta_{ij}^l(2)^2)=(a_{ij}^l)^2+c_{ij}^l+W_{ij}^l(2),\\
+&d_{ij}^l(1)=\E(\theta_{ij}^l(1)^2)=(a_{ij}^l)^2+c_{ij}^l,
+\end{align*}
+we can write the expected utility function as 
+\begin{equation}
+\label{fex1}
+\bar{u}(\bm{d})=\sum_{l\in[r]}\left(\sum_{t\in[2]}\left(\sum_{i\in[4]_1}\gamma_{i}(t)\bar{u}_i^l(t)+\gamma_3(t)(\bar{m}_3^l(t)+\bar{n}_3^l(t)+k_{23}^l(t)\bar{u}_2(t))\right)\right)
+\end{equation}
+where
+\begin{align*}
+&\bar{u}_i^l(1)=k_{1i}^l(1)k_{11}^l(1)+3V_i^l(1)a_{1i}^la_{11}^l,&\bar{n}_3^l(t)=3a_{13}^ld_{23}^l(t)(d_{12}^l(t)k_{11}^l(t)+V_2^l(t)a_{11}^l),\\
+&\bar{u}_i^l(2)=k_{1i}^l(2)k_{11}^l(2)+3V_i^l(2)a_{1i}^la_{11}^l,&\bar{m}_3^l(t)=3V_3^l(t)a_{23}^la_{12}^l(a_{11}^l+k_{11}^l(t)d_{13}^l(t)).
+\end{align*}
+
+
+There are a few important points to notice here:
+\begin{itemize}
+\item because of the form of the utility factorisation in equation (\ref{utex}), the expected utility consists of the sum of the expected scores at each location $l$ and of the sum, at each of these locations, of the scores associated to the two time slices. This result is a direct consequence of the independence of the processes at different locations. However,  it would have been straightforward to embellish the example to allow the different processes to be dependent on one another, by defining a hierarchical model over $\bm{\theta}(t)^\T=(\bm{\theta}_i(t)^\T)_{i\in[4]}$, where $\bm{\theta}_i(t)$ is the vector including the parameters $\theta_{ji}(t)$ in equations (\ref{lmdm1}) and (\ref{lmdm2}), $i\in[4]$;
+\item the expected utility in equation (\ref{fex1}) is a polynomial, where the unknown quantities are the individual judgements delivered by the panels. This polynomial has for this example degree six and it is not a simple multilinear combination of the unknowns. Note that knowing the shape of the expected utility allows potential decision centres to understand how different  factors influence  the decision making process: we focus on these issues in Chapter \ref{chapter5};
+\item the \gls{IDSS} would have not been able to compute the expected utility of equation (\ref{fex1}) if the panels had only delivered the mean estimates of the variables under their jurisdiction. The quantities $V_i^l(t)$, $W_{ij}^l(2)$ and $c_{ij}^l$ represent levels of uncertainty concerning these mean estimates.   If we just plug in the expectations of relevant means and set equal to zero the above measures of uncertainty we obtain a spurious evaluation of an expected utility score corresponding to
+\begin{align}
+\label{wrong}
+&\bar{u}(\bm{d})=\sum_{l\in[r]}\sum_{t\in[2]}\left(\sum_{i\in[4]_1}\gamma_i(t)(a_{11}^l)^3(a_{1i}^l)^3+\gamma_3^t(a_{11}^l)^3(a_{23}^l)^2(a_{12}^l)^2(3a_{13}^l+{a_{23}^l}{a_{12}^l})\right). 
+\end{align}
+Equation (\ref{wrong}) is way different from (\ref{fex1}). A \gls{DSS} that provides expected utility scores from equation (\ref{wrong}) could thus lead decision centres to behave as non expected utility maximisers and put them in danger of adopting indefensible countermeasures.
+\end{itemize}
+
+
+\subsection{A Network of Dynamic Models}
+The last example we present in this chapter consists of a sequence of generic models, whose input/output relationships respect the \gls{DAG} in Figure \ref{fig:MDM} consisting of a Markov chain structure. We assume again the \gls{IDSS} needs to identify the expected utility score associated to a specific policy, therefore skipping the optimisation steps, and suppress the dependence on the decisions. 
+
+As before, assume the variables $Y_i(t)$, $t\in[T]$, $i\in[4]$, are observed at each time point at $r$ different locations in space and let $\bm{Y}_i(t)=(Y^1_i(t),\dots, Y_i^r(t))^\T$, where $Y^l_i(t)$ denotes the $i$-th variable at time $t$ and location $l$. Further assume that the compatible utility factorisation is linear over time, space and nodes of the graph, i.e.
+\[
+u^{\mathcal{G}}=\sum_{i\in[4]}\sum_{t\in[T]}\sum_{l\in[r]} k_{til}u_{til}(y_{i}^l(t)),
+\]
+
+Suppose further each panel individually agreed to model its marginal utility using a simple quadratic function of the  form 
+\[
+u_{til}=-\gamma_i(t)y_i^l(t)^2.
+\] 
+
+Assume panel $G_1$ agreed to use a complex sampling computational algorithm delivering as output the first two moments of the distribution of $\bm{Y}_1(t)$, $t\in[T]$. Let $\bm{a}_1(t)$ and $C_1(t)$ the mean and covariance matrix respectively of $\bm{Y}_1(t)$ deduced from the agreed algorithm, with $c_1^{p,s}(t)$ the entry in position $(p,s)$ of $C_1(t)$. Let also $a_1^l(t)$ and $c_1^l(t)$ be the mean and the variance of $Y_1^l(t)$ and $\bm{c}_1(t)=(c_1^1(t),\dots,c_1^r(t))^\T$.
+
+ Panel $G_2$ agrees to model $\bm{Y}_2(t)$ according to $r$ distinct \glspl{MDM} defined by the following observation equations
+\begin{align*}
+&Y_2^l(t)=\bm{Y}_1(t)^\T\bm{\theta}_2^l(t) +v_2^l(t),\;\;\;\;\;\;\;\;v_2^l(t)\sim (0,V^l_2(t)),
+\end{align*}
+where $\bm{\theta}_2^l(t)$ is a $r$-dimensional vector of unknown parameters and $\E(V_2^l(t))=b_2^l(t)$. The system equations  are defined as
+\[
+\bm{\theta}_2^l(t)=G_{2}^l(t)\bm{\theta}_{2}^l(t{-1})+\bm{w}_{2}^l(t),\;\;\;\;\;\;\;\;\bm{w}_{2}^l(t)\sim (\bm{0},W_{2}^l(t)),
+\]
+where $G_{2}^l(t)$ is a $r\times r$ matrix having known entries and $W_{2}^l(t)$ is a diagonal matrix with known entries $w_{2,l}^{i,j}$ in position $(i,j)$. Assume that is given a prior distribution with mean $\bm{a}_2^{l}$ and covariance $C_{2}^l$ to $\bm{\theta}_2^l(1)$, where $C_{2}^l$ is a diagonal matrix with $c_{2,l}^{i,j}$ in entry $(i,j)$.
+
+Panel $G_3$ agreed to use a simple \gls{LMDM}, defined, for $l\in[r]$, by the following observation equations 
+\[
+Y_3^l(t)=\theta_{23}^l(t)Y_2^l(t)+v_3^l(t),
+\]
+and system equations
+\[
+\theta_{23}^l(t)=\theta_{23}^l(t{-1})+w_{23}^l(t).
+\]
+The errors $v_t^l(3)$ and $w_t^l(2,3)$ are assumed by $G_3$ to be mutually independent with mean zero and variance $V_3^l(t)$ and $W_{23}^l(t)$ respectively. These variances are assumed to be unknown, but the panel provides a prior mean $b_3^l(t)$ for $V_3^l(t)$ and $r_{23}^l(t)$ for $W_{23}^l(t)$. Prior means and variances are delivered also for the parameters $\theta_{23}^l(1)$ and denoted as $a_{23}^l$ and $c_{23}^l$.
+
+Lastly panel $G_4$ agreed to model the variables under their jurisdiction using a complex deterministic simulator for each region and to introduce uncertainty by defining a non-dynamic emulator over its outputs (see Section \ref{sec:emu}). The inputs of each simulator are $y_3^l(t)$ together with other known constants, whilst its output is $y_4^l(t)$. The emulator is then formally defined as
+\[
+Y_4^l(t)=m(Y_3^l(t))+e(Y_3^l(t)),
+\]
+where $m(Y_3^l(t))=\theta^l_{04}+\theta^l_{34}Y_3^l(t)$ and $e(Y_3^l(t))$ is a zero mean Gaussian process with covariance function $c^l(\cdot,\cdot)=W^l_{4}r^l(Y_3^l(t)-Y_3^l(t)^{'})$, where $r^l$ is a stationary correlation function such that $r^l(0)=1$ For the purpose of this example, it is actually not necessary to specify such correlation function and we envisage the panel to have agreed on one such function \citep[see e.g.][]{Kennedy2001}. The panel further agrees to deliver the following beliefs:
+\[
+\begin{array}{lllll}
+\mathbb{E}(\theta^l_{04})=a^l_{04},&\mathbb{E}(\theta^l_{34})=a^l_{34},&
+\mathbb{V}(\theta^l_{04})=c^l_{04},&\mathbb{V}(\theta^l_{34})=c^l_{34},&\mathbb{E}(W^l_{4})=r^l_{4}.
+\end{array}
+\]
+
+\begin{figure}
+\centerline{
+\xymatrix@C=1.4em{
+&&SB\ar@/_0.6pc/@{~>}[d]_(.35){u^*_{t,1}}&&SB\ar@/_0.6pc/@{~>}[d]_(.35){u^*_{t,2}}&&SB\ar@/_0.6pc/@{~>}[d]_(.35){u^*_{t,3}}&&SB\ar@/_0.6pc/@{~>}[d]_(.35){u^*_{t,4}}&&\\
+&&*+[o][F-]{\bm{Y}_t(1)}\ar@/_0.6pc/@{.>}[u]_(.35){\tilde{u}_{t,1}}\ar@/^0.6pc/^{\bar{u}_{t,1}}@{-->}[ll]\ar[rr]&&*+[o][F-]{\bm{Y}_t(2)}\ar@/_0.6pc/@{.>}[u]_(.35){\tilde{u}_{t,2}}\ar[rr]\ar@/^0.6pc/^{\bar{u}_{t,2}}@{-->}[ll]&&*+[o][F-]{\bm{Y}_t(3)}\ar@/_0.6pc/@{.>}[u]_(.35){\tilde{u}_{t,3}}\ar@/^0.6pc/^{\bar{u}_{t,3}}@{-->}[ll]\ar[rr]&&*+[o][F-]{\bm{Y}_t(4)}\ar@/_0.6pc/@{.>}[u]_(.35){\tilde{u}_{t,4}}\ar@/^0.6pc/^{\bar{u}_{t,4}}@{-->}[ll]&&\ar@/^0.6pc/^{\bar{u}_{t+1,1}}@{-->}[ll]
+}
+}
+\caption{Description of the propagation algorithm over the directed acyclic graph of Figure \ref{fig:MDM}. \label{fig:messpass}}
+\end{figure}
+
+We now show how the algorithm works symbolically under the overarching structure defined above. Its steps are summarised in Figure \ref{fig:messpass} where the arrows have the same meaning as in Example \ref{ex:algoex}. For conciseness here we assume that the time horizon is equal to two and we start illustrating the algorithm from panel $G_4$ overseeing $\bm{Y}_2(4)$. Note that by construction $\tilde{u}_{2,4}=u^{\Gr}$. Letting $\dot{u}_{2,4}=u^{\Gr}-\sum_{l\in[r]}k_{24l}u_{24l}$, panel $G_4$  computes $\bar{u}_{2,4}$, as
+\begin{align*}
+\bar{u}_{2,4}&=\dot{u}_{2,4}-\sum_{l\in[r]}k_{24l}\gamma_4^l(2)\mathbb{E}(Y_4^l(2)^2)\\
+&=\dot{u}_{2,4}-\sum_{l\in[r]}k_{24l}\gamma_4^l(2)(\mathbb{E}(Y_4^l(2))^2+\mathbb{V}(Y_4^l(2)))\\
+&=\dot{u}_{2,4}-\sum_{l\in[r]}\gamma_4^l(2)k_{24l}\left[\tau^l_{4}+2a^l_{04}a^l_{34}\mathbb{E}(Y_3^l(2))+\tau^l_{34}\mathbb{E}(Y_3^l(2)^2)\right],
+\end{align*}
+where $\tau^l_{04}={a^l_{04}}^2+r^l_{4}+c^l_{04}$ and $\tau^l_{34}={a^l_{34}}^2+c^l_{34}$.
+
+This function is then $\longrightarrow G_3$. Note that because of the topology of the \gls{DAG}, $\tilde{u}_{2,3}=\bar{u}_{2,4}$. Let  $h_{2,3}^l=-2\gamma_4^l(2)k_{24l}a_{04}^la_{34}^l$ and 
+\begin{align*}
+\dot{u}_{2,3}&=\sum_{i\in[4]}\sum_{l\in[r]}k_{1il}u_{1il}+k_{21l}u_{21l}+k_{22l}u_{22l}-\gamma_4^l(2)k_{24l}\tau_{4}^l),\\
+g_{2,3}^l&=-(\gamma_4^l(2)k_{24l}\tau_{34}^l+k_{23l}\gamma_{3}^l(2)).
+\end{align*}  
+Then, $\bar{u}_{2,3}$ is equal to 
+\begin{align*}
+\bar{u}_{2,3}&=\dot{u}_{2,3}-\sum_{l\in[r]}g_{2,3}^l\E(Y_{3}^l(2)^2)+h_{2,3}^l\E(Y_3^l(2)),
+\end{align*}
+where $\E(Y_3^l(2))=a_{23}^l\E(Y_2^l(2))$ and $\E(Y_3^l(2)^2)=({a_{23}^l}^2+r_{23}^l(2)+c_{23}^l)\E(Y_2^l(2)^2)+b_3^l(2)$.
+
+Rearranging and noting that $\tilde{u}_{2,2}=\bar{u}_{2,3}$, we have that
+\begin{equation}
+\label{eq:kmn}
+\tilde{u}_{2,2}=\dot{u}_{2,2}-\sum_{l\in[r]}\left[[g_{2,3}^l({a_{23}^l}^2+r_{23}^l(2)+c_{23}^l)+k_{22l}\gamma_{2}^l(2)]\E(Y_2^l(2)^2)+h_{2,3}^la_{23}^l\E(Y_2^l(2))\right],
+\end{equation}
+where 
+\begin{equation}
+\label{eq:kmnp}
+\dot{u}_{2,2}=\sum_{i\in[4]}\sum_{l\in[r]}k_{1il}u_{1il}+k_{21l}u_{21l}-\gamma_4^l(2)k_{24l}\tau_{4}^l-g_{2,3}^lb_3^l(2).
+\end{equation}
+
+At this stage panel $G_2$ performs a marginalisation step computing 
+\begin{equation}
+\E(Y_2^l(2))=\E(\bm{Y}_1(2)^\T)G_2^l(2)\bm{a}_2^l,
+\end{equation}
+and
+\begin{equation}
+\E(Y_2^l(2)^2)=\E(Y_2^l(2))^2+\V(Y_2^l(2)),
+\end{equation}
+where
+\begin{equation}
+\E(Y_2^l(2))^2={\bm{a}_2^l}^\T G_2^l(2)^\T \E(\bm{Y}_1(2))\E(\bm{Y}_1(2)^\T)G_2^l(2){\bm{a}_2^l}
+\end{equation} 
+and  
+\begin{align}
+\V(Y_2^l(2))&=\V(Y_1(2)^\T\bm{\theta}_{2}^l(2))+\E(V_2^l(2))\nonumber\\
+&= \V(\bm{Y}_1(t)^\T G_2^l(2)\bm{\theta}_2^l(1))+\E(\bm{Y}_1^\T W_2^l(2)\bm{Y}_1(t))+b_2^l(2)\nonumber\\
+&=\V(\bm{Y}_1(t)^\T G_2^l(2)\bm{a}_2^l)+\E(\bm{Y}_1(2)^\T G_{2}^l(2)C_2^lG_2^l(2)^\T \bm{Y}_1(t))\nonumber\\
+&\hspace{1cm}+\E(\bm{Y}_1^\T W_2^l(2)\bm{Y}_1(t))+b_2^l(2)\nonumber\\
+&= {\bm{a}_2^l}^\T G_2^l(2)^\T \V(\bm{Y}_1(2))G_2^l(2)\bm{a}_2^l\nonumber\\
+&\hspace{1cm}+\E(\bm{Y}_1(2)^\T (G_{2}^l(2)C_2^lG_2^l(2)^\T+W_2^l(2)) \bm{Y}_1(2))
++b_2^l(2)\label{eq:kmnfgs}.
+\end{align}
+
+Plugging in equations (\ref{eq:kmnp})-(\ref{eq:kmnfgs}) into (\ref{eq:kmn}) panel $G_2$ computes $\bar{u}_{2,2}$. This function is then sent to $G_1$. Recall that $\E(\bm{Y}_1(2))=\bm{a}_1(2)$, $\V(\bm{Y}_1(2))=C_1(2)$ and note that 
+\[
+\E(\bm{Y}_1(2)^\T (G_{2}^l(2)C_2^lG_2^l(2)^\T+W_2^l(2)) \bm{Y}_1(2))= \sum_{i,j\in[r]}(A^{i,j}+w^{i,j}_{2,l})(a^i_1(2)a_1^j(2)+c_1^{i,j}(2)).
+\]  
+By substituting these values into $\bar{u}_{2,2}$, panel $G_1$ computes $\bar{u}_{2,1}$. 
+
+At this stage the algorithm has completed the second time slice of the \gls{IDSS}. The steps for the first time slice almost identically mirror the one illustrated above. These  can be deduced by changing the time indices and deleting the parameters $r_{23}^l(2)$, $G_2^l(2)$ and $W_2^l(2)$, which model the updating of the parameters through time.  The overall expected utility can then be written as
+\begin{equation*}
+\bar{u}(\bm{d})=\sum_{t\in[2]}\sum_{l\in[r]}\bar{\gamma}_1(t)\tau_1^l(t)+\bar{u}_2^l(t)(\bar{\gamma}_2^l(t)+\bar{u}_3^l(t)(\bar{\gamma}_3^l(t)+\tau_{34}^l\bar{\gamma}_4^l(t)))+\tau_{mix}^l(t),
+\end{equation*}
+where $\bar{\gamma}_i^l(t)=k_{til}\gamma_i^l(t)$, $\tau_1^l(t)=a_1^l(t)^2+c_1^l(t)$, $\bar{u}_3^l(1)=c_{23}^l+(a_{23}^l)^2$, $\bar{u}_3^l(2)=\bar{u}_3^l(1)+r_{23}^l(2)$ and 
+\begin{eqnarray*}
+\tau_{mix}^l(2)&=&b_3^l(2)\bar{\gamma}_3^l(2)+\bar{\gamma}_4^l(2)\tau_4^l+2a_{04}^la_{34}^la_{23}^l\bm{a}_1(2)^\T G_2^l(2)\bm{a}_2^l,\\
+\tau_{mix}^l(1)&=&b_3^l(1)\bar{\gamma}_3^l(1)+\bar{\gamma}_4^l(1)\tau_4^l+2a_{04}^la_{34}^la_{23}^l\bm{a}_1(1)^\T \bm{a}_2^l,\\
+\bar{u}_2^l(2)&=&{\bm{a}_2^l}^\T G_2^l(2)^\T(C_1(2)+\bm{a}_1(2)\bm{a}_1(2)^\T)G_2^l(2)\bm{a}_2^l+b_2^l(2)\\
+&&+\sum_{i,j\in[r]}(A^{i,j}+w^{i,j}_{2,l})(a^i_1(2)a_1^j(2)+c_1^{i,j}(2))\\
+\bar{u}_2^l(1)&=&{\bm{a}_2^l}^\T(C_1(2)+\bm{a}_1(2)\bm{a}_1(2)^\T)\bm{a}_2^l+b_2^l(1)+\sum_{i,j\in[r]}c_{2,l}^{i,j}(a^i_1(1)a_1^j(1)+s_1^{i,j}(1)),
+\end{eqnarray*} 
+with $A=G_{2}^l(2)C_{2}^l{G_{2}^l(2)}^\T$, such that $A^{i,j}$ is its entry in position $(i,j)$.
+
+\section{Conclusions}
+ Having formally defined in the previous chapter the \glspl{IDSS} and discussed the conditions for sound group inferences, we introduced here new distributed propagation algorithms for the exact computation of an \gls{IDSS} expected utility scores. These work for a novel asymmetric dynamic decision problem class, which embeds partial factorisations of utility functions. These types of factorisations have not been considered in expected utility computations before.
+ 
+ As shown by the above examples, all calculations are straightforward and scale up, albeit with a large number of moments or probabilities to be computed, stored and transmitted between panels. However, these quantities can be provided by an \gls{IDSS}. So the large number of computations necessary for coherently evaluating different policies  are  actually trivial ones and operationally computable in real time. We note that the algorithms we define in these multi-\glspl{ES} are closely related to the ones already cited for the propagation of probabilities and expected utilities in graphical structures, which have now been successfully implemented in many large applications. So we can be confident that our methods remain feasible for current and much larger applications. 
+\label{sec:conclusions4}

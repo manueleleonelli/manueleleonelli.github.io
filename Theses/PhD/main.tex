@@ -1,0 +1,391 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Masters/Doctoral Thesis 
+% LaTeX Template
+% Version 1.43 (17/5/14)
+%
+% This template has been downloaded from:
+% http://www.LaTeXTemplates.com
+%
+% Original authors:
+% Steven Gunn 
+% http://users.ecs.soton.ac.uk/srg/softwaretools/document/templates/
+% and
+% Sunil Patel
+% http://www.sunilpatel.co.uk/thesis-template/
+%
+% License:
+% CC BY-NC-SA 3.0 (http://creativecommons.org/licenses/by-nc-sa/3.0/)
+%
+% Note:
+% Make sure to edit document variables in the Thesis.cls file
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%----------------------------------------------------------------------------------------
+%	PACKAGES AND OTHER DOCUMENT CONFIGURATIONS
+%----------------------------------------------------------------------------------------
+
+\documentclass[11pt, oneside]{Thesis} % The default font size and one-sided printing (no margin offsets)
+\usepackage{xcolor}
+\hypersetup{
+    colorlinks,
+    linkcolor={black},
+    citecolor={black},
+    urlcolor={black}
+}
+\graphicspath{{Pictures/}} % Specifies the directory where pictures are stored
+
+\setcounter{tocdepth}{1}
+%--------------------------------------------------------------------------------------------
+%PACKAGES
+%-----------------------------------------------------------------------------------------------
+\usepackage{multicol}
+\usepackage[square, comma, sort&compress]{natbib} % Use the natbib reference package - read up on this to edit the reference style; if you want text (e.g. Smith et al., 2012) for the in-text references (instead of numbers), remove 'numbers' 
+\hypersetup{urlcolor=blue, colorlinks=true} % Colors hyperlinks in blue - change to black if annoying
+\title{\ttitle} % Defines the thesis title - don't touch this
+
+\makeatletter
+\renewcommand\subsubsection{\@startsection{subsubsection}{3}{\z@}%
+                                     {-3.25ex\@plus -1ex \@minus -.2ex}%
+                                     {-1.5ex \@plus -.2ex}% Formerly 1.5ex \@plus .2ex
+                                     {\normalfont\normalsize\bfseries}}
+\makeatother
+\usepackage{verbatim}
+\usepackage{mathtools}
+\usepackage[colorlinks]{hyperref}
+\usepackage[acronym,toc]{glossaries}
+\usepackage{graphicx}
+\usepackage{subcaption}
+\usepackage{pdfpages}
+\usepackage{epstopdf}
+\epstopdfsetup{update} 
+\usepackage{fixltx2e}
+\usepackage{bm}
+\usepackage{pseudocode}
+\usepackage{mathtools}
+\usepackage{tikz}
+\usepackage{pgf}
+\usepackage{lmodern}
+\usetikzlibrary{arrows,automata}
+\usetikzlibrary{positioning}
+\usetikzlibrary{shadows,shapes,decorations}
+\usepackage{pgfplots}
+\pgfplotsset{compat=newest}
+\usepackage[all]{xy}
+\usetikzlibrary{calc,fit}
+\usepackage[colorinlistoftodos]{todonotes}
+\usepackage{bbm}
+\usepackage{multirow}
+\usepackage{alltt}
+\usepackage{verbatim}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% COMMANDS
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newcommand\independent{\protect\mathpalette{\protect\independenT}{\perp}} \def\independenT#1#2{\mathrel{\rlap{$#1#2$}\mkern2mu{#1#2}}}
+\newcommand{\y}{\bm{y}}
+\newcommand{\De}{\mathcal{D}}
+\newcommand{\dr}{\textnormal{d}}
+\newcommand{\E}{\mathbb{E}}
+\newcommand{\V}{\mathbb{V}}
+\newcommand{\D}{\bm{D}}
+\newcommand{\B}{\textnormal{B}}
+\newcommand{\Y}{\bm{Y}}
+\newcommand{\Gr}{\mathcal{G}}
+\newcommand{\pa}{\bm{\theta}}
+\newcommand{\Cov}{\mathbb{C}}
+\newcommand{\MY}{\mathcal{Y}}
+\newcommand{\R}{\bm{R}}
+\newcommand{\Do}{\textnormal{do}}
+\newcommand{\EU}{\textnormal{EU}}
+\newcommand{\N}{\textnormal{N}}
+\newcommand{\Multi}{\textnormal{Multi}}
+\newcommand{\Be}{\textnormal{Be}}
+\newcommand{\Bin}{\textnormal{Bin}}
+\newcommand{\NIG}{\textnormal{NIG}}
+\newcommand{\Di}{\textnormal{Di}}
+\newcommand{\IG}{\textnormal{IG}}
+\newcommand{\blockdiag}{\textnormal{blockdiag}}
+\newcommand{\diag}{\textnormal{diag}}
+\newcommand{\IW}{\textnormal{IW}}
+\newcommand{\NIW}{\textnormal{NIW}}
+\newcommand{\HIW}{\textnormal{HIW}}
+\newcommand{\Exp}{\textnormal{Exp}}
+\newcommand{\T}{\textnormal{T}}
+\newcommand{\tr}{\textnormal{tr}}
+\newcommand{\Rs}{\mathcal{R}}
+\newcommand{\ci}[3]{#1\independent #2 \;|\; #3}
+\newcommand{\bci}[3]{\lfloor#1\independent #2 \rfloor \;/\; #3}
+\newcommand{\UT}{U}
+\DeclareMathOperator*{\argmax}{arg\,max}
+%-------------------------------------------------------------------------
+% COLORS
+%------------------------------------------------------------------------
+\definecolor{Blau0}{RGB}{0,0,150}
+\definecolor{Blau1}{RGB}{25,25,255}
+\definecolor{Blau2}{RGB}{0,162,232}
+\definecolor{Blau3}{RGB}{175,226,239}
+\definecolor{Gruen0}{RGB}{0,150,0}
+\definecolor{Gruen1}{RGB}{0,255,0}
+\definecolor{Rot0}{RGB}{150,0,0}
+\definecolor{Rot1}{RGB}{255,25,25}
+
+%-------------------------------------------------------------------------------------
+%GLOSSARY
+%-----------------------------------------------------------------------------------
+\makeglossaries
+\newacronym{DSS}{DSS}{Decision Support System}
+\newacronym{ES}{ES}{Expert System}
+\newacronym{DM}{DM}{Decision Maker}
+\newacronym{MN}{MN}{Markov Network}
+\newacronym{BN}{BN}{Bayesian Network}
+\newacronym{RODOS}{RODOS}{Real-time On-line DecisiOn Support system}
+\newacronym{MCDA}{MCDA}{MultiCriteria Decision Analysis}
+\newacronym{ASY}{ASY}{Analsying SubsYstem}
+\newacronym{CSY}{CSY}{Countermeasure SubsYstem}
+\newacronym{ESY}{ESY}{Evaluating SubsYstem}
+\newacronym{UG}{UG}{Undirected Graph}
+\newacronym{ID}{ID}{Influence Diagram}
+\newacronym{SEU}{SEU}{Subjective Expected Utility}
+\newacronym{DAG}{DAG}{Directed Acyclic Graph}
+\newacronym{CG}{CG}{Chain Graph}
+\newacronym{OOBN}{OOBN}{Object Oriented Bayesian Network}
+\newacronym{IDSS}{IDSS}{Integrating Decision Support System}
+\newacronym{CEG}{CEG}{Chain Event Graph}
+\newacronym{DLM}{DLM}{Dynamic Linear Model}
+\newacronym{MDM}{MDM}{Multiregression Dynamic Model}
+\newacronym{LMDM}{LMDM}{Linear Multiregression Dynamic Model}
+\newacronym{DCG}{DCG}{Dynamic Chain Graph}
+\newacronym{DBN}{DBN}{Dynamic Bayesian Network}
+\newacronym{2-TBN}{2-TBN}{2-Time-slice Bayesian Network}
+\newacronym{GP}{GP}{Gaussian Process}
+\newacronym{UI}{UI}{Utility Independent}
+\newacronym{CUI}{CUI}{Conditional Utility Independent}
+\newacronym{CBN}{CBN}{Causal Bayesian Network}
+\newacronym{logOp}{logOp}{logarithmic Opinion pool}
+\newacronym{EB}{EB}{Externally Bayesian}
+\newacronym{CEB}{CEB}{Conditional External Bayesianity}
+\newacronym{PCG}{PCG}{Probabilistic Chain Graph}
+\newacronym{GAI}{GAI}{Generalised Additive Independent}
+\newacronym{MID}{MID}{Multiplicative Influence Diagram}
+\newacronym{DS}{DS}{Decision Sequence}
+\newacronym{DDM}{DDM}{Distributed Dynamic Model}
+\newacronym{SB}{SB}{SupraBayesian}
+\newacronym[plural=CK-classes]{CK-class}{CK-class}{Common Knowledge-class}
+\newacronym{rhs}{rhs}{right hand side}
+\newacronym{AC}{AC}{Arithmetic Circuit}
+\newacronym{SEM}{SEM}{Structural Equation Model}
+\newacronym{iff}{iff}{if and only if}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% DOCUMENT
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{document}
+
+\frontmatter % Use roman page numbering style (i, ii, iii, iv...) for the pre-content pages
+
+\setstretch{1.3} % Line spacing of 1.3
+
+% Define the page headers using the FancyHdr package and set up for one-sided printing
+\fancyhead{} % Clears all page headers and footers
+\rhead{\thepage} % Sets the right side header to show the page number
+\lhead{} % Clears the left side page header
+
+\pagestyle{fancy} % Finally, use the "fancy" page style to implement the FancyHdr headers
+
+\newcommand{\HRule}{\rule{\linewidth}{0.5mm}} % New command to make the lines in the title page
+
+% PDF meta-data
+\hypersetup{pdftitle={\ttitle}}
+\hypersetup{pdfsubject=\subjectname}
+\hypersetup{pdfauthor=\authornames}
+\hypersetup{pdfkeywords=\keywordnames}
+
+\numberwithin{equation}{section}
+
+%----------------------------------------------------------------------------------------
+%	TITLE PAGE
+%----------------------------------------------------------------------------------------
+\thispagestyle{empty}
+% \input epsf        
+ \begin{center}
+ \begin{picture}(0,110)(65,50)
+ \includegraphics[width=5cm]{crest_fullcolour} 
+\end{picture}
+\end{center}
+
+\vspace{2.3cm}
+
+\begin{spacing}{2}
+\setlength{\unitlength}{1mm}
+\begin{center}
+\textbf{\LARGE{Bayesian Decision Support in Complex Modular Systems: an Algebraic and Graphical Approach}}\\
+\vspace{0.5cm}
+\Large{by}\\
+\textbf{\LARGE{Manuele Leonelli}}\\
+\vspace{0.5cm}
+\textbf{\Large{Thesis}}\\
+\Large{Submitted to The University of Warwick\\ for the degree of}\\
+\textbf{\Large{Doctor of Philosophy}}\\
+\vspace{1cm}
+\textbf{\LARGE{Department of Statistics}}\\
+\Large{May 2015}\\
+\vspace{1cm}
+\includegraphics[width=7cm]{the_warwick_uni_blue}
+\end{center}
+\end{spacing}
+
+\clearpage
+
+\pagestyle{fancy} % The page style headers have been "empty" all this time, now use the "fancy" headers as defined before to bring them back
+
+\lhead{\emph{Contents}} % Set the left side page header to "Contents"
+\tableofcontents % Write out the Table of Contents
+
+
+\clearpage 
+
+%----------------------------------------------------------------------------------------
+%	ACKNOWLEDGEMENTS
+%----------------------------------------------------------------------------------------
+
+
+\setstretch{1.3} % Reset the line-spacing to 1.3 for body text (if it has changed)
+
+
+\chapter*{Acknowledgements}
+\addcontentsline{toc}{chapter}{Acknowledgements}  
+\thispagestyle{empty}
+
+I honestly have many people to thank for helping me out during these long years, but firstly and most importantly I would like to acknowledge the invaluable guidance that my supervisor Jim Smith has offered me at any step of my PhD. I would have not been able to get this far without his continuous moral support and wisdom. 
+
+I would like to thank the Department of Statistics of the University of Warwick and its staff for the incredible research environment and economic support provided. Thanks to the graphical models reading group and its members for the interesting discussions throughout my PhD. More broadly, I would like to thank the University of Warwick for being such an amazing place where to pursue a postgraduate degree. 
+
+Many thanks to Eva Riccomagno for pushing me to continue my studies and following me, even from faraway, throughout my PhD. I would like to thank the Department of Mathematics of the University of Genoa, and in particular Ivano Repetto and Maria Piera Rogantin, for hosting me several times in these years.
+ 
+I would like to thank the 51 Sir Thomas crew (Satwik, Sahil, Anni, Felipe, Kena, Isis) for showing me that you can find a place you can call home even abroad.  
+
+Huge thanks to The University of Warwick Volleyball Club and its members for the many fun nights in these years and for cheering me up in the most difficult moments. Special thanks to Mike  for being such a good friend, and to Kit and Francesco, who are like brothers to me. Thanks to the Warwick Sport staff for the continuous support. 
+
+I would like to thank my friends back home as well, who have supported me even from faraway all this time. Last, but not least, I would like to thank my family for believing in me and bearing the long separation. Many thanks to my two grandmas, Ione and Giuliana, who taught me so much with their enthusiasm and vitality.
+
+\clearpage
+
+\chapter*{Declaration}
+\label{declaration}
+\addcontentsline{toc}{chapter}{Declaration}  
+\thispagestyle{empty}
+
+I hereby declare that this thesis is the result of my own work and research, except where otherwise indicated. This thesis has not been submitted for examination to any institution other than the University of Warwick.
+
+Some of this work has been published or is currently under the submission process as follows:
+\begin{itemize}
+\item part of the discussion in Chapter \ref{chapter1} has now appeared in the  proceedings of the ICDE2013 conference under the title ``\textit{Using graphical models and multi-attribute utility theory for probabilistic uncertainty handling in large systems, with application to the nuclear emergency management}'', written jointly with my supervisor Jim Smith, and can be found in the bibliography as \citet{Leonelli2013};
+\item the material in Section \ref{sec:wash} has been presented at the ANS Winter Meeting 2013 and is due to appear in the conference proceedings under the title ``\textit{Dynamic uncertainty handling for coherent decision making in nuclear emergency response}'', written jointly with my supervisor Jim Smith, and can be found in the bibliography as \citet{Leonelli2013a};
+\item Section \ref{sec:diff} summarises the results of the paper ``\textit{A differential approach for staged trees}'', written jointly with Christiane G\"{o}rgen and my supervisor Jim Smith, and has been accepted to appear in the proceedings of the ECSQARU2015 conference. The manuscript can be found in the bibliography as \citet{Gorgen2015};
+\item the majority of the material in Chapter \ref{chapter4} is included in a paper at the invited revision stage for the Annals of Operations Research under the title ``\textit{Bayesian decision support for complex systems with many distributed experts}'', written jointly with my supervisor Jim Smith, and can be found in the bibliography as \citet{Leonelli2015};
+\item the results in Sections \ref{sec:dec} and \ref{sec:symbolic} have been submitted to the International Journal of Approximate Reasoning under the title ``\textit{Using computer algebra to symbolically evaluate discrete influence diagrams}'', written jointly with my supervisor Jim Smith and Eva Riccomagno, and can be found in the bibliography as \citet{Leonelli2015a};
+\item the material in Sections \ref{sec:description}-\ref{sec:parexamples} is included in a manuscript under the title ``\textit{The algebra of integrated partial belief systems}'', written jointly with Eva Riccomagno and my supervisor Jim Smith, and is about to be submitted. The manuscript can be found in the bibliography as \citet{Leonelli2015b};
+\item Chapter \ref{chapter3} is based on the manuscript ``\textit{Coherent inference for integrating decision support systems}'', written jointly with my supervisor Jim Smith and Martine J. Barons, and is about to be submitted. The manuscript can be found in the bibliography as \citet{Smith2015}.     
+\end{itemize} 
+
+I have been lead author of all the papers listed above, with the exception of \citet{Gorgen2015}, where myself and Christiane G\"{o}rgen have joint ownership of the results, and \citet{Smith2015}, which reports results jointly achieved by the authors. However, what appears in this thesis has been solely written by me.   
+\clearpage 
+
+\chapter*{Abstract}
+\addcontentsline{toc}{chapter}{Abstract}  
+\thispagestyle{empty}
+Nowadays decision centres are required to make choices in complex and evolving environments, described through multiple and interdependent processes with many associated measurements. The objective of a real time decision making centre is to agree to a sequence of efficacious countermeasures. To achieve this it is usually necessary to integrate opinions and information from an often diverse set of stakeholders, articulating several competing objectives and knowledge over different domains of expertise. A collection of decision support systems can enhance such an integration, not only ensuring that all relevant evidence systematically informs policy making, but also encouraging the decision centre to exhibit an underlying consistency across all its components and to address the problem as a whole. In this thesis we develop a formal framework, extending standard Bayesian methodology, enabling the judgements and the models of groups of experts to be coherently aggregated in a unique entity. We discuss when and how it is possible to do so and the conditions the group needs to agree upon. We call this framework integrating decision support system. We then develop a variety of methodologies to enhance such an integration, enabling integrating decision support systems to be feasibly used in practice.  
+
+The word cloud in the following page summarises my research. 
+\clearpage
+\begin{center}
+\includegraphics[scale=0.68]{cloud.pdf}
+\end{center}
+\clearpage
+%----------------------------------------------------------------------------------------
+%	LIST OF CONTENTS/FIGURES/TABLES PAGES
+%----------------------------------------------------------------------------------------
+
+\lhead{\emph{List of Figures}} % Set the left side page header to "List of Figures"
+\listoffigures % Write out the List of Figures
+
+\lhead{\emph{List of Tables}} % Set the left side page header to "List of Tables"
+\listoftables % Write out the List of Tables
+\begin{comment}
+\clearpage
+
+\renewcommand*{\glossaryentrynumbers}[1]{}
+\printglossary[type=\acronymtype, title=Abbreviations, toctitle=Abbreviations]
+\end{comment}
+\clearpage 
+%----------------------------------------------------------------------------------------
+%	DEDICATION
+%----------------------------------------------------------------------------------------
+
+\setstretch{1.3} % Return the line spacing back to 1.3
+
+\pagestyle{empty} % Page style needs to be empty for this page
+
+\null\vspace{\stretch{1}}
+\begin{flushright}
+\textit{\large{To Lucilla}}
+\end{flushright}
+\vspace{\stretch{2}}\null
+
+\clearpage
+%\dedicatory{For/Dedicated to/To my\ldots} % Dedication text
+
+%----------------------------------------------------------------------------------------
+%	THESIS CONTENT - CHAPTERS
+%----------------------------------------------------------------------------------------
+
+\mainmatter % Begin numeric (1,2,3...) page numbering
+
+\pagestyle{fancy} % Return the page headers back to the "fancy" style
+
+% Include the chapters of the thesis as separate files from the Chapters folder
+% Uncomment the lines as you write the chapters
+
+\addtocontents{toc}{\vspace{1em}}
+
+\input{Chapters/Chapter1}
+\input{Chapters/Chapter2} 
+\input{Chapters/ciao}
+\input{Chapters/Chapter4} 
+\input{Chapters/Chapter5} 
+\input{Chapters/Chapter6} 
+%\input{Chapters/Chapter7} 
+
+%----------------------------------------------------------------------------------------
+%	THESIS CONTENT - APPENDICES
+%----------------------------------------------------------------------------------------
+
+\addtocontents{toc}{\vspace{1em}} % Add a gap in the Contents, for aesthetics
+
+\appendix % Cue to tell LaTeX that the following 'chapters' are Appendices
+
+% Include the appendices of the thesis as separate files from the Appendices folder
+% Uncomment the lines as you write the Appendices
+\input{Appendices/AppendixA}
+\input{Appendices/AppendixB}
+\input{Appendices/AppendixE}
+\input{Appendices/AppendixC}
+\input{Appendices/AppendixD}
+\addtocontents{toc}{\vspace{1em}} % Add a gap in the Contents, for aesthetics
+
+\backmatter
+
+%----------------------------------------------------------------------------------------
+%	BIBLIOGRAPHY
+%----------------------------------------------------------------------------------------
+
+\label{Bibliography}
+
+\lhead{\emph{Bibliography}} % Change the page header to say "Bibliography"
+
+\bibliographystyle{plainnat} % Use the "unsrtnat" BibTeX style for formatting the Bibliography
+
+\bibliography{Bibliography} % The references (bibliography) information are stored in the file named "Bibliography.bib"
+
+\end{document}  

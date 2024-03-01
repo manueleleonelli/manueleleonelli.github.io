@@ -1,0 +1,75 @@
+% Appendix A
+
+\chapter{Polynomial Algebra} % Main appendix title
+
+\label{appendixC} % For referencing this appendix elsewhere, use \ref{AppendixA}
+
+\lhead{Appendix C. \emph{Polynomial Algebra}} % This is for the header on each page - perhaps a shortened title
+
+In this appendix we introduce the concepts of polynomial algebra that we use in the main body of the thesis \citep[see e.g.][for more details]{Cox2007a}. We start by defining a monomial.
+
+\begin{definition}
+A \textbf{monomial} with indeterminates $y_1,\dots,y_n$, $n\in\mathbb{Z}_{\geq 1}$, is 
+\begin{equation*}
+\bm{y}^{\bm{\alpha}}=y_1^{\alpha_1}\cdots y_n^{\alpha_n},
+\end{equation*}
+where $\bm{y}=y_1\cdots y_n$ and $\bm{\alpha}=(\alpha_i)^\T_{i\in[n]}\in\mathbb{Z}_{\geq 0}^n$. The \emph{degree} of $\bm{y}^{\bm{\alpha}}$ is $|\bm{\alpha}|=\sum_{i\in[n]}\alpha_i$, whilst $\bm{\alpha}$ is its  \emph{multi-degree}.
+\end{definition}
+
+A polynomial is a finite linear combination of monomials with coefficients taking values in a field $k$.\footnote{A field is a set where addition, subtraction, multiplication and division have the standard properties of operations. A formal definition can be found in most algebra textbooks.} For the purpose of this thesis, we always assume this field to coincide with the real numbers $\mathbb{R}$. 
+
+\begin{definition}
+\label{def:poly}
+A \textbf{polynomial} $p(\bm{y})$ with indeterminates $y_1,\dots,y_n$, and \emph{coefficients} $c_{\bm{\alpha}}$ in a field $k$ is defined as
+\begin{equation*}
+p(\bm{y})=\sum_{\bm{\alpha}\in A}c_{\bm{\alpha}}\bm{y}^{\bm{\alpha}},
+\end{equation*}
+where $A\subset \mathbb{Z}^{n}_{\geq 0}$. 
+\end{definition}
+
+\begin{definition}
+In the notation of Definition \ref{def:poly}, a \emph{term} of $p(\bm{y})$ is $c_{\bm{\alpha}}\bm{y}^{\bm{\alpha}}$ if $c_{\bm{\alpha}}\neq 0$, and the \emph{degree} of $p(\bm{y})$ is the maximum $|\bm{\alpha}|$ such that the coefficient $c_{\bm{\alpha}}$ is non zero.
+\end{definition}
+
+\begin{definition}
+We say that a polynomial $p(\bm{y})$ is \emph{homogeneous} if all its terms $c_{\bm{\alpha}}\bm{y}^{\bm{\alpha}}$ have the same degree. Non homogeneous polynomials are called \emph{inhomogeneous}. An homogeneous polynomial such that, for every term $c_{\bm{\alpha}}\bm{y}^{\bm{\alpha}}$, $\alpha_i$ is either $1$ or $0$ is called \emph{square-free} or \emph{multilinear}.
+\end{definition}
+
+Polynomials with one indeterminate have one term only of a particular degree, whilst polynomials with more than one indeterminate can have many terms with the same degree. In many contexts it is important to order any two terms of a polynomial. We therefore now discuss the notion of monomial ordering.  Denote an ordering (i.e. a binary relation) with $>$. First note that there is a one to one correspondence between a monomial $\bm{y}^{\bm{\alpha}}$ and its exponent $\bm{\alpha}$. Therefore any ordering on $\mathbb{Z}^n_{\geq 0}$ induces an ordering on the monomials. A basic requirement that an ordering on monomials needs to entertain is to be \textit{total}.
+
+\begin{definition}
+An order $>$ on $\mathbb{Z}_{\geq 0}^n$ is total if, for any $\bm{\alpha},\bm{\beta}\in\mathbb{Z}_{\geq 0}^n$, exactly one of the three statements 
+$\bm{\alpha}>\bm{\beta}$,  $\bm{\beta}>\bm{\alpha}$, $ \bm{\beta}=\bm{\alpha}$,
+is true.
+\end{definition}
+
+In general, an order on the monomials requires a few more conditions.
+
+\begin{definition}
+A \emph{monomial ordering} $>$ on $\mathbb{Z}_{\geq 0}^n$ is a binary relation satisfying:
+\begin{itemize}
+\item $>$ is a total ordering on $\mathbb{Z}_{\geq 0}^n$;
+\item for $\bm{\alpha}, \bm{\beta}, \bm{\gamma}\in\mathbb{Z}_{\geq 0}^n$ ,if $\bm{\alpha}>\bm{\beta}$ then $\bm{\alpha}+\bm{\gamma}>\bm{\beta}+\bm{\gamma}$;
+\item every non empty subset of $\mathbb{Z}_{\geq 0}^n$ has a smallest element with respect to $>$.
+\end{itemize}
+\end{definition}
+
+Two examples of  monomial orderings are the \textbf{lexicographical order} and the \textbf{reverse lexicographical order}. 
+
+\begin{definition}
+Let $\bm{\alpha}=(\alpha_i)^\T_{i\in[n]}$ and $\bm{\beta}=(\beta_i)^\T_{i\in[n]}$, with $\bm{\alpha},\bm{\beta}\in\mathbb{Z}^n_{\geq 0}$. We say $\bm{\alpha}>_{lex}\bm{\beta}$ with respect to a lexicographic order if in the difference $\bm{\alpha}-\bm{\beta}$ the left-most non zero entry is positive.  A reverse lexicographic order, $>_{revlex}$, is such that if $\bm{\alpha}>_{revlex}\bm{\beta}$ then in the difference $\bm{\alpha}-\bm{\beta}$ the right-most non zero entry is positive.
+\end{definition}
+
+Lastly, we show that powers of polynomials can be computed applying the \textit{Multinomial theorem} \citep[see e.g. page 336 of][]{Cox2007a}. 
+
+\begin{theorem}
+Let $m,n\in\mathbb{Z}_{\geq 1}$, $\bm{\alpha}\in\mathbb{Z}^n_{\geq 0}$ and $\bm{y}=y_1\cdots,y_n$, where $y_i$ is an indeterminate, $i\in[n]$. Then
+\[
+(y_1+\cdots+y_n)^m=\sum_{|\bm{\alpha}|=m}\binom{m}{\bm{\alpha}}\bm{y}^{\bm{\alpha}},
+\]
+where 
+\[
+\binom{m}{\bm{\alpha}}=\frac{m!}{\alpha_1!\cdots \alpha_n!},
+\]
+is the \emph{Multinomial coefficient}.
+\end{theorem}

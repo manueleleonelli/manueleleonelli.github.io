@@ -1,0 +1,312 @@
+% Appendix A
+
+\chapter{Proofs} % Main appendix title
+
+\label{appendixA} % For referencing this appendix elsewhere, use \ref{AppendixA}
+
+\lhead{Appendix A. \emph{Proofs}} % This is for the header on each page - perhaps a shortened title
+
+\section{Proofs of Chapter \ref{chapter2}}
+\subsection{Proof of Proposition \ref{i-th}}
+\label{appendixA1}
+We develop the proof via backward induction over the random and decision vertices of the MID, starting from $Y_n$. Define, for $i\in[n]$,
+\begin{equation*}
+\bar{u}^i=\int_{\mathcal{Y}_{[n]_{i-1}^{\mathbb{V}}}}\max_{\mathcal{Y}_{[n]_{i-1}^{\mathbb{D}}}}\sum_{I\in\mathcal{P}_0([m])}h^{n_I-1}\prod_{i\in I}k_iu_i(\bm{y}_{P_i})f\left(\bm{y}_{[n]_{i-1}^{\mathbb{V}}}\;|\;\bm{y}_{\Pi_{[n]_{i-1}^{\mathbb{V}}}}\right)\dr\bm{y}_{[n]_{i-1}^{\mathbb{V}}},
+\end{equation*}
+where $[n]_{i-1}^{\mathbb{V}}=[n]\setminus[i-1]\cap \mathbb{V}$, $[n]_{i-1}^{\mathbb{D}}=[n]\setminus[i-1]\cap \mathbb{D}$ and $\Pi_{[n]_{i-1}^{\mathbb{V}}}=\cup_{j\in[n]_{i-1}^{\mathbb{V}}}\Pi_j$.
+
+The DM's preferences are a function of $Y_n$ only through $k_mu_m(\bm{y}_{P_m})$, since by construction $n=j_m\in\mathbb{J}$. Therefore, this quantity can be either maximised or marginalised as in equation (\ref{cond4}) to compute $\bar{u}_n(\bm{y}_{B_n})$. Note that $B_n$ includes only the indices of the variables $\bar{u}_n$ formally depends on, since $B_n=P_m\setminus n$, if $n\in\mathbb{D}$, whilst $B_n=P_m\cup \Pi_n\setminus n$, if $n\in\mathbb{V}$. Then 
+\begin{equation*}
+\label{eq:proofpro}
+\bar{u}^n=\sum_{I\in\mathcal{P}_0([m])}h^{n_I-1}\prod_{i\in I}(\mathbbm{1}_{\{i\neq n\}} k_iu_i(\bm{y}_{P_i})+\mathbbm{1}_{\{i=n\}}\bar{u}_i(\bm{y}_{B_i})).
+\end{equation*}
+Now consider $Y_{n-1}$. If $n-1\not\in \mathbb{J}$, then $\bar{u}^n$ is a function of $Y_{n-1}$ only through $\bar{u}_n$. Therefore maximisation and marginalisation steps can be computed as in equation (\ref{cond1}) to compute $\bar{u}_{n-1}(\bm{y}_{B_{n-1}})$. Again $B_{n-1}$ includes the indices of the variables $\bar{u}_{n-1}$ formally depends on, since $B_{n-1}=P_m\setminus\{n,n{-1}\}$, if $n,n{-1}\in\mathbb{D}$, $B_{n-1}=P_m\cup\Pi_n\cup\Pi_{n-1}\setminus\{n,n{-1}\}$, if $n,n{-1}\in\mathbb{V}$, $B_{n-1}=P_m\cup\Pi_{n-1}\setminus\{n,n{-1}\}$, if $n\in\mathbb{D}$ and $n{-1}\in\mathbb{V}$,  $B_{n-1}=P_m\cup\Pi_n\setminus\{n,n{-1}\}$, if $n\in\mathbb{V}$ and $n{-1}\in\mathbb{D}$. Then 
+\begin{equation*}
+\bar{u}^{n-1}=\sum_{I\in\mathcal{P}_0([m])}h^{n_I-1}\prod_{i\in I}(\mathbbm{1}_{\{i\neq n\}} k_iu_i(\bm{y}_{P_i})+\mathbbm{1}_{\{i=n\}}\bar{u}_{i-1}(\bm{y}_{B_{i-1}})).
+\end{equation*}
+ Conversely, if $n-1\in\mathbb{J}$, $\bar{u}^n$ is potentially a function of $Y_{n-1}$ through both $u_{m-1}(\bm{y}_{P_{m-1}})$ and $\bar{u}_n(\bm{y}_{B_n})$ and note that $\bar{u}^n$ can be written in this case as
+\begin{equation*}
+\sum_{I\in\mathcal{P}_0([m{-2}])}h^{n_I-1}\prod_{i\in I}k_iu_i+u_{m-1}'+\left(\sum_{i\in\mathcal{P}_0([m{-2}])}h^{n_i-1}\prod_{i\in I}k_iu_i\right)u_{m-1}', 
+\end{equation*}  
+where 
+\begin{equation*}
+u_{m-1}'=hk_{m-1}u_{m-1}(\bm{y}_{P_{m-1}})\bar{u}_n(\bm{y}_{B_n})+k_{m-1}u_{m-1}(\bm{y}_{P_{m-1}})+\bar{u}_n(\bm{y}_{B_n}).
+\end{equation*}
+Therefore, optimisation and marginalisation steps can be performed over $u_{m-1}'$ as specified in equations (\ref{cond2}) and (\ref{cond3}) respectively. Then note that $\bar{u}^{n-1}$ can be written as 
+\begin{align*}
+\bar{u}^{n-1}&=\sum_{I\in\mathcal{P}_0([m{-2}])}h^{n_I-1}\prod_{i\in I}k_iu_i+\bar{u}_{n-1}+\left(\sum_{i\in\mathcal{P}_0([m{-2}])}h^{n_i-1}\prod_{i\in I}k_iu_i\right)\bar{u}_{n-1}\\
+&=\sum_{I\in\mathcal{P}_0([m{-1}])}h^{n_I-1}\prod_{i\in I}(\mathbbm{1}_{\{i\neq n-1\}} k_iu_i(\bm{y}_{P_i})+\mathbbm{1}_{\{i=n-1\}}\bar{u}_i(\bm{y}_{B_i})).
+\end{align*}
+
+Now for a $j\in[n{-2}]$ and assuming with no loss of generality that $k$ is the index of a utility vertex such that $j_{k-1}<j\leq j_k$, we have that 
+\begin{equation*}
+\label{eq:proofproof}
+\bar{u}^j=\sum_{I\in\mathcal{P}_0([k])}h^{n_I-1}\prod_{i\in I}(\mathbbm{1}_{\{i\neq j\}} k_iu_i(\bm{y}_{P_i})+\mathbbm{1}_{\{i=j\}}\bar{u}_i(\bm{y}_{B_i})).
+\end{equation*}
+Therefore, at the following step, when considering $Y_{j-1}$, we can proceed as done with $Y_{n-1}$ by maximisation and marginalisation in equations (\ref{cond2})-(\ref{cond1}) to compute $\bar{u}^{j-1}$. Thus, at the conclusion of the procedure, $\bar{u}_1$ yields the expected utility of the optimal decision.
+
+\section{Proofs of Chapter \ref{chapter3}}
+\subsection{Proof of Theorem \ref{theo:gold}}
+\label{appendixA21}
+Fix a $\bm{d}\in \bm{\mathcal{D}}$ and for simplicity suppress this dependence and the time index $t$. We need show that under the conditions of the theorem at any time $t$ and under any policy the SB will continue to hold panel independent beliefs, i.e. that, for $i\in[m]$, 
+\begin{equation}
+\bm{\theta }_{i}\independent \bm{\theta }_{i^{-}}\;|\;I_{+},
+\label{indep components}
+\end{equation}%
+and that when assessing $\bm{\theta }_{i}$, she will only use the information $G_{i}$ would use if acting autonomously in assessing the information she needs to deliver, i.e. 
+\begin{equation}
+\bm{\theta }_{i}\independent I_{+}\;|\;I_{CK},I_{ii}.  \label{indep updating}
+\end{equation}%
+This is then sufficient for soundness and distributivity. Because even if all panellists could share each other's information then, given all panel beliefs, they would come to the same assessment about the joint distribution of the relevant parameters: that all panel subvectors are mutually independent of each other and that these margins will simply be the margins of the associated panel were they making decisions autonomously. 
+
+The proof simply uses the semi-graphoid axioms of conditional independence in Proposition \ref{prop:semigraph}. We start by proving the panel independence condition in (\ref{indep components}). Note that from common separability in equation (\ref{commonly sep}) it follows that
+\begin{align}
+\bm{\theta}_i &\independent \bm{\theta}_{i^{-}} \;|\; I_{CK}.\nonumber
+\shortintertext{which combined with the separately informed condition in equation (\ref{sep inform}) through strong decomposition and using the symmetric property of semi-graphoids axioms gives}
+\bm{\theta}_{i^{-}} &\independent I_{ii},\bm{\theta}_i\;|\; I_{CK}.\nonumber 
+\shortintertext{ Using again strong decomposition and symmetric arguments, it follows that} 
+\bm{\theta}_i&\independent \bm{\theta}_{i^{-}}\;|\; I_{ii},I_{CK}. \label{proof:sound1}\\
+\shortintertext{Now the cutting condition in equation (\ref{cutting}) together with equation (\ref{proof:sound1}) implies by strong decomposition that}
+\bm{\theta}_i&\independent I_*,\bm{\theta}_{i^{-}}\;|\; I_{CK},I_{ii}.\label{proof:sd}\\
+\shortintertext{Then again by strong decomposition we have that}
+\bm{\theta}_i&\independent \bm{\theta}_{i^{-}}\;|\; I_{CK},I_{ii}, I_*.\nonumber\\
+\shortintertext{Since $I_{ii}$ is a function of $I_*$ the above expression is equivalent to} 
+\bm{\theta}_i&\independent \bm{\theta}_{i^{-}}\;|\; I_{CK}, I_*. \label{proof:sound2} \\
+\shortintertext{Now the delegatable condition in equation (\ref{delegatable}) can be written as}
+I_+&\independent \bm{\theta}_i,\bm{\theta}_{i^{-}}\;|\; I_{CK},I_{*},\nonumber
+\shortintertext{and using strong decomposition it follows that}
+I_+&\independent \bm{\theta}_{i}\;|\; I_{CK},I_*,\bm{\theta}_{i^{-}}. \label{proof:sound3}
+\shortintertext{Combining via strong decomposition equations (\ref{proof:sound2}) and (\ref{proof:sound3}) and using the symmetry property we have that}
+\bm{\theta}_{i}&\independent I_+,\bm{\theta}_{i^{-}}\;|\; I_{CK},I_*. \nonumber\\
+\shortintertext{Using again strong decomposition it follows that}
+\bm{\theta}_{i}&\independent \bm{\theta}_{i^{-}}\;|\; I_{CK},I_*,I_+,\nonumber
+\end{align}
+which, since $I_*$ and $I_{CK}$ are functions of $I_+$, can be written as equation (\ref{indep components}). This shows that panel independence directly follows from the four conditions of Definition \ref{def:cond}.
+
+To show that equation (\ref{indep updating}) holds, note that another implication of delegatability in equation (\ref{delegatable}) by strong decomposition is that
+ \begin{align}
+\bm{\theta}_i&\independent I_{+}\;|\; I_{CK},I_{ii},I_*, \label{proof:sound41}\\
+\shortintertext{where again we used the fact that $I_{ii}$ is a function of $I_*$. Now noting that by strong decomposition equation (\ref{proof:sd}) implies that}
+\bm{\theta}_i&\independent I_* \;|\; I_{CK},I_{ii}, \label{proof:sound5}\\
+\shortintertext{it follows from equations (\ref{proof:sound41}) and (\ref{proof:sound5}) by strong decomposition that}
+\bm{\theta}_i & \independent I_+,I_*\;|\; I_{CK},I_{ii},\nonumber
+\end{align}
+which, since $I_*$ is a function of $I_+$ is equivalent to equation (\ref{indep updating}).
+
+\subsection{Proof of Theorem \ref{theo:seplik}}
+\label{proof:seplik}
+Fix a policy $\bm{d}\in\bm{\mathcal{D}}$ and suppress for ease of notation this dependence. Under the initial hypotheses, by Theorem \ref{theo:gold}
+\begin{equation*}
+\independent _{i\in[m]}\bm{\theta }_{i}\;|\;I_{CK}^{0},I_{\ast }^{0},
+\end{equation*}%
+implying that the prior joint density can be written in a product form 
+\begin{align*}
+\pi (\bm{\theta })&=\prod_{i\in[m]}\pi _{i}(\bm{\theta }_{i}).\\
+\intertext{It follows that under this admissibility protocol} 
+\pi (\bm{\theta }\;|\;\bm{x}^{t})&=\prod_{i\in[m]}\pi_{i}(\bm{\theta }_{i},\bm{t}_{i}(\bm{x}^{t})),\\
+\intertext{where from the form of the likelihood above} 
+\pi _{i}(\bm{\theta }_{i},\bm{t}_{i}(\bm{x}^{t}))&\propto l_{i}(\bm{\theta }_{i}\;|\;\bm{t}_{i}(\bm{x}^{t}))\pi _{i}(\bm{\theta }_{i}).
+\end{align*}
+By hypothesis $\pi _{i}(\bm{\theta }_{i},\bm{t}_{i}(\bm{x}^{t}))$ will be delivered by $G_{i}$ and adopted by the SB. So the IDSS is sound. In particular we can deduce, through the definition of panel separability and the results of Theorem \ref{theo:gold}, that 
+\begin{equation*}
+\independent _{i\in[m]}\bm{\theta }_{i}\;|\;I_{CK}^{t},I_{+}^{t}\;\;\Longleftrightarrow\; \;\independent_{i\in[m]}\bm{\theta }_{i}\;|\;I_{CK}^{t},I_{\ast }^{t}.
+\end{equation*}%
+So we have separability a posteriori. Note that in the notation above 
+\begin{equation*}
+I_{+}^{t} =\left\{I_{CK}^{t},I_{\ast}^{t}\right\} =\left\{ I_{CK}^{0},I_{\ast }^{0},\bm{x}^{t}\right\},
+\end{equation*}%
+and for $i\in[m]$
+\begin{equation*}
+\left\{ I_{CK}^{t},I_{ii}^{t}\right\} =\left\{ I_{CK}^{t},I_{ii}^{0},\bm{t}_{i}(\bm{x}^{t})\right\}.
+\end{equation*}%
+Since by definition $\bm{t}_{i}(\bm{x}^{t})$ is known to $G_{i}$, $i\in[m]$,  the system is also delegatable. Finally note that if 
+\begin{equation*}
+l(\bm{\theta }\;|\;\bm{x}^{t})\neq\prod_{i\in[m]}l_{i}(\bm{\theta }_{i}\;|\;\bm{t}_{i}(\bm{x}^{t}))
+\end{equation*}%
+on a set $A$ of non zero prior measure, then the conditional density $\pi_{A}(\bm{\theta }|\bm{x}^{t})$ on $A$ will have the property that for all $\bm{\theta} \in A$ 
+\begin{equation*}
+\pi _{A}(\bm{\theta }|\bm{x}^{t})\neq\prod_{i\in[m]}\pi _{A,i}(\bm{\theta }_{i},\bm{t}_{i}(\bm{x}^{t})),
+\end{equation*}%
+where $\pi_{A,i}$ denotes the density delivered by panel $G_i$ for the parameters it oversees in $A$. This means that panel parameters are a posteriori dependent and so in particular the density determined by the margins is not sound.
+
+
+
+\subsection{Proof of Theorem \ref{theo:UGIDSS}}
+Suppress for simplicity the dependence on $\bm{d}$ and the time index $t$. Since the IDSS is a priori sound, the prior density can be written as 
+\[
+\pi(\bm{\theta})=\frac{\prod_{C_i\in\mathcal{C}}\pi(\bm{\theta}_{C_i})}{\prod_{S\in\mathcal{S}}\pi(\bm{\theta}_{S})},
+\]
+where, by soundness, the distributions over the separators can be computed from the any distribution over a clique containing that separator. Now soundness a posteriori is ensured iff the posterior can be uniquely written as
+\begin{equation}
+\label{eq:UG}
+\pi(\bm{\theta}\;|\bm{x})=\frac{\prod_{C_i\in\mathcal{C}}\pi(\bm{\theta}_{C_i}\;|\;\bm{x})}{\prod_{S\in\mathcal{S}}\pi(\bm{\theta}_{S}\;|\;\bm{x})},
+\end{equation}
+where $\bm{x}=(\bm{x}_i^\T)^{\T}_{i\in[n]}$.
+Since each panel updates its distribution using its own independent dataset, then it follows that the posterior over the cliques enjoys the factorisation at the numerator of (\ref{eq:UG}). Calling $\pi^*_{i,S}$ the posterior distribution of panel $G_i$ over $S$, we then have that
+\[
+\pi_{i,S}(\bm{\theta}_S\;|\;\bm{x})\propto l_i(\bm{\theta}_S\;|\; t_{i}(\bm{x}^t_{i,S}))\pi_i(\bm{\theta}_S).
+\]  
+Therefore, from the above equation, the posterior distribution can be written as in (\ref{eq:UG}) iff, for every $i$ such that $S\subset C_i$, the sufficient statistic over the separator is equal for every panel $G_i$.
+
+\label{proof:UGIDSS}
+
+\section{Proofs of Chapter \ref{chapter4}}
+
+
+\subsection{Proof of Theorem \ref{teo:teo1}}
+\label{proofone}
+We develop this proof via backward induction both through the vertices of the DAG and through time. For the purpose of this proof define for $t=T$
+\begin{equation}
+\bar{u}^{T,i}(\bm{y}^T_1,\dots, \bm{y}^T_{i-1},\bm{y}^{T-1}_{i},\dots,\bm{y}^{T-1}_{n},\bm{d}^T)=\int_{\mathcal{Y}_i}\cdots \int_{\mathcal{Y}_n}u^{\Gr}f_{T,i}\cdots f_{T,n}\dr\bm{y}_i(T)\cdots\dr\bm{y}_n(T),
+\label{proof1}
+\end{equation}
+and note that $\bar{u}^{T,1}\equiv \bar{u}^T$.
+
+First, without any loss of generality, fix a policy $\bm{d}^T$. Then start the backward induction from $\bm{Y}_n(T)$, which, by construction, is a leaf of the time slice DAG at time $T$. For a leaf, $\bm{Y}_i(T)$ say,  it follows from (\ref{teo14}) that $\tilde{u}_{T,i}=u^{\Gr}_i(\bm{r}_{A_i})$ and note that consequently $u^{\Gr}_i$ is a function of $\bm{Y}_n(T)$ only through $\tilde{u}_{T,n}$. Therefore $\tilde{u}_{T,n}$ can then be simply marginalised as in equation (\ref{teo13}) to obtain $\bar{u}_{T,n}$. Furthermore
+\begin{equation}
+\bar{u}^{T,n}=\sum_{i\in \{Le\setminus \{n\}\}}u^{\Gr}_i(\bm{r}_{A_i})+\bar{u}_{T,n}\left(\bm{y}^T_{A'_n},\bm{y}^{T-1}_n,\bm{d}^T\right).
+\label{proof2}
+\end{equation}
+
+Now consider $\bm{Y}_{n-1}(T)$. The vertex associated with this random vector in the time slice DAG is either the father of $\bm{Y}_{n}(T)$ or a leaf of the DAG. In the latter case, since by construction $n-1\in\UT$, the exact same method followed for $\bm{Y}_n(T)$ can be applied to $\bm{Y}_{n-1}(T)$, and thus
+\begin{equation}
+\label{proof3}
+\bar{u}^{T,n-1}=\sum_{i\in \{Le\setminus \{n,n{-1}\}\}}u^{\Gr}_i(\bm{r}_{A_i})+\sum_{j=n-1}^n\bar{u}_{T,j}\left(\bm{y}^T_{A'_j},\bm{y}^{T-1}_j,\bm{d}^T\right).
+\end{equation}
+If on the other hand $\bm{Y}_{n-1}(T)$ is the father of $\bm{Y}_n(T)$, then by construction $\bm{Y}_{n-1}(T)$ has only one son. Thus from equation (\ref{teo14}) $\bar{u}_{T,n}\equiv \tilde{u}_{T,n-1}$ and equation (\ref{proof2}) is a function of $\bm{Y}_{n-1}(T)$ only through $\bar{u}_{T,n}$. In order to deduce $\bar{u}^{T,n-1}$ only $\tilde{u}_{T,n-1}$ has to be marginalised with respect to $f_{T,n-1}$ and therefore 
+\begin{equation}
+\label{proof4}
+\bar{u}^{T,n-1}=\sum_{i\in \{Le\setminus \{n,n{-1}\}\}}u^{\Gr}_i(\bm{r}_{A_i})+\bar{u}_{T,n-1}\left(\bm{y}^T_{A'_{n-1}},\bm{y}^{T-1}_{n-1},\bm{y}^{T-1}_n,\bm{d}^T\right).
+\end{equation}
+
+We can note from equations (\ref{proof3}) and (\ref{proof4}) that $\bar{u}^{T,n-1}$ consists of the linear combination of two summations: the first over the leaves of the graphs with index $j$ smaller than $n-1$ of utility terms $u^{\Gr}_j$; the second over the indices $j$ bigger or equal than $n-1$ of the terms $\bar{u}_{T,j}$ such that the father of $\bm{Y}_j(T)$ has an index smaller than $n-1$ in the time slice DAG. So for example in equation (\ref{proof3}) the second summation is over both $n$ and $n-1$ since the associated vertices are both leaves of the graphs. On the other hand in equation (\ref{proof4}) there is no term $\bar{u}_{T,n}$ since its father has index $n-1$. More generally, for $j\in [n]$, $\bar{u}^{T,j}$ can be written as the linear combination of the following two summations:
+\begin{itemize}
+\item the first over the indices $i$ in $Le\cap [j{-1}]$ of $u^{\Gr}_i$;
+\item the second over the indices $k$ in $B_j=\{k\geq j: F_k<j\}$ of $\bar{u}_{T,k}$, where $F_k$ is the index of the father of $\bm{Y}_k^\T$.
+\end{itemize}
+Therefore, for a $j\in[n]$, we have that 
+\begin{equation}
+\label{proof5}
+\bar{u}^{T,j}=\sum_{i\in \{Le\cap [j-1]\}}u^{\Gr}_i(\bm{r}_{A_i})+\sum_{k\in B_j}\bar{u}_{T,k}\left(\bm{y}^T_{A'_k},\bm{y}^{T-1}_k,\bm{y}^{T-1}_{Dn_k},\bm{d}^T\right),
+\end{equation}
+where $Dn_k$ is the set of the indices of the descendants of $\bm{Y}^\T_k$.
+ 
+In particular for $\bm{Y}_2(T)$ we can write equation (\ref{proof5}) as
+\begin{equation}
+\label{proof6}
+\bar{u}^{T,2}=\sum_{k\in S_1}\bar{u}_{T,k}\left(\bm{y}^T_{1},\bm{y}^{T-1}_k,\bm{y}^{T-1}_{S_k},\bm{d}^T\right),
+\end{equation}
+since, by the connectedness of the time slice DAG, $\bm{Y}_1(T)$ is the father of all the vertices whose father's index is not $[n]\setminus \{1\}$. It then follows that equation (\ref{proof6}) corresponds to $\tilde{u}_{T,1}$, as defined in equation (\ref{teo14}), and therefore $\bar{u}^T$ can be written as in equation (\ref{teo11}). Thus Theorem \ref{teo:teo1} holds for time $T$.
+
+Now, since $\bm{Y}_1(T)$ is the unique root of the time slice DAG, if $i,j\in S_1$, then 
+\begin{equation}
+\label{proof7}
+A'_i\cap A'_j =\{1\}.
+\end{equation}
+ Suppose that any vertex $\bm{Y}_j(T)$ , for $j\in S_1$, is either connected by a path to one only leaf of the DAG or is a leaf of the graph itself. Because of the identity in equation (\ref{proof7}) and because of the algebraic form of equation (\ref{proof6}), which consists of a linear combination of the terms $\bar{u}_{T,j}$, for $j\in S_1$,  we can deduce that equation (\ref{teo15}) holds for the last time slice. Now, consider the case where one vertex $\bm{Y}_j(T)$ with index in $S_1$ is connected to more than one leaf. Equation (\ref{teo14}) guarantees the existence of a vertex $\bm{Y}_i(T)$, $i>j$, connected to both $\bm{Y}_j(T)$ and the above mentioned leaves, such that $\tilde{u}_{T,i}$ can be written as a linear combination of  terms $\bar{u}_{T,k}$, for which each of these terms is a function of one of the leaves only. It therefore follows that equation (\ref{teo15}) also holds  in this case.
+
+Therefore equation (\ref{teo15}) guarantees that $\bar{u}^{T,1}$ can be written as a linear combination of terms involving only variables in the same ancestral set. Since also the probability factorisation does not change as formalised in Proposition \ref{prop1}, the exact same recursions we explicated at time $T$ can then be followed at time $T-1$ by substituting $u^{\Gr}_i$ with $\hat{u}_{T-1,i}$, $i\in Le$, in equations (\ref{proof1})-(\ref{proof5}) and by changing the time index.  This then also holds for any time slice $t$, $1\leq t\leq T-1$, since $\bar{u}^{t,1}$ will be again a linear combination of terms $\hat{u}_{t-1,i}$, $i\in Le$, and the probability density function factorises as in Proposition \ref{prop1}.
+
+\subsection{Proof of Theorem \ref{teoalgo}}
+\label{prooftwo}
+To prove Theorem \ref{teoalgo} we proceed as follows:
+\begin{itemize}
+\item We relate the lines of the pseudo-code of Algorithm \ref{algo31} to the equations (\ref{teo11})-(\ref{teo15}) of Theorem \ref{teo:teo1} and their variations which include optimisation steps in equations (\ref{opt1}) and (\ref{opt2});
+\item We then show that each panel and the SB have sufficient information to perform the steps of the algorithm they are responsible for;
+\item We conclude by showing that the optimisation steps, which in the algorithm correspond to lines (8) and (15), are able to identify optimal decisions using only combinations of quantities individual panels are able to calculate.
+\end{itemize}
+
+We start with the first two bullets.  Line (1) describes the backward induction step over the time index, $t$, whilst line (2) does the same over the index of the vertices of the graph, $i$. Now note that in lines (5)-(7), Panel $G_i:\tilde{u}_{t,i}$ using equation (\ref{teo14}). Each panel has enough information to do this, since line (10) guarantees that the scores are communicated to the panels overseeing father vertices and line (14) denotes the fact that the SB transmits $\hat{u}_{t,i}$ to the appropriate panels.   The functions $\tilde{u}_{t,i}$ are then sent to the  $SB$, who performs an optimisation step in line (8) and communicates the result back to the panel. We address the validity of this step below.
+
+ Since the $SB:u^*_{t,i}\longrightarrow G_i$, each panel is able to compute $\bar{u}^*_{t,i}$ (lines 10-11) following equation (\ref{opt2}). As noted before, if $i$ is not the root of the DAG, $\bar{u}^*_{t,i}$ is sent to the appropriate panel, whilst, if $i=1$, as specified by the if statement in line (9), $\longrightarrow SB$. For each time slice with time index $t\neq 1$, lines (13)-(14) compute $\hat{u}_{t,i}$, as  in equation (\ref{teo15}).  These are sent to the appropriate panels, which can then continue the backward inductive process from the time slice with a lower time index. If on the other hand $t=1$, then the expected utility is a function of the initial decision space $\mathcal{D}(0)$ only. The SB can then perform a final optimisation step over this space and thus conclude the algorithm (line 15).
+
+We now address the optimisation steps. The influence on the scores associated with time slices with index bigger than $t$ of a decision space $\mathcal{D}_i(t)$ are included, by construction, only in the terms $\hat{u}_{t,k}$, where k is either the index of a descendant $\bm{Y}_k(t)$ of $\bm{Y}_i(t)$ or $k=i$. Further note that the same decision space $\mathcal{D}_i(t)$ can affect the scores of terms including descendants of $\bm{Y}_i(t)$ at the same time point. Thus the whole contribution of $\mathcal{D}_i(t)$ is  summarised within $\tilde{u}_{t,i}$, as it can be seen by recursively using equations (\ref{teo14}) and (\ref{teo13}).
+
+Now, as specified by equation (\ref{opt1}), the optimisation step over $\mathcal{D}_i(t)$ is performed by maximising $\tilde{u}_{t,i}$, which carries all the information concerning this decision space. More specifically, no other term is an explicit function of $\mathcal{D}_i(t)$ at this stage of the algorithm, as guaranteed by equations (\ref{irr}). Finally, Structural Assumption \ref{strutass2} guarantees that all the elements that appears as arguments of $\tilde{u}_{t,i}$ are observed and therefore known at the time the decision associated to this decision space  needs to be made. 
+
+\section{Proofs of Chapter \ref{chapter5}}
+\subsection{Proof of Theorem \ref{theo:ciao}}
+\label{proof:theociao}
+Fix a policy $\bm{d}\in\bm{\mathcal{D}}$ and suppress this dependence. Since $\bm{R}=\bm{Y}$, the utility factorisation is panel separable and the marginal utilities are polynomials, the utility function can be written as
+\begin{equation}
+u(\bm{y})=\sum_{I\in\mathcal{P}_0([m])}k_I\sum_{i\in I}\left(\sum_{b_i\in B_i}\rho_{b_i}y_i^{b_i}\right),
+\label{eq:prova}
+\end{equation}
+for $B_i\subset \mathbb{Z}_{>0}$. Note also that we can rewrite (\ref{eq:prova}) as
+\begin{equation*}
+u(\bm{y})=\hat{u}(\bm{y}_{[m-1]})+\hat{u}(y_{m}),
+\end{equation*}
+where 
+\begin{align}
+\hat{u}(\bm{y}_{[m-1]})&=\sum_{I\in\mathcal{P}_0([m-1])}k_I\prod_{i\in I}\left(\sum_{b_i\in B_i}\rho_{b_i}y_i^{b_i}\right),\nonumber\\
+\hat{u}(y_{m})&=\sum_{I\in\mathcal{P}_0([m])\cap\{m\}}k_I\prod_{i\in I}\left(\sum_{b_i\in B_i}\rho_{b_i}y_i^{b_i}\right).\label{eq:prova1}
+\end{align}
+Calling $\bm{\theta}$ the overall parameter vector of the IDSS, the conditional expected utility function, $\E(u(\bm{Y})\;|\;\bm{\theta})$, can be written applying sequentially the tower rule of expectation as
+\begin{equation}
+\E(u(\bm{Y})\;|\;\bm{\theta})=\E_{Y_1|\bm{\theta}}\left(\E_{Y_2|Y_1,\bm{\theta}}\left(\cdots \E_{Y_{m-1}|\bm{Y}_{[m-2]},\bm{\theta}}\left(\hat{u}(\bm{y}_{[m-1]})+\E_{Y_m|\bm{Y}_{[m-1]},\bm{\theta}}\left(\hat{u}(\bm{y}_{m})\right)\right)\right)\right).
+\label{eq:prova3}
+\end{equation}
+From equation (\ref{eq:prova1}), the definition of a polynomial SEM and observing that the power of a polynomial is still a polynomial function of the same arguments, it follows that 
+\begin{equation}
+E_{Y_m|\bm{Y}_{[m-1]},\bm{\theta}}\left(\hat{u}(\bm{y}_{m})\right)=p_m(\bm{Y}_{[m-1]},\bm{\theta}), \label{eq:prova2}
+\end{equation}
+where $p_m$ is a generic polynomial function. Thus $\hat{u}(\bm{Y}_{[m-1]})+\E_{Y_m|\bm{Y}_{[m-1],\bm{\theta}}}\left(\hat{u}(\bm{y}_{m})\right)$ is also a polynomial function of the same arguments. 
+
+Following the same reasoning to deduce (\ref{eq:prova2}), we then have that 
+\begin{equation*}
+\E_{Y_{m-1}|\bm{Y}_{[m-2]},\bm{\theta}}\left(\hat{u}(\bm{y}_{[m-1]})+\E_{Y_m|\bm{Y}_{[m-1]},\bm{\theta}}\left(\hat{u}(\bm{y}_{m})\right)\right)=p_{m-1}(\bm{Y}_{[m-2]},\bm{\theta}),
+\end{equation*}
+where $p_{m-1}$ is a generic polynomial function. Therefore the same procedure can be applied to all the expectations in (\ref{eq:prova3}). We can then write
+$
+\E(u(\bm{Y})\;|\;\bm{\theta})=p_1(\bm{\theta}),
+$ where $p_1$ is a generic polynomial function. This is by construction an algebraic conditional expected utility, where the functions $\lambda_{ij}$ are monomials. Partial independence and Lemma \ref{lemma:ciaociao} then guarantees score separability holds. 
+
+\subsection{Proof of Proposition \ref{prop:1}}
+\label{proof:basta}
+We prove this result via induction over the number of vertices of the DAG. If the DAG has only one vertex 
+\begin{equation*}
+u(\bm{r})=k_1\sum_{i\in n_1}\rho_{1i}y_1^i,
+\end{equation*}
+which can be seen as an instance of equation (\ref{eq:multiutpol}). Assume the result holds for a network with $n-1$ vertices. A multilinear utility factorisation can be rewritten as
+\begin{equation}
+u(\bm{r})=\sum_{I\in\mathcal{P}_0([n-1])}k_I\prod_{i\in I}u_i(y_i)+\sum_{I\in\mathcal{P}_0([n])\cap\{n\}}k_I\prod_{i\in I\setminus\{n\}}u_i(y_i)u_n(y_n)+ k_nu_n(y_n).
+\label{macheneso}
+\end{equation}
+The first term on the rhs of (\ref{macheneso}) is by inductive hypothesis equal to the sum of all the possible monomial of degree $\bm{\alpha}^\T=(\alpha_1,\dots,\alpha_{n-1},0)$ where $0<\alpha_i<n_i$, $i\in[n]$. The other terms only include monomials such that the exponent of $y_n$ is not zero. We have that, letting $\bm{n}_{i-1}^\T=(n_i)_{i\in[n-1]}$ and $\bm{y}_{[n-1]}=\prod_{i\in[n-1]}y_i$,
+\begin{eqnarray}
+\sum_{I\in\mathcal{P}_0([n])\cap\{n\}}k_I\prod_{\mathclap{i\in I\setminus \{n\}}}u_i(y_i)u_n(y_n)+k_nu_n(y_n)&=& \sum_{\mathclap{\bm{0}<_{lex}\bm{\alpha}\leq_{lex}\bm{n}_{n-1}}}c_{\bm{\alpha}}\bm{y}^{\bm{\alpha}}_{[n-1]}\left(\sum_{i\in [n_n]}\rho_{ni}y_n^i\right)+k_nu_n(y_n)\nonumber\\
+&=&\sum_{\substack{\bm{0}<_{lex}\bm{\alpha}\leq_{lex}\bm{n}_{n-1}\\ i\in[n_n]}}c_{\bm{\alpha}}\rho_{ni}\bm{y}^{\bm{\alpha}}_{[n-1]}y_n^i+k_nu_n(y_n)\nonumber\\
+&=&\sum_{\substack{\bm{0}'<_{lex}\bm{\alpha}\leq_{lex}\bm{n}_{n}\\ \alpha_n\neq 0}}c_{\bm{\alpha}}\bm{y}_{[n]}^{\bm{\alpha}}.\label{eq:uff}
+\end{eqnarray}
+Therefore, the sum of the first term on the rhs of (\ref{macheneso}) and (\ref{eq:uff}) equals equation (\ref{eq:multiutpol}).
+\subsection{Proof of Theorem \ref{polyexp}}
+\label{proof:polyexp}
+For a subset $I\in \mathcal{P}_0([m])$, let $j_I$ be the index of the variable appearing before the utility vertex with index $u_{\max_{I}}$ in the decision sequence. Let $C_I^i=\{z\in\mathbb{V}:i\leq z\leq j_I\}$. The conditional expected utility function  of equations (\ref{cond4})-(\ref{cond1}) can be (less intuitively) written as
+\begin{equation}
+\label{proof1a}
+\bar{u}_i(\bm{y}_{u_i})=\sum_{I\in \mathcal{P}_0([m]_{l-1})}\bar{u}_i^I(\bm{y}_{B_i})=\sum_{I\in \mathcal{P}_0(\{l,\dots,m\})}k^{n_I-1}\prod_{s\in I}k_su_s(\bm{y}_{P_s})\sum_{\bm{y}_{C_I^i}\in\bm{\mathcal{Y}}_{C_I^i}}P(\bm{y}_{C_I^i}\;|\;\bm{y}_{B_i}),
+\end{equation}
+where
+\begin{equation}
+\label{proof2a}
+P(\bm{y}_{C_I^i}\;|\;\bm{y}_{B_i})=\prod_{t\in C_I^i}P(y_t\;|\;\bm{y}_{B_t}),
+\end{equation}
+and $P(\bm{y}_A\;|\;\bm{y}_B)=\mathbb{P}(\bm{Y}_A=\bm{y}_A\;|\;\bm{Y}_B=\bm{y}_B)$.
+The conditional expected utility therefore depends on the power set of the indices of the utility vertices subsequent to $Y_i$ in the decision sequence. We can note that for any $I,J\in \mathcal{P}_0([m_{l-1}])$ such that $\# I=\# J$ and $u_{\max_{I}}=u_{\max_{J}}$, $\bar{u}_i^I(\bm{y}_{B_i})$ and $\bar{u}^J_i(\bm{y}_{B_i})$ have the same polynomial structure since $C_I^i=C_J^i$. Now for $a=l,\dots,m$ and $b=l,\dots,a$, the binomial coefficient $\binom{a-l}{b-l}$ counts the number of elements $I\in\mathcal{P}_0([m]_{l-1})$ having $\# I=b-l+1$ and including $a$. Thus $r_{iba}$ in equation~(\ref{struct}) counts the correct number of monomials having a certain degree since $\bm{\mathcal{Y}}_{C_I(i)}=\times_{t\in C_I^i}\mathcal{Y}_t$. Further note that considering each combination of $b$ and $a$ in the ranges specified above, we consider each element of $\mathcal{P}_0([m]_{l-1})$.
+
+ By having a closer look at $d_{iba}$ in equation~(\ref{struct}) it is easy to deduce the corresponding degree of these monomials. The first term of $d_{iba}$, $(b-l)$, computes the degree associated to the criterion weight $k$, since $b-l=n_I-1$ and the second term, $2(b-l+1)$, computes the degree associated to the product between the criterion weights $k_s$ and the utilities $u_s(\bm{y}_{P_s})$ for $s\in C_I^i$. The last term $w_{ia}$ corresponds to the degree deriving from the probabilistic part of equation~(\ref{proof1a}), which is equal to the number of non-controlled vertices between $Y_i$  and $Y_{j_{\max_{I}}}$ (both included) as shown by equation~(\ref{proof2a}).
+
+Since the set $B_i$ includes the arguments of $\bar{u}_i(\bm{y}_{B_i})$ and $\bm{\mathcal{Y}}=\times_{i\in[n]}\mathcal{Y}_i$, equation~(\ref{veccond}) guarantees that the dimension of the conditional expected utility vector is $\prod_{t\in B_i}r_t$.
+
+\subsection{Proof of Theorem \ref{polyasy}}
+\label{cippu}
+For $i,j,k,l\in\mathbb{V}$ and $s,t\in [m]$, an asymmetry $Y_i=y_i\Rightarrow Y_j=y_j$ implies that any monomials that include terms of the form $p_{ky_k\pi(k)}$, $\theta_{s\pi(s)}$, $p_{ky_k\pi(k)}p_{ly_l\pi(l)}$, $\theta_{t\pi(t)}\theta_{s\pi(s)}$ and $p_{ky_k\pi(k)}\theta_{s\pi(s)}$ entailing both instantiations $y_i$ and $y_j$ are associated to a non possible combination of events, with $y_k\in\mathcal{Y}_k$, $\pi(k)\in\mathcal{Y}_{\Pi(k)}$, $y_l\in\mathcal{Y}_l$, $\pi(l)\in\mathcal{Y}_{\Pi(l)}$, $\pi(t)\in\mathcal{Y}_{P(t)}$ and  $\pi(s)\in\mathcal{Y}_{P(s)}$. Thus these monomials have to be set equal to zero. 
+
+For $j<t\leq z$, $\bar{u}_t$ has an associated set $B_t$ which includes both $i$ and $j$ and consequently $\prod_{s\in B_t\setminus \{i\cup j\}}r_s$ rows of the vector corresponds to the conditioning on $Y_i=y_i$ and $Y_j=y_j$. Therefore all the monomials in those rows have to be set equal to zero.
+
+For $i<t\leq j$, the index $i$ is in the set $B_t$, whilst the variable $Y_j$ has been already EUMarginalised. Thus, there are only $\prod_{s\in B_t\setminus \{i\}}r_s$ rows conditional on the event $Y_i=y_i$. In those rows only some of the monomials are associated to the event $Y_j=y_j$. Specifically, the ones implying $Y_j=y_j$ can only be multiplying a term including a $\bm{\theta}_{xP_x}$ from a utility vertex $u_x$ subsequent to $Y_j$ in the MID DS. We can deduce that there are 
+$
+\prod_{s=t}^{j_a}r_s/r_j
+$ monomials of degree $d_{tba}$ that include the case $Y_j=y_j$ in such entries of $\bar{\bm{u}}_t$, for $a\in [m]_{x-1}$ and $b\in[a]_{l-1}$ (using the notation of Theorem~\ref{polyexp}).
+
+Lastly, if $t\leq i$, then the set $B_t$ does not include $i$ and $j$, which have been both EUMarginalised. Thus monomials including a combination of the events $Y_j=y_j$ and $Y_i=y_i$ appears in each row of $\bar{\bm{u}}_t$. Just as before, we can deduce that there are $\prod_{s=t}^{j_a}r_s/(r_i\cdot r_j)$ monomials of degree $d_{tba}$, $a\in [m]_{x-1}$, $b\in[a]_{l-1}$, implying the event $Y_i=y_i\land Y_j=y_j$.  

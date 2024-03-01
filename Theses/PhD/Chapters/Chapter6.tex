@@ -1,0 +1,67 @@
+% Chapter Template
+
+\chapter{Conclusions} % Main chapter title
+
+\label{chapter6} % Change X to a consecutive number; for referencing this chapter elsewhere, use \ref{ChapterX}
+
+\lhead{Chapter 6. \emph{Conclusions}} % Change X to a consecutive number; this is for the header on each page - perhaps a shortened title
+
+In this last chapter we first briefly summarise the main contributions of  this work. A more detailed discussion of the relevance of the results of the thesis is reported within each of the previous chapters. Importantly, this thesis gives a number of possible research directions that we discuss below. There are still many research avenues to explore and we outline here some issues we are currently addressing.
+
+\section*{Summary of the Contributions of the Thesis}
+
+In this thesis we have defined the statistical framework of the IDSS that coherently aggregates the beliefs and preferences of separate panels of experts having different expertise. We  discussed in Chapter \ref{chapter3} when and how it is possible to coherently combine both expert judgements and models into a unique entity and provided a variety of examples of IDSSs. In Chapter \ref{chapter4} we then defined new propagation algorithms for the computation of the expected utility of the policies supported by an IDSS. We developed in Chapter \ref{chapter5} new separation conditions for the panels' beliefs based on the algebraic form of the IDSS expected utility. In that chapter we further discussed symbolic approaches for decision making and inference in IDs and staged trees respectively.  
+
+In more details:
+\begin{itemize}
+\item Theorems 3.4.3 and 3.4.5, Lemma 3.4.7 and the results in Section 3.6 show that the framework of IDSSs allows for distributed Bayesian inferences, generalizing the standard Bayesian paradigm reviewed in Section 2.1. Specifically, we derived in Section 3.6 independence conditions for a variety of graphical models which generalize the standard independences over the parameter set reviewed in Chapter 2;
+\item the expert judgement combinations of \citet{Faria1997} assume each expert has responsibility over the whole vertex set of an agreed BN or PCG model (see Proposition 2.6.5). In Proposition 3.6.5 we generalized their combination rules to cases where the experts partition the vertex set of an agreed graphical model;
+\item Lemma 3.5.2 and Theorem 3.5.5, using the newly notion of the natural comparator $\bm{d}^0$, generalized the standard Perlean notion of causality reviewed in Section 2.3.4 and introduced new inferential routines. As specified in the above mentioned results, the classic CBN model can be seen of an instance of an IDSS equipped with the natural comparator;
+\item in Definition 4.1.8 we introduced the new class of compatible utility factorization which exploits both generalized additive and utility independence, and can be represented by a specific subclass of the utility diagrams reviewed in Section 2.4.3. This new class of utility models is then showed to enable for the distributed computation of expected utilities in Theorem 4.1.13, which is also the first result to our knowledge using the idea of partial utility independence in expected utility computations;
+\item Section 4.3 then presents a variety of algorithms to compute these expected utilities in different situations, e.g. dynamic and non-dynamic. We further provided a long list of examples of these computations in practice in Section 4.4;
+\item we then focused in Chapter 5 on the computation of expected utilities for particular types of Bayesian network models and introduced a new procedure to quickly compute these scores in closed form. As shown in Lemma 5.5.6 and Proposition 5.5.10 the new concept of algebraic substitution together with the application of the multinomial theorem allowed us to instantly derive a polynomial form for expected utilities associated to BN models;
+\item the independence conditions for the distributed multi-expert inference routines in IDSSs were shown to be too strong for the computations of the expected utilities of the point above; we therefore identified in Theorems 5.5.8 and 5.5.13 minimal sets of independences for the computations of these expected utilities;
+\item lastly, we introduced two new symbolic inferential frameworks: one for IDs, where we symbolically defined utility parameters and deduced a polynomial expression for expected utilities; and one for CEGs and staged trees, where we showed that by computing certain derivatives of the polynomial defining the model, a user can answer a variety of inferential queries.    
+\end{itemize}
+
+\section*{Future Work }
+
+\subsection*{Missing Data and Approximated Systems}
+We showed in Chapter \ref{chapter3} that evidence coming from certain observational and experimental studies can be introduced in the IDSS whilst retaining the distributivity of the systems. However often it could only be available data whose likelihood is not panel separable. This might be for example due to missing observations. We note here that there are two related practical solutions to this problem: 
+\begin{itemize}
+\item panels can accommodate only a subset of the data into the system respecting panel separability. This gives the basis for a framework to analyse the system;
+\item methods can be developed where the distributivity property can only be approximatively satisfied.
+\end{itemize}
+In the latter case we would then need to introduce measures to quantify the effects of both the approximation of distributivity and the loss of data. One such measure could be for example the variation in expected utility defined as
+\[
+|\bar{u}(\bm{d}\;|\;\bm{x})-\bar{u}(\bm{d}\;|\;\bm{x}')|,
+\]  
+where $\bm{x}$ is a dataset with non panel separable likelihood, $\bm{x}'$ is a subset of $\bm{x}$ for which the panel separability property holds and $\bar{u}(\bm{d}\;|\;\bm{x})$ is the expected utility after the introduction of data. If the above measure is small, then the extent of not including observations that break distributivity will be almost irrelevant. This measure could then be embedded into a formal methodology of approximated decision support.
+ 
+\subsection*{Non-Bayesian Approaches}
+The Bayesian framework provides a coherent and established methodology to model and reason about uncertainty. Therefore we claim that the collective should always strive to define their beliefs as subjective probability statements. However there are cases where members of panels will simply not agree on a unique probability specification. We could envisage the use of a pooling operator to aggregate these beliefs, but again the experts might disagree on the weights of such operator. There is therefore the need to develop inferential methods within IDSSs outside of the Bayesian formalism to deal with these situations. 
+
+Belief functions \citep{Dempster1968,Shafer1976} and imprecise probabilities \citep{Walley1991} represent possible candidates, since these do not require the experts to agree on a unique specification. In particular \textit{credal networks} \citep{Cozman2000} can be used as an integrating structure in these frameworks. These are DAGs defining for each vertex a credal set, a set of probability distributions, instead of one only distribution as in BNs. 
+
+\subsection*{Real World Application of IDSSs}
+The focus of this thesis has been on developing a formal theory to aggregate expert judgements in complex settings, as nuclear emergency management.  Since a formal theory is now in place we can start looking at developing these types of systems to support actual decision making. One obvious domain of application would be nuclear emergency management since, as we noted, Bayesian models for many of the modules of any plausible network have been already defined. We are currently starting to develop an IDSS to deal with food security issues. In this direction, \citet{Barons2014} built a DBN to model the production of sugar.  
+
+\subsection*{Propagation in Group CEGs}
+The propagation algorithms we defined in Chapter \ref{chapter4}, although working for a wide variety of commonly used models, do not allow for asymmetric conditional independence statements to be explicitly represented. It would be therefore relevant to develop algorithms for models exhibiting such an asymmetric structure, as for example CEGs. In Section \ref{sec:IDSSET} we showed that these models can be part of the structural consensus of an IDSS. We can therefore now build on the algorithm of \citet{Thwaites2008} to take into account the underlying multi-expert structure of the graph. 
+
+\subsection*{Dynamic and Multivariate Algebraic Substitution}
+Algebraic substitutions have proved extremely powerful in both computing conditional expected utilities and moments of functions over an underlying DAG. These substitutions work for non-dynamic  models whose vertices are  univariate random variables. Given the often geographic nature of the problems IDSSs aim at addressing, there is a need to generalise such recursions to the multivariate case. A natural framework where this could be achieved is by representing probabilities as \textit{tensors} \citep[see e.g.][for a discussion of their use in statistics]{McCullagh1987}. Furthermore algebraic substitutions can provide the basis for moment forecasting in \lq{p}olynomial MDM models\rq , generalising the recursions of \citet{Queen2008} that forecast the covariances of an LMDM.
+
+\subsection*{Symbolic Continuous IDs}
+In Section \ref{sec:symbolic} we introduced a symbolic definition of IDs for discrete decisions and variables. This formalism can be rather straightforwardly extended to continuous IDs. A symbolic evaluation algorithm for these models would then use the idea of algebraic substitution to compute expected utilities of decision nodes. \citet{Madsen2005} developed, in a non-symbolic framework, an evaluation algorithm for continuous IDs embedding additive utility factorisations with quadratic marginal utilities functions. This can easily identify optimal decisions since the associated expected utility has a unique maximum. We have started developing similar recursions in a very wide class of IDs with multilinear and polynomial utilities, where in addition a compliance error is associated to every decision node.  Just as in the discrete case, we can then implement such an algorithm in a computer algebra system.
+   
+\subsection*{Asymmetric IDs}
+In Section \ref{sec:symbolic} we briefly discussed the imposition of asymmetric constraints in IDs. We also noted that great computational advantages would be achieved if these constraint were implemented during the evaluation process. We are planning to develop such a methodology by starting looking at \textit{decision circuits} \citep{Bhattacharjya2007,Bhattacharjya2012}, a graphical representation of asymmetric problems through a variation of an AC.  
+
+\subsection*{Computer Algebra and Sensitivity Analysis in Trees}
+The symbolic definition of probabilities of BN models has given rise to a large body of literature on formal symbolic sensitivity analyses \citep[see e.g.][]{Chan2001,Chan2004}. Having  symbolically defined probabilities in staged trees, we can now start developing sensitivity analyses techniques tailored to the structure of the staged tree polynomials. Alongside these theoretical advances, we are looking to implement the symbolic definition of staged trees in a computer algebra system to widen the use of such models in practice.
+  
+  \begin{comment} 
+\subsection*{Symbolic Model Definition}
+In Section \ref{sec:diff} we defined the interpolator polynomial of a staged tree. This is able to capture all the probabilistic information associated to the tree model. Thus, once this polynomial is defined, all inference can be performed over the polynomial. This observation leads us to start looking at classes of models that are only defined polynomially. Such definition could then enable us to identify new classes of probabilistic models that do not have a graphical probabilistic counterpart.
+\end{comment}

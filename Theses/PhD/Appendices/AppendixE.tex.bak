@@ -1,0 +1,204 @@
+% Appendix A
+
+\chapter{Bayesian Models} % Main appendix title
+
+
+ 
+\label{appendixE} % For referencing this appendix elsewhere, use \ref{AppendixA}
+
+\lhead{Appendix E. \emph{Bayesian Models}} % This is for the header on each page - perhaps a shortened title
+
+\section{Discrete Models}
+\subsection{Beta-Binomial Model}
+Let $Y|\theta\sim Bin(n,\theta)$ for $n\in\mathbb{Z}_{\geq 1}$ and $\theta \in [0,1]$, that is, given $\theta$, $Y$ is a binomial distribution associated to $n$ independent trials with probability $\theta$ of success. Its density function is written as
+\begin{equation}
+f(y\;|\;\theta)=\binom{n}{y}\theta^y(1-\theta)^{n-y}.
+\end{equation}
+Recall that $\E(Y\;|\;\theta)=n\theta$ and $\V(Y\;|\;\theta)=n\theta(1-\theta)$. Assume $\theta\sim Be(p,q)$, that is $\theta$ follows a Beta distribution whose density can be written as
+\begin{equation}
+\pi(\theta)=\frac{1}{B(p,q)}\theta^{p-1}(1-\theta)^{q-1},
+\end{equation}
+where $B(p,q)$ is the beta function equal to
+\begin{equation}
+\label{eq:betafunction}
+B(p,q)=\frac{\Gamma(p)\Gamma(q)}{\Gamma(p+q)},
+\end{equation}
+with 
+\begin{equation}
+\Gamma(p)=\int_{0}^{\infty}x^{p-1}e^{-x}\dr x,
+\end{equation}
+for $p>0$. Note that if $p\in\mathbb{Z}_{\geq 1}$ then $\Gamma(p)=p-1!$. The first two non-central moments of $\theta$ can be seen to be equal to 
+\begin{equation}
+\E(\theta)=\frac{p}{p+q},\;\;\;\; \V(\theta)=\frac{pq}{(p+q)^2(p+q+1)}.
+\end{equation}
+By applying Bayes theorem in equation (\ref{eq:proprbayes}) the posterior density of $\theta|\bm{Y}$ is proportional to
+\begin{equation}
+\theta^{y+p-1}(1-\theta)^{q+n-y-1},
+\end{equation}
+and therefore $\theta|\bm{Y}\sim Be(y+p,q+n-y)$. Consequently the beta prior is the conjugate one for binomial likelihoods. 
+
+\subsection{Dirichlet-Multinomial Model}
+Let  $Z_1,\dots,Z_n$ be independent and identically distributed random variables taking values in $k$ possible categories with probabilities $\theta_1,\dots,\theta_k$. Let $Y_i$ denote the random variable counting the number of observations of the $Z$s in the $i$-th category. By construction $n=\sum_{j\in[k]}y_j$. Then, letting $\bm{\theta}=(\theta_1,\dots,\theta_k)^\T$, $\bm{Y}=(Y_1,\dots,Y_k)^\T$, we have that $\bm{Y}|\bm{\theta}$ is a multinomial distribution, denoted as $\bm{Y}|\bm{\theta}\sim Multi(n,\bm{\theta})$, whose density can be written as
+\begin{equation}
+f(\bm{y}\;|\;\bm{\theta})=\binom{n}{y_1,\dots,y_k}\prod_{j\in[k]}\theta_j^{y_j},
+\end{equation} 
+where
+\begin{equation}
+\binom{n}{y_1,\dots,y_k}=\frac{n!}{y_1!\cdots y_k!}.
+\end{equation}
+Note that each $Y_i\;|\bm{\theta}$, $i\in[k]$,  behaves as a binomial distribution with parameters $n$ and $\theta_i$, and $\Cov(Y_i,Y_j\;|\;\bm{\theta})=-n\theta_i\theta_j$, $i\neq j$.
+
+Assume $\bm{\theta}$ follows a Dirichlet distribution of parameter $\bm{a}=(a_1,\dots,a_k)^\T$, $\bm{\theta}\sim D(\bm{a})$, with density
+\begin{equation}
+f(\bm{\theta})=\frac{1}{B(\bm{a})}\prod_{i\in[k]}\theta_i^{a_i-1},
+\end{equation}
+where $B(\bm{a})$ is a generalization of the beta function in equation (\ref{eq:betafunction}) equal to
+\begin{equation}
+B(\bm{a})=\frac{\prod_{i\in[k]}\Gamma(a_i)}{\Gamma\left(\sum_{i\in[k]}a_i\right)}.
+\end{equation}
+Note that for any $I\in[k]$, $\bm{\theta}_I\sim D(\bm{a}_I)$, and that $\theta_i\sim Be(a_i,a-a_i)$, where $a=\sum_{i\in[k]}a_i$. The first two moments have a closed form which can be easily deduced to be 
+\begin{equation}
+\E(\theta_i)=\frac{a_i}{a},\;\;\;\;\;\V(\theta_i)=\frac{a_i(a-a_i)}{a^2(a+1)},\;\;\;\;\; \Cov(\theta_i,\theta_j)=-\frac{a_ia_j}{a^2(a+1)}.
+\end{equation}
+
+Similarly to previous section we can note that the Dirichlet family is conjugate with the multinomial one by simply applying Bayes theorem in equation (\ref{eq:proprbayes}). It holds that
+\begin{equation}
+f(\bm{\theta}\;|\;\bm{y})\propto \prod_{j\in[k]} \theta_j^{y_j+a_j-1},
+\end{equation}
+and therefore $\bm{\theta}|\bm{Y}\sim D(\bm{a}+\bm{y})$.
+
+\subsection{Contingency Tables}
+
+
+\section{Continuous Models}
+
+\subsection{Normal-Inverse Gamma Models }
+Let $Y|\mu,\sigma^2\sim N(\mu,\sigma^2)$, where $\mu\in\mathbb{R}$ and $\sigma^2>0$, that is $Y$ follows a normal distribution given the parameters $\mu$ and $\sigma^2$. Recall that $\E(Y\;|\;\mu,\sigma^2)=\mu$, $\V(Y\;|\;\mu,\sigma^2)=\sigma^2$ and the density is written as
+\begin{equation}
+\label{eq:normaldensity}
+f(y\;|\;\mu,\sigma^2)=\frac{1}{\sqrt{2\pi\sigma^2}}\exp\left(-\frac{1}{2\sigma^2}(y-\mu)^2\right).
+\end{equation} 
+The distribution of a normal distribution is fully characterized by its first two moments. Every higher order moment is a function of the first two and any central moment of odd order is equal to zero. We summarize the first moments of a normal distribution in Table \ref{table:moments}.
+
+\begin{table}
+\renewcommand{\arraystretch}{1.5}
+\begin{center}
+\begin{tabular}{|c|c|c|}
+\hline
+Order& Non-central moment & Central moment \\
+\hline
+1&$\mu$&$0$\\
+\hline
+2&$\sigma^2+\mu^2$&$\sigma^2$\\
+\hline
+3&$\mu^3+3\mu\sigma^2$&$0$\\
+\hline
+4&$\mu^4+6\mu^2\sigma^2+3\sigma^4$&$3\sigma^4$\\
+\hline
+5&$\mu^5+10\mu^3\sigma^2+15\mu\sigma^4$&$0$\\
+\hline
+6&$\mu^6+15\mu^4\sigma^2+45\mu^2\sigma^2+15\sigma^6$&$15\sigma^6$\\
+\hline
+\end{tabular}
+\end{center}
+\caption{First six moments of a normal distribution with mean $\mu$ and variance $\sigma^2$.\label{table:moments}}
+\end{table} 
+
+Suppose the prior distribution over $(\mu,\sigma^2)$ has density
+\begin{equation}
+\label{eq:normalinversegamma}
+\pi(\mu,\sigma^2)= \frac{\sqrt{r}}{\sqrt{2\pi\sigma^2}}\frac{(a/2)^{b/2}}{\Gamma(b/2)}\left(\sigma^2\right)^{-b/2-1}\exp\left( -\frac{a+r(\mu-m)^2}{2\sigma^2}\right),
+\end{equation}
+for $m\in\mathbb{R}$ and $a,b,r\in\mathbb{R}_{>0}$. Note that the joint density $\pi(\mu,\sigma^2)$ can be written as the product of $\pi(\mu\;|\;\sigma^2)$ and $\pi(\sigma^2)$, where
+\begin{align}
+\pi(\mu\;|\;\sigma^2)&= \frac{\sqrt{r}}{\sqrt{2\pi\sigma^2}}\exp\left( -\frac{r(\mu-m)^2}{2\sigma^2}\right),\\
+\pi(\sigma^2)&=\frac{(a/2)^{b/2}}{\Gamma(b/2)}\left(\sigma^2\right)^{-a/2-1}\exp\left(-\frac{a}{2\sigma^2}\right).
+\end{align}
+Therefore $\mu|\sigma^2\sim N(m,r\sigma^2)$ and $\sigma^2\sim IG(a,b)$, meaning that $\sigma^2$ follows an inverse gamma distribution with parameters $a$ and $b$. We will say that a distribution having the density in equation (\ref{eq:normalinversegamma}) is a Normal Inverse Gamma with parameters $m$, $r$, $a$ and $b$, that is $(\mu,\sigma^2)\sim NIG(m,r,a,b)$. We will study in more details the features of this distribution in the following section.
+
+Now the posterior density $(\mu,\sigma^2)|y$ can be deduced by multiplying equations (\ref{eq:normaldensity}) and (\ref{eq:normalinversegamma}) and is proportional to
+\begin{equation}
+\label{eq:nigposterior}
+\frac{1}{\sqrt{2\pi\sigma^2}}\exp\left(-\frac{(1+r)\left(\mu-\frac{y+rm}{1+r}\right)^2}{2\sigma^2}\right)\left(\sigma^2\right)^{-b-\frac{3}{2}}\exp\left(-\frac{1}{2\sigma^2}\left(a+\frac{r}{1+r}(y-m)^2\right)\right).
+\end{equation}
+Equation (\ref{eq:nigposterior}) is proportional to the density of a $NIG(m',r',a',b')$, where 
+\begin{equation}
+\begin{array}{ll}
+m'=\frac{y+rm}{1+r},&r'=1+r,\\
+b'=b+\frac{1}{2},&a'=a+\frac{1}{2}\frac{r}{1+r}(y-m)^2.
+\end{array}
+\end{equation}
+Therefore an $NIG$ distribution is  conjugate with a normal likelihood. 
+
+
+\subsection{Bayesian Normal Linear Models}
+We now consider a normal linear model defined by 
+\begin{equation}
+\bm{Y}=X\bm{\beta}+\bm{\varepsilon},
+\end{equation}
+where $\bm{y}=(y_1,\dots,y_n)^\T$ is a vector of observations, $X$ is a $n\times p$ matrix of known values of covariates, $\bm{\beta}=(\beta_1,\dots,\beta_p)^\T$ is a vector of parameters and $\bm{\varepsilon}=(\varepsilon_1,\dots, \varepsilon_n)^\T$ is a vector of random errors, where $\varepsilon_1,\dots,\varepsilon_n$ are independent and indentically distributed as a normal distribution with mean $0$ and variance $\sigma^2$. Therefore $\bm{Y}|\bm{\beta},\sigma^2\sim \mathcal{N}(X\bm{\beta},\sigma^2I_n)$, where $I_n$ is the identity matrix of dimension $n\times n$. The density of this multivariate normal is equal to 
+\begin{equation}
+f(\bm{y}\;|\;\bm{\beta},\sigma^2)=(2\pi\sigma^2)^{-\frac{n}{2}}\exp\left(-\frac{1}{2\sigma^2}(\bm{y}-X\bm{\beta})^\T(\bm{y}-X\bm{\beta})\right).
+\end{equation}
+
+Assume a multivariate NIG prior is given to $(\bm{\beta},\sigma^2)$ with parameters $(\bm{m},V,a,b)$, whose density can be written as
+\begin{equation}
+\label{eq:multinig}
+\pi(\bm{\beta},\sigma^2)=\left(\frac{a}{2}\right)^{\frac{b}{2}}\left(\sigma^2\right)^{-\frac{b+p+2}{2}}\frac{1}{(2\pi)^{p/2}|V|^{\frac{1}{2}}\Gamma(b/2)}\exp\left(-\frac{(\bm{\beta}-\bm{m})^\T V^{-1}(\bm{\beta}-\bm{m})+a}{2\sigma^2}\right),
+\end{equation}
+where $V$ is a $p\times p$ positive definite symmetric matrix, $\bm{m}$ is a vector of dimension $n$, $a,b>0$ and $|V|$ is the determinant of $V$. Note that again this is the product of a normal distribution over $\bm{\beta}|\sigma^2$ and an inverse gamma over $\sigma^2$. The marginal moments of $\bm{\beta}$ and $\sigma^2$ can be easily deduced and are equal to 
+\begin{equation}
+\begin{array}{ll}
+\E(\bm{\beta})=\bm{m},&\V(\bm{\beta})=\frac{a}{b-2}V,\\
+\E(\sigma^2)=\frac{a}{b-2}, &\V(\sigma^2)=\frac{2a^2}{(b-2)^2(b-4)}.
+\end{array}
+\end{equation}
+Note that $\bm{\beta}$ marginally follows a multivariate T-distribution with $b$ degrees of freedom and parameters $\bm{m}$ and $aV$, $\bm{\beta}\sim T_b(\bm{m},aV)$, whose density is equal to
+\begin{equation}
+\pi(\beta)=\frac{a^{b/2}\Gamma((b+p)/2)}{|V|^{1/2}\pi^{p/2}\Gamma(b/2)}(a+(\bm{\beta}-\bm{m})^\T V^{-1}(\bm{\beta}-\bm{m}))^{(b+p)/2}.
+\end{equation} 
+
+Using again Bayes theorem in equation (\ref{eq:proprbayes}) it can be shown that the NIG density in equation (\ref{eq:multinig}) is conjugate for the normal linear model. Its posterior is then $NIG(a',b',\bm{m}',V')$, where
+\begin{equation}
+\begin{array}{ll}
+V'=(V^{-1}+X^\T X)^{-1}, &\bm{m}'=(V^{-1}+X^\T X)^{-1}(V^{-1}\bm{m}+X^{\T}\bm{y}),\\
+b'=b+n,&a'=a+\bm{m}^\T V^{-1}\bm{m}+\bm{y}^\T\bm{y}-\bm{m}'^\T V'^{-1}\bm{m}'.
+\end{array}
+\end{equation}
+\subsection{Multivariate Normal Models}
+We now consider a generalization of the previous sections where now we sample from $\bm{Y}=(\bm{Y}_1^\T,\dots, \bm{Y}_n^\T)$, where each $\bm{Y}_i$, $i\in[n]\sim \mathcal{N}(\bm{\mu},\Sigma)$ and $\independent_{i\in[n]}\bm{Y}_i\;|\; \bm{\mu},\Sigma$. We let $\bm{\mu}$ be a $m\times 1$ vector and $\Sigma$ be a $m\times m$ symmetric positive definite matrix. In this setting
+\begin{equation}
+f(\bm{y}\;|\;\bm{\mu},\Sigma)=(2\pi)^{-mn/2}|\Sigma|^{-n/2}\exp\left(-\frac{\sum_{i\in[n]}(\bm{y}_i-\bm{\mu})^\T\Sigma^{-1}(\bm{y}_i-\bm{\mu})}{2}\right).
+\end{equation}
+
+Note that the difficulty here is that it needs to be given a prior distribution to the covariance matrix $\Sigma$. The approach is similar to the ones above and factorizes the density $\pi(\bm{\mu},\Sigma)$ as $\pi(\bm{\mu}\;|\;\Sigma)\pi(\Sigma)$. The distribution of $\bm{\mu}|\Sigma$ is assumed to be normal with mean $\bm{m}$ and covariance $c^{-1}\Sigma$, whilst $\Sigma$ is assumed to follow the so-called \textit{inverse Wishart} distribution, denoted as IW. If $\Sigma\sim IW(A,d)$, where $A$ is positive definite symmetric $m\times m$ matrix and $d>m$, then the density is equal to
+\begin{equation}
+\pi(\Sigma)=k^{-1}|A|^{d/2}|\Sigma|^{-(d+m+1)/2}\exp\left(-\frac{tr(\Sigma^{-1}A)}{2}\right),
+\end{equation} 
+where $tr$ denotes the trace of a matrix and 
+\begin{equation}
+k=2^{dm/2}\pi^{m(m-1)/4}\prod_{i\in[m]}\Gamma((d+1-i)/2).
+\end{equation}
+The joint distribution of $(\bm{\mu},\Sigma)$ so defined follows a normal inverse Wishart distribution, $NIW$. Therefore if we let $(\bm{\mu},\Sigma)\sim NIW(\bm{m},c,A,d)$ the density is equal to 
+\begin{equation}
+\pi(\bm{\mu},\Sigma)=\frac{|A|^{d/2}|\Sigma|^{-(d+m+2)/2}}{(2\pi)^{m/2}k}\exp\left(-\frac{c(\bm{\mu}-\bm{m})^\T \Sigma^{-1}(\bm{\mu}-\bm{m})+tr(\Sigma^{-1}A)}{2}\right).
+\end{equation}
+
+The moments of the normal distribution can be straightforwardly deduced, whilst for the Inverse-Wishart the computation of moments is more complicated. We report here the mean of $\Sigma$ and refer the reader to \citet{Siskind1972} for the computation of the second order moments. Specifically
+\begin{equation}
+\begin{array}{ll}
+\E(\bm{\mu})=\bm{m},&\V(\bm{\mu})=c^{-1}\Sigma,
+\\ 
+\E(\Sigma)=(d-m-1)^{-1}A,& \mbox{for } d>m-1.
+\end{array}
+\end{equation}
+Note that also similarly to the normal linear model, $\bm{\mu}$ marginally follows a multivariate T distribution with $d+1-m$ degrees of freedom and parameters $(\bm{m},  c^{-1}A)$.
+
+It can be shown that the $NIG$ distribution is conjugate with the multivariate normal likelihood and the posterior has parameters $(\bm{m}',c',A',d')$, where
+\begin{equation}
+\begin{array}{ll}
+\bm{m}'=(c+n)^{-1}(c\bm{m}+n\bar{\bm{y}}), & c'=c+n,\\
+A'=A+nS+cn(c+n)^{-1}(\bm{m}-\bar{\bm{y}})^\T(\bm{m}-\bar{\bm{y}}),&d'=d+n,
+\end{array}
+\end{equation}
+with $\bar{\bm{y}}=\sum_{i\in[n]}\bm{y}_i$ and $S=n^{-1}\sum_{i\in[n]}(\bm{y}_i-\bar{\bm{y}})(\bm{y}_i-\bar{\bm{y}})^\T$.

@@ -1,0 +1,8 @@
+% Appendix A
+
+\chapter{Graph Theory} % Main appendix title
+
+\label{graph} % For referencing this appendix elsewhere, use \ref{AppendixA}
+
+\lhead{Appendix B. \emph{Graph Theory}} % This is for the header on each page - perhaps a shortened title
+

@@ -1,0 +1,100 @@
+% Appendix A
+
+\chapter{Graph Theory} % Main appendix title
+
+\label{appendixB} % For referencing this appendix elsewhere, use \ref{AppendixA}
+
+\lhead{Appendix B. \emph{Graph Theory}} % This is for the header on each page - perhaps a shortened title
+
+\section{Some Definitions}
+\begin{definition}
+A \textbf{graph} $\Gr$ is a pair $\Gr=(V(\Gr), E(\Gr))$, where $V(\Gr)$ is a finite set of \emph{vertices}, or nodes, of $\Gr$ and $E(\Gr)$ is a subset of $V(\Gr)\bigtimes V(\Gr)$ of ordered distinct pairs of vertices, called \emph{edges}, or arcs, of $\Gr$.
+\end{definition}
+Note that our definition does not allow for the presence of multiple edges between the same two vertices. Edges connecting one vertex to itself are also not allowed by the definition above. Throughout the thesis we consider generic graphs whose vertex set is equal to $\{Y_i: i \in[n]\}$, $\{\bm{Y}_i^T: i\in[n]\}$ or $\{\bm{r}_i: i\in[m]\}$, among the others. In this appendix we  consider the vertex set $\{Y_i:i\in[n]\}$, unless otherwise specified, to define the terminology employed in this thesis. This however straightforwardly applies to any other vertex set.
+
+Let $i,j\in[n]$. For $Y_i$, $Y_j\in V(\Gr)$, if $(Y_i,Y_j),(Y_j,Y_i)\in E(\Gr)$ we say that there is an \textit{undirected} edge between $Y_i$ and $Y_j$. The vertices $Y_i$ and $Y_j$ are said to be \textit{neighbours}. The set of the indices of the neighbours of a vertex $Y_i$ is denoted by $Ne_i$. If $(Y_i,Y_j)\in E(\Gr)$ but $(Y_j,Y_i)\not\in E(\Gr)$, we say that there is a \textit{directed} edge \textit{from} $Y_i$ \textit{to} $Y_j$. We further say that $Y_i$ is a \textit{parent} of $Y_j$ and that $Y_j$ is a \textit{child} of $Y_i$. The set of the indices of the parents of $Y_i$ is denoted with $\Pi_i$, whilst $Ch_i$ is the set of the indices of its children. We define $Fa_i=\{i\}\cup \Pi_i$ and we call $\{Y_i\}\cup \{Y_j:j\in\Pi_i\}$ the \textit{family} of $Y_i$. The \textit{boundary} of $Y_i$ is $\{Y_j:j\in Bd_i\}$, where $Bd_i=\Pi_i\cup Ne_i$. If $(Y_i,Y_j)\in E(\Gr)$ and/or $(Y_j,Y_i)\in E(\Gr)$, we say that $Y_i$ and $Y_j$ are joined.
+
+A \textit{path} of length $m$ from $Y_{i_1}$ to $Y_{j_m}$ in a graph $\Gr$ is a sequence of $m$ distinct edges in $E(\Gr)$
+\begin{equation*}
+((Y_{i_1},Y_{j_1}),\dots, (Y_{i_k},Y_{j_k}),(Y_{i_{k+1}},Y_{j_{k+1}}),\dots,(Y_{i_m},Y_{j_m})),
+\end{equation*}
+ such that $Y_{j_k}=Y_{i_{k+1}}$, $k\in[m-1]$, $i_k,j_k\in[n]$ and we say that the path \textit{ends} in $Y_{j_m}$. A \textit{cycle} is a path  with the additional condition that $Y_{i_1}=Y_{j_n}$. A \textit{rooted path} of length $m+1$ from $Y_{i_1}$ to $Y_{j_m}$ is a sequence comprising of a vertex in $V(\Gr)$ and $m$ distinct edges in $E(\Gr)$ is such that
+\begin{equation*}
+(Y_{i_1},(Y_{i_1},Y_{j_1}),\dots, (Y_{i_k},Y_{j_k}),(Y_{i_{k+1}},Y_{j_{k+1}}),\dots,(Y_{i_m},Y_{j_m})),
+\end{equation*} 
+ where $Y_{j_k}=Y_{i_{k+1}}$, $k\in[m-1]$, $i_k,j_k\in[n]$. Cycles and (rooted) paths including at least one directed edge are called \textit{directed} cycles and directed (rooted) paths respectively.
+ 
+If in $\Gr$ there are both a path from $Y_i$ to $Y_j$ and a path from $Y_j$ to $Y_i$ we say that $Y_i$ and $Y_j$ are  \textit{connected}. It can be seen that the vertex set of a graph $\Gr$ can be uniquely partitioned into subsets of vertices such that every element of the subset is connected with all the other elements of that subset. We call such subsets the \textit{strong components} of $\Gr$. We further let a \textit{trail} from $Y_i$ to $Y_j$ be a path where two consecutive vertices  of the associated sequence simply needs to be joined.
+
+
+\begin{definition}
+We define the following special graphs:
+\begin{itemize}
+\item if all the edges of $\Gr$ are undirected we say that $\Gr$ is an \emph{Undirected Graph (UG)};
+\item if all the edges of $\Gr$ are directed we say that $\Gr$ is a \emph{directed graph};
+\item if a graph $\Gr$ includes both directed and undirected graphs we say that $\Gr$ is a \emph{mixed graph};
+\item the \emph{undirected version} of a generic graph $\Gr$, denoted by $\Gr^{U}$ is the undirected graph obtained by replacing every directed edge with an undirected one;
+\item a graph $\Gr'=(V(\Gr'),E(\Gr'))$ is a \emph{subgraph} of $\Gr=(V(\Gr),E(\Gr))$ if $V(\Gr')\subseteq V(\Gr)$ and $E(\Gr')\subseteq E(\Gr)\cap \{V(\Gr')\times V(\Gr')\}$.  If $E(\Gr')= E(\Gr)\cap \{V(\Gr')\times V(\Gr')\}$ we say that $\Gr'$ is the subgraph of $\Gr$ \emph{induced} by $V(\Gr')$;
+\item a graph $\Gr$ is \emph{complete} if each pair of its vertices is joined;
+\item a \emph{clique} $\{Y_i:i\in C\}$, $C\subseteq [n]$, of a graph $\Gr$ is such that the subgraph induced by $\{Y_i:i\in C\}$ is a complete maximal subgraph of $\Gr$, where maximal means that there is no $C\subset C'$ such that the subgraph induced by $\{Y_i:i\in C'\}$ is complete;
+\item a graph $ \Gr$ is \emph{connected} if there is a trail between every pair of vertices in $\Gr$;
+\item a \emph{Directed Acyclic Graph (DAG)} is a directed graph with no directed cycles;
+\item a \emph{Chain Graph (CG)} is a mixed graph with no directed cycles;
+\end{itemize}
+\end{definition}
+Note in particular that DAGs and UGs are special cases of CGs. Furthermore the strong components of a DAG all consists of a single vertex. 
+
+\section{Chain Graphs and Directed Acyclic Graphs}
+We now focus in more detail on CGs. We first note that it is always possible, although not uniquely, to \textit{well-order} the vertices of a CG with an indexing such that if there is a directed edge from $Y_i$ to $Y_j$, then $i<j$.  See for example \citet{Cowell1999a} for algorithms that allow for a construction of such an indexing.  
+
+For a well-ordered CG $\Gr$, we say that $Y_i$ is an \textit{ancestor} of $Y_j$ if there is a path from $Y_i$ to $Y_j$ but not a path from $Y_j$ to $Y_i$. In this case $Y_j$ is also call a \textit{descendant} of $Y_i$ and we denote with $De_i$ the set of the indices of descendants of $Y_i$. The \textit{ancestral set} of a vertex $Y_i$ is the set including all its ancestors and $Y_i$ itself. We denote with $A_i$ the set of indices of the variables in the ancestral set and we define $A_i'=A_i\setminus \{i\}$ (this is usually referred to as the \textit{non-descendant set}). More generally the ancestral set of  $\{Y_i:i\in A\}$, $A\subseteq [n]$, is the union of the set of ancestors of every element in $\{Y_i:i\in A\}$ together with the elements in $\{Y_i:i\in A\}$. The \textit{ancestral graph} of $\{Y_i:i\in A\}$ is the subgraph of $\Gr$ induced by $\{Y_i:i\in A\}$. 
+
+
+ Let $A$, $B$ and $C$ be three disjoint subsets of $[n]$. We say that $\{Y_i:i\in C\}$ \textit{separates} $\{Y_i:i\in A\}$ from $\{Y_i:i\in B\}$ if every trail from any element in $\{Y_i:i\in A\}$ to any element in  $\{Y_i:i\in B\}$ goes through at least one element in $\{Y_i:i\in C\}$. We now define a special type of chain graph.
+\begin{definition}
+Given a CG $\Gr$, the \emph{moral graph}, $\Gr^m$, of $\Gr$ is the undirected graph obtained from $\Gr$ by the following procedure:
+\begin{itemize}
+\item add an undirected edge between any pair of vertices that have children in a common strong component and that are not already joined;
+\item form the undirected version of the obtained graph.
+\end{itemize}
+\end{definition}
+
+Let $\Gr$ now be a well-ordered DAG. Note that for a DAG the moralisation process  adds an edge between all pairs of parents of the same children not already joined by a directed edge. The resulting graph from the moralisation of a BN is said to be \textit{decomposable}. We say that a vertex $Y_i$ is the \textit{father} of $Y_j$ and $Y_j$ is its \textit{son}, for $Y_i,Y_j\in\Gr$, if $(Y_i,Y_j)\in E(\Gr)$ and there is no other directed path from $Y_i$ to $Y_j$. Note that in a decomposable DAG each vertex either has one or no father. We denote with $F_i$ the index of the father of $Y_i$, whilst $S_i$ is the set of the indices of its sons. A vertex of a DAG with no children is called \textit{leaf}, whilst a \textit{root} is a vertex with no parents. We let $Le$ be the index set of the leafs of the DAG.
+
+
+Consider now an undirected graph $\Gr$ and let $\sigma$ be a cycle. A \textit{chord} of this cycle is an edge $(Y_i,Y_l)\in \E(\Gr)$ such that the edges $(Y_i,Y_j),(Y_k,Y_l)\in E(\Gr)$ are non consecutive elements of $\sigma$.  The undirected graph $\Gr$ is said to be \textit{chordal} if all its cycles of length at least four have a chord. It is possible to show that the notion of chordal graph coincides with the one of decomposable graph (which for the purpose of this thesis we omit). Thus generally we refer to a chordal graph as a decomposable graph: see for more details \citet{Cowell1999a}. We also say that a chain graph is decomposable meaning that its undirected version is chordal. 
+
+The last concept concerning undirected graphs we define here is the one of decomposition.
+\begin{definition}
+The sets $\{Y_i:i\in A\}$ and $\{Y_i:i\in B\}$, $A,B\subset [n]$ are said to form a \emph{decomposition} of a graph $\Gr$ with vertex set $\{Y_i:i\in[n]\}$ if
+\begin{itemize}
+\item $A\cup B=[n]$;
+\item $\{Y_i:i\in A\cap B\}$ separates $\{Y_i:i\in A\}$ from $\{Y_i:i\in  B\}$;
+\item the subgraph of $\Gr$ induced by $\{Y_i:i\in A\cap B\}$ is complete.
+\end{itemize}
+\end{definition}
+
+\section{Trees}
+We now deal with a special class of graphs called \textit{trees}. 
+\begin{definition}
+\label{def:tree}
+A graph $\Gr$ is a \emph{tree} if it is connected and its undirected version has no cycles. 
+\end{definition}
+
+Note that in a tree there is a unique trail between any two vertices. A rooted tree is a tree with a designated vertex called  \textit{root}.  A \textit{leaf} of a tree is a vertex which is joined to at most one other node. A \textit{forest} is a graph having no cycles, i.e. its strong components are all trees.  
+
+An important class of trees is defined below. 
+\begin{definition}
+Let $\Gr$ be an undirected graph, $\{Y_j:j\in C_i\}$, $i\in[m]$, its cliques and $\mathcal{C}=\{C_1,\dots,C_m\}$. A \emph{junction tree} of $\Gr$ has vertex set $\{Y_C: C\in\mathcal{C}\}$ and is such that $C_i\cap C_j\subset C_k$, $i,j,k \in[m]$, for any $C_k$ such that $\{Y_l:l\in C_k\}$ is a member of an edge in the unique path between $\{Y_l:l\in C_i\}$ and $\{Y_l:l\in C_j\}$.
+\end{definition}
+It is possible to show that if $\Gr$ is decomposable, then there exists a unique junction tree associated to that graph and its cliques can be ordered so that they exhibit the \textit{running intersection property}, i.e., for all $j\in [m]$, there is an $i<j$ such that $S_{j}=C_j\cap \cup_{k\in [j-1]}C_k\subseteq C_i$. Note that $\{Y_i: i\in S_j\}$,  separates $\{Y_i: i\in C_j\}$ from $\{Y_i: i\in \cup_{k\in [j-1]}C_k\}$ and we therefore call it a \textit{separator}. Let also $\mathcal{S}=\{S_2,\dots,S_m\}$. Note that by construction $S_j\subset C_i$ for an $i<j$.  \citet{Cowell1999a} presented several algorithms to construct a junction tree exhibiting the running intersection property. 
+
+Another class of trees we deal with is introduced now. 
+\begin{definition}
+ A \emph{directed tree} $\mathcal{T}$  is a directed graph with the following two properties:
+ \begin{itemize}
+ \item it has a unique vertex with no parents called \textit{root};
+ \item all other vertices have exactly one parent.
+ \end{itemize}
+\end{definition}   
+It can be noted that a directed tree is also a generic tree according to Definition \ref{def:tree}. The vertex set of a directed tree, $V(\mathcal{T})$, is  partitioned into the set of leaves $L(\mathcal{T})$, the vertices with no children, and the set of \textit{situations} $S(\mathcal{T})=V(\mathcal{T})\setminus L(\mathcal{T})$. A \textit{floret} $\mathcal{F}(v_i)$ of a situation $v_i\in S(\mathcal{T})$ is the subgraph of $\mathcal{T}$ generated by $\{v_i\cup v_{Ch_i}\}$. Note that any directed tree is fully defined by  its set of florets. 

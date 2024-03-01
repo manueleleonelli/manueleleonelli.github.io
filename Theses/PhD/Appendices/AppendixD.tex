@@ -1,0 +1,325 @@
+% Appendix Template
+
+\chapter{Computer Code} % Main appendix title
+
+\label{appendixD} % Change X to a consecutive letter; for referencing this appendix elsewhere, use \ref{AppendixX}
+
+\lhead{Appendix D. \emph{Computer Code }} % Change X to a consecutive letter; this is for the header on each page - perhaps a shortened title
+
+
+\noindent Computation of the highest index in each parent set of a utility node.\\
+\textbf{Inputs}: \verb|PiU::table|, parent sets of utility nodes;
+\verb|m::integer|, number of utility nodes.\\
+\textbf{Output}: \verb|J::list|.
+
+\vspace{-0.4cm}
+\begin{alltt}
+CompJ := \textbf{proc}(PiU,m) \textbf{local} i,j:
+\textbf{for} j  \textbf{to} m \textbf{do} J[j] := max(PiU[J]) \textbf{end do}:
+\textbf{return} convert(J,list):
+\textbf{end proc}:
+\end{alltt}
+
+
+\noindent Computation of the indices of the argument of the expected utility at step $i$. \\
+ \textbf{Inputs}: \verb|PiU::table|; \verb|PiV::table|, parent sets of random nodes; \verb|i::integer|;\\
+\verb|n::integer|, number of random nodes; \verb|J::list|.\\
+\textbf{Output}: \verb|Bi[i]::set|.
+
+\vspace{-0.4cm}
+\begin{alltt}
+CompBi := \textbf{proc}(PiU,PiV,i,n,J) \textbf{local} Bi, part, j:
+Bi[i], part := \{\},\{\}:
+\textbf{for} j \textbf{from} i \textbf{to} n \textbf{do}
+  part := part \textbf{union} \{j\}:
+  \textbf{if} member(j,V) \textbf{then} Bi[i] := Bi[i] \textbf{union} PiV[j] \textbf{end if}:
+  \textbf{if} member(j,J,'l') \textbf{then} Bi[i] := Bi[i] \textbf{union} PiU[l] \textbf{end if}:
+\textbf{end do}:
+Bi[i] := Bi[i] \textbf{minus} part:
+\textbf{return} Bi[i]:
+\textbf{end proc}:
+\end{alltt}
+
+
+Initialisation of an MID.\\
+\textbf{Inputs}: \verb|p::table|, probability vectors; \verb|psi::table|, utility vectors; \\
+\verb|PiV::table|; \verb|PiU::table|; \verb|n::integer|; \verb|m::integer|.\\
+\textbf{Outputs}: \verb|J::list|; \verb|Bi::table|; \verb|u::table|, expected utility vectors.
+
+\vspace{-0.4cm}
+\begin{alltt}
+Initialise := \textbf{proc}(p, psi, PiV, PiU, n, m) \textbf{local} J, i, Bi, u:
+J := CompJ(PiU, m):
+\textbf{for} i \textbf{to} n \textbf{do}  Bi[i] := CompBi(PiU, PiV, i, n, J) \textbf{end do}:
+Bi[n+1], u[n+1] := \{\}, []:
+\textbf{return} J, Bi, u:
+\textbf{end proc}:
+\end{alltt}
+
+
+\noindent EUDuplication of a utility vector and an expected utility vector.\\
+\textbf{Inputs}: \verb|u::table|; \verb|psi::table|; \verb|j::integer|; \verb|PiV::table|; \verb|PiU::table|;
+\verb|r::table|, size of the decision and sample spaces; \verb|Bi::table|; \verb|J::list|.\\
+\textbf{Outputs}: \verb|utemp::list|, EUDuplicated version of \verb|u|; \verb|psitemp::list|, EUDuplicated version of \verb|psi|.
+
+\vspace{-0.4cm}
+\begin{alltt}
+EUDuplicationPsi := \textbf{proc}(u, psi, j, PiV, PiU, r, Bi, J)
+\textbf{local} i, uprime, psiprime, psitemp, utemp, x, sx, y, h, z:
+i, uprime, psiprime:= max(PiU[j]), [], []: 
+psitemp, utemp:= psi[j], u[i+1]:
+\textbf{for} x \textbf{from} max(Bi[i+1], PiU[j]) \textbf{by} -1 \textbf{to} 1 \textbf{do}
+  \textbf{if} member(x, (PiU[j] \textbf{union} Bi[i+1]) \textbf{minus} (PiU[j] \textbf{intersect} Bi[i+1])) 
+    \textbf{then} sx := 1:
+    \textbf{for} y \textbf{from} x+1 \textbf{to} max(Bi[i+1], PiU[j]) \textbf{do}
+      \textbf{if} member(y, Bi[i+1] \textbf{union} PiU[j]) \textbf{then} sx := sx*r[y] \textbf{end if}
+    \textbf{end do}:
+    \textbf{if} member(x, Bi[i+1]) \textbf{then} \textbf{for} l \textbf{to} Size(psitemp)[2]/sx \textbf{do} 
+      \textbf{for} z \textbf{to} r[x] \textbf{do}
+      psiprime := [op(psiprime), op(convert(psitemp, list)
+      [(l-1)*sx+1 .. l*sx])]
+      \textbf{end do} \textbf{end do}:
+      psitemp, psiprime := psiprime, []:
+    \textbf{elif} member(x, PiU[j]) \textbf{then} \textbf{for} l \textbf{to} Size(utemp)[2]/sx \textbf{do}
+     \textbf{for} z \textbf{to} r[x] \textbf{do} 
+     uprime := [op(uprime),op(convert(utemp, list)[(l-1)*sx+1..l*sx])]
+     \textbf{end do} \textbf{end do}:
+     utemp,  uprime := uprime, []:
+\textbf{end if} \textbf{end if} \textbf{end do}:
+\textbf{return} utemp, psitemp:
+\textbf{end proc}:
+\end{alltt}
+
+
+EuMultiSum between an expected utility vector and a utility vector. \\
+\textbf{Inputs}: \verb|u::table|; \verb|psi::table|; \verb|j::integer|; \verb|PiV::table|; \verb|PiU::table|;
+ \verb|r::table|; \verb|Bi::table|; \verb|J::list|.\\
+\textbf{Outputs}: \verb|ut::list|, expected utility vector after an EUMultiSum.  
+
+\vspace{-0.4cm}
+\begin{alltt}
+EUMultiSum := \textbf{proc}(u, psi, j, PiV, PiU, r, Bi, J) 
+\textbf{local} i, uprime, psiprime, ut;
+i := max(PiU[j]);
+uprime, psiprime:=EUDuplicationPsi(u, psi, j, PiV, PiU, r, Bi, J);
+uprime := convert(uprime, list);
+\textbf{if} Size(uprime)[1] = 0 \textbf{then}  ut := k[j]*~psiprime 
+\textbf{else} ut := h*~k[j]*~psiprime*~uprime+~uprime+~k[j]*~psiprime \textbf{end if};
+\textbf{return} ut: 
+\textbf{end proc}:
+\end{alltt}
+
+
+\noindent EUDuplication of a probability vector and an expected utility vector. \\
+\textbf{Inputs}: \verb|u::table|; \verb|p::table|; \verb|i::integer|; \verb|PiV::table|; \verb|PiU::table|; 
+  \verb|r::table|;\\
+   \verb|Bi::table|; \verb|J::list|.\\
+  \textbf{Outputs}: \verb|utemp::list|, EUDuplicated version of \verb|u|;
+\verb|ptemp::list|, EUDuplicated version of \verb|p|.
+
+\vspace{-0.4cm}
+\begin{alltt}
+EUDuplicationP := \textbf{proc}(u, p, i, PiV, PiU, r, Bi, J)
+ \textbf{local} uprime, pprime, ptemp, utemp, x, sx, y, l, z:
+uprime, pprime, ptemp, utemp   := [], [],  p[i], u[i+1]:
+Uni:= Bi[i+1] \textbf{union} PiV[i] \textbf{union} PiU[j];
+\textbf{if} member(i, J) \textbf{then} member(i, J, 'j');
+  \textbf{for} x \textbf{from} max(Uni) \textbf{by} -1 \textbf{to} 1 \textbf{do}
+    \textbf{if} member(x, Uni \textbf{minus} ((Bi[i+1] \textbf{union} PiU[j]) \textbf{intersect} 
+    (PiV[i] \textbf{union} \{i\}))) \textbf{then} 
+      sx := 1;
+      \textbf{for} y \textbf{from} x+1 \textbf{to} max(Uni) \textbf{do}
+        \textbf{if} member(y, Uni) \textbf{then}  sx := sx*r[y] \textbf{end if}
+      \textbf{end do}; 
+      \textbf{if} member(x, Bi[i+1] \textbf{union} PiU[j]) \textbf{then}
+        \textbf{for} l \textbf{to} Size(ptemp)[2]/sx \textbf{do} \textbf{for} z \textbf{to} r[x] \textbf{do} 
+            pprime := [op(pprime), op(convert(ptemp, list)
+            [(l-1)*sx+1 .. l*sx])]
+        \textbf{end do} \textbf{end do};
+        ptemp,  pprime := pprime, [];
+      \textbf{elif} member(x, PiV[i]) \textbf{then} 
+        \textbf{for} l \textbf{to} Size(utemp)[2]/sx \textbf{do} \textbf{for} z \textbf{to} r[x] \textbf{do} 
+            uprime := [op(uprime), op(convert(utemp, list)
+            [(l-1)*sx+1 .. l*sx])] 
+        \textbf{end do} \textbf{end do};
+        utemp, uprime := uprime, []:
+\textbf{end if} \textbf{end if} \textbf{end do};
+\textbf{else} \textbf{for} x \textbf{from} max(Bi[i+1], PiV[i]) \textbf{by} -1 \textbf{to} 1 \textbf{do}
+    \textbf{if} member(x, (Bi[i+1] \textbf{union} PiV[i]) \textbf{minus} (Bi[i+1] \textbf{intersect} 
+    (PiV[i] \textbf{union} \{i\}))) \textbf{then}
+      sx := 1;
+      \textbf{for} y \textbf{from} x+1 \textbf{to} max(Bi[i+1], PiV[i]) \textbf{do}
+        \textbf{if} member(y, Bi[i+1] \textbf{union} PiV[i]) \textbf{then} sx := sx*r[y] \textbf{end if} 
+      \textbf{end do};
+      \textbf{if} member(x, Bi[i+1]) \textbf{then} 
+        \textbf{for} l \textbf{to} Size(ptemp)[2]/sx \textbf{do} \textbf{for} z \textbf{to} r[x] \textbf{do} 
+            pprime := [op(pprime), op(convert(ptemp, list)
+            [(l-1)*sx+1 .. l*sx])]
+        \textbf{end do} \textbf{end do};
+        ptemp, pprime := psiprime, [];
+      \textbf{elif} member(x, PiV[i]) \textbf{then} \textbf{for} l \textbf{to} Size(utemp)[2]/sx \textbf{do}
+       \textbf{for} z \textbf{to} r[x] \textbf{do}
+            uprime := [op(uprime), op(convert(utemp, list)
+            [(l-1)*sx+1 .. l*sx])]
+        \textbf{end do} \textbf{end do};
+        utemp, uprime := uprime, []:
+\textbf{end if} \textbf{end if} \textbf{end do} \textbf{end if}:
+\textbf{return} utemp, ptemp:
+\textbf{end proc}:
+\end{alltt}
+
+
+\noindent EUMarginalisation over a sample space. \\
+\textbf{Inputs}: \verb|u::table|; \verb|p::table|; \verb|i::integer|; \verb|PiV::table|; \verb|PiU::table|; 
+  \verb|r::table|;\\
+   \verb|Bi::table|; \verb|J::list|.\\
+\textbf{Outputs}: \verb|ut::list|, expected utility vector after EUMarginalisation.
+
+
+\vspace{-0.4cm}
+\begin{alltt}
+EUMarginalisation := \textbf{proc}(u, p, i, PiV, PiU, r, Bi, J)
+\textbf{local} uprime, pprime, rows, cols, l, one, zero, row, Iprime, ut;
+uprime, pprime := EUDuplicationP(u, p, i, PiV, PiU, r, Bi, J);
+pprime, rows, cols := convert(pprime, list), 1,  Size(pprime)[2]; 
+\textbf{for} l \textbf{to} i-1 \textbf{do} \textbf{if} member(l, PiV[i]) \textbf{then}
+  rows := rows*r[l] \textbf{end if} \textbf{end do};
+one := convert(Vector(r[i], 1), list): 
+zero := convert(Vector(cols, 0), list):
+row, Iprime := [op(zero), op(one)],  [op(one)]:
+\textbf{for} l \textbf{to} rows-1 \textbf{do} Iprime := [op(Iprime), op(row)] \textbf{end do};
+Iprime := Matrix(rows, cols, [op(Iprime), op(one)]);
+ut := convert(Multiply(Iprime, Vector[column](uprime*~pprime)), list);
+\textbf{return} ut:
+\textbf{end proc}:
+\end{alltt}
+
+
+\noindent Identification of an optimal policy (at random). \\
+\textbf{Inputs}: \verb|r::table|; \verb|i::integer|, index of the decision variable,
+ \verb|t::integer|, number of random draws. \\
+\textbf{Outputs}: \verb|maxi::vector|, optimal decisions.
+
+\vspace{-0.4cm}
+\begin{alltt}
+Maximise := \textbf{proc}(r, i, t) \textbf{local} maxi, l: 
+maxi := Vector(t, 0):
+\textbf{for} l \textbf{to} t \textbf{do} 
+  maxi[l] := RandomTools[Generate](integer(range = 1 .. r[i])) \textbf{end do}:
+\textbf{return} maxi:
+\textbf{end proc}:
+\end{alltt}
+
+\noindent EUMaximisation over a decision space. \\
+\textbf{Inputs}: \verb|u::table|; \verb|i::integer|; \verb|r::table|. \\
+\textbf{Outputs}: \verb|u[i]::list|, expected utility vector after EUMaximisation.
+
+\vspace{-0.4cm}
+\begin{alltt}
+EUMaximisation := \textbf{proc}(u, i, r) \textbf{local} opt, Istar, j, l, zero;
+opt := Maximise(r, i, Size(u[i+1])[2]/r[i]);
+zero := convert(Vector(Size(u[i+1])[2], 0), list);
+Istar := [];
+\textbf{for} j \textbf{to} Size(u[i+1])[2]/r[i] \textbf{do} \textbf{for} l \textbf{to} r[i] \textbf{do}
+    \textbf{if} opt[j] = l \textbf{then}  Istar := [op(Istar), 1]  
+    \textbf{else} Istar := [op(Istar), 0] \textbf{end if} 
+ \textbf{end do}; 
+  \textbf{if} j < Size(u[i+1])[2]/r[i] \textbf{then}
+     Istar := [op(Istar), op(zero)] \textbf{end if} \textbf{end do};
+Istar := Matrix(Size(u[i+1])[2]/r[i], Size(u[i+1])[2], Istar);
+u[i] := convert(Multiply(Istar, Vector[column](u[i+1])), list); 
+\textbf{return} u[i]:
+\textbf{end proc}:
+\end{alltt}
+
+
+\noindent Symbolic evaluation algorithm for an MID. \\
+\textbf{Inputs}: \verb|p::table|; \verb|psi::table|; \verb|PiV::table|; \verb|PiU::table|; \verb|n::integer|;\\
+ \verb|m::integer|; \verb|De::set|, index set of the decision variables; \verb|V::set|, index set of the random variables; \verb|r::table|. \\
+\textbf{Output}: \verb|eu::table|, expected utility vectors.
+
+\vspace{-0.4cm}
+\begin{alltt}
+SymbolicExpectedUtility := \textbf{proc}(p, psi, PiV, PiU, n, m, De, V, r)
+\textbf{local} J, Bi, utemp, i, j, ceu,best;
+with(LinearAlgebra): with(ArrayTools):
+J, Bi, eu := Initialise(p, psi, PiV, PiU, n, m);
+j := m;
+\textbf{for} i \textbf{from} n \textbf{by} -1 \textbf{to} 1 \textbf{do} \textbf{if} j = 0 \textbf{then} \textbf{if} member(i, De) \textbf{then}
+      eu[i] := EUMaximisation(eu, i, r) 
+    \textbf{else} eu[i] := EUMarginalisation(eu, p, i, PiV, PiU, r, Bi, J) 
+    \textbf{end if}; 
+  \textbf{else} \textbf{if} J[j] = i \textbf{then}  \textbf{if} member(i, De) \textbf{then} 
+        utemp[i+1] := EUMultiSum(eu, psi, j, PiV, PiU, r, Bi, J); 
+        eu[i] := EUMaximisation(utemp, i, r) 
+      \textbf{else}
+        utemp[i+1] := EUMultiSum(eu, psi, j, PiV, PiU, r, Bi, J); 
+        eu[i] := EUMarginalisation(utemp, p, i, PiV, PiU, r, Bi, J)
+      \textbf{end if};
+      j := j-1
+    \textbf{else} \textbf{if} member(i, De) \textbf{then} eu[i] := EUMaximisation(eu, i, r)
+      \textbf{else} eu[i] := EUMarginalisation(eu, p, i, PiV, PiU, r, Bi, J)
+\textbf{end if} \textbf{end if} \textbf{end if} \textbf{end do};
+\textbf{return} eu: 
+\textbf{end proc}:
+\end{alltt}
+
+\noindent Consider the MID in Figure \ref{fig-ex} with $n=6$ variables (decision or random nodes) and $m=3$ utility nodes.\\
+Definition of the MID number of variables and  utility nodes.\\
+\verb|n := 6: m := 3:|\\
+\verb|V|, contains the indices of random nodes and \verb|De|  those of the decision nodes.\\
+\verb|V := {2, 3, 5, 6}: De := {1, 4}:|\\
+Conditional probabilities.\\
+\verb|p[6] := [p6111, p6011, p6101, p6001, p6110, p6010, p6100, p6000]:|\\
+\verb|p[5] := [p5111, p5011, p5101, p5001, p5110, p5010, p5100, p5000]:|\\
+\verb|p[3] := [p3111, p3011, p3101, p3001, p3110, p3010, p3100, p3000]:|\\
+\verb|p[2] := [p211, p201, p210, p200]:|\\
+Utility parameters.\\
+\verb|psi[1] := [psi11, psi10]:|\\
+\verb|psi[2] := [psi21, psi20]:|\\
+\verb|psi[3] := [psi311, psi301, psi310, psi300]:|\\
+Parents of random nodes.\\
+\verb|PiV[2] := {1}:  PiV[3] := {1, 2}:  PiV[5] := {3, 4}: PiV[6] := {4, 5}:|\\
+Parents of utility nodes.\\
+\verb|PiU[1] := {3}: PiU[2] := {5}: PiU[3] := {4, 6}:|\\
+Number of levels of the variables.\\
+\verb|r[1] := 2: r[2] := 2: r[3] := 2: r[4] := 2: r[5] := 2: r[6] := 2:| \\
+Computation of the expected utility vectors.\\
+\verb|eu := SymbolicExpectedUtility(p, psi, PiV, PiU, n, m, De, V, r):|
+
+\noindent Example of the output of \verb|SymbolicExpectedUtility|, \verb|eu[1]|:
+\begin{alltt}
+[((k[1]*psi11+h*k[1]*psi11*((k[2]*psi21+h*k[2]*psi21*
+(p6010*psi300*k[3]+p6110*psi310*k[3])+k[3]*psi300*p6010
++k[3]*psi310*p6110)*p5101+(k[2]*psi20+h*k[2]*psi20*
+(p6000*psi300*k[3]+p6100*psi310*k[3])+k[3]*psi300*p6000
++k[3]*psi310*p6100)*p5001)+(k[2]*psi21+h*k[2]*psi21*
+(p6010*psi300*k[3]+p6110*psi310*k[3])+k[3]*psi300*p6010
++k[3]*psi310*p6110)*p5101+(k[2]*psi20+h*k[2]*psi20*
+(p6000*psi300*k[3]+p6100*psi310*k[3])+k[3]*psi300*p6000
++k[3]*psi310*p6100)*p5001)*p3110+(k[1]*psi10+h*k[1]*psi10*
+((k[2]*psi21+h*k[2]*psi21*(p6011*psi301*k[3]
++p6111*psi311*k[3])+k[3]*psi301*p6011+k[3]*psi311*p6111)*p5110+
+(k[2]*psi20+h*k[2]*psi20*(p6001*psi301*k[3]+p6101*psi311*k[3])
++k[3]*psi301*p6001+k[3]*psi311*p6101)*p5010)+
+(k[2]*psi21+h*k[2]*psi21*(p6011*psi301*k[3]+p6111*psi311*k[3])
++k[3]*psi301*p6011+k[3]*psi311*p6111)*p5110+
+(k[2]*psi20+h*k[2]*psi20*(p6001*psi301*k[3]+p6101*psi311*k[3])
++k[3]*psi301*p6001+k[3]*psi311*p6101)*p5010)*p3010)*p210+((k[1]*
+psi11+h*k[1]*psi11*((k[2]*psi21+h*k[2]*psi21*(p6010*psi300*
+k[3]+p6110*psi310*k[3]+k[3]*psi300*p6010+k[3]*psi310*p6110)*p5101
++(k[2]*psi20+h*k[2]*psi20*(p6000*psi300*k[3]+p6100*psi310*k[3])
++k[3]*psi300*p6000+k[3]*psi310*p6100)*p5001)+
+(k[2]*psi21+h*k[2]*psi21*(p6010*psi300*k[3]+p6110*psi310*k[3])
++k[3]*psi300*p6010+k[3]*psi310*p6110)*p5101+
+(k[2]*psi20+h*k[2]*psi20*(p6000*psi300*k[3]+p6100*psi310*k[3])
++k[3]*psi300*p6000+k[3]*psi310*p6100)*p5001)*p3100+(k[1]*psi10
++h*k[1]*psi10*((k[2]*psi21+h*k[2]*psi21*(p6011*psi301*k[3]
++p6111*psi311*k[3])+k[3]*psi301*p6011+k[3]*psi311*p6111)*p5110+
+(k[2]*psi20+h*k[2]*psi20*(p6001*psi301*k[3]+p6101*psi311*k[3])
++k[3]*psi301*p6001+k[3]*psi311*p6101)*p5010)+
+(k[2]*psi21+h*k[2]*psi21*(p6011*psi301*k[3]+p6111*psi311*k[3])
++k[3]*psi301*p6011+k[3]*psi311*p6111)*p5110+
+(k[2]*psi20+h*k[2]*psi20*(p6001*psi301*k[3]+p6101*psi311*k[3])
++k[3]*psi301*p6001+k[3]*psi311*p6101)*p5010)*p3000)*p200]
+\end{alltt}
