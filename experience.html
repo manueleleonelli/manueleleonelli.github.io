@@ -1,13 +1,7 @@
 <!DOCTYPE html>
-<!--
-    Plain-Academic by Vasilios Mavroudis
-    Released under the  Simplified BSD License/FreeBSD (2-clause) License.
-    https://github.com/mavroudisv/plain-academic
--->
-
 <html lang="en">
 <head>
-    <title>Manuele Leonelli</title>
+    <title>Software - Manuele Leonelli</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
@@ -15,7 +9,6 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
     <link href='https://fonts.googleapis.com/css?family=Oswald:700' rel='stylesheet' type='text/css'>
 </head>
-
 
 <body>
 
@@ -25,72 +18,193 @@
             <ul class="nav navbar-nav">
                 <li><a href="index.html">Home</a></li>
                 <li><a href="publications.html">Publications</a></li> 
-                <li><a style="color:#e01709" href="experience.html">Software</a></li>
+                <li><a style="color:#e01709" href="software.html">Software</a></li>
                 <li><a href="experience1.html">Teaching</a></li>
                 <li><a href="resume.pdf" target="_blank">CV</a></li> 
             </ul>
         </div>
     </nav>
-    
 
     <!-- Page Content -->
     <div class="container">
-
         <div class="row">
 
-            <!-- Software -->
-            <div class="col-md-8" style="min-height: 100vh; height: auto;"> <!--100hv-->
-                <h2 id="exp">Software</h2>
+            <!-- Main Software Content -->
+            <div class="col-md-8">
+                <h2 id="software">Software</h2>
+                
+                <!-- Package 1: stagedtrees -->
+                <div class="software-package">
+                    <h3>stagedtrees</h3>
+                    <img src="path/to/stagedtrees-hex.png" alt="stagedtrees hexagon" style="width:100px;">
+                    <p><strong>CRAN Version:</strong> 
+                        <a href="https://cran.r-project.org/package=stagedtrees">![stagedtrees CRAN](https://www.r-pkg.org/badges/version/stagedtrees)</a>
+                    </p>
+                    <p><strong>Download stats:</strong> 
+                        <a href="https://cran.r-project.org/package=stagedtrees">![CRAN Downloads](https://cranlogs.r-pkg.org/badges/stagedtrees)</a>
+                    </p>
+                    <p><strong>R CMD Check:</strong> 
+                        <a href="https://github.com/stagedtrees/stagedtrees/actions">![R CMD Check](https://github.com/stagedtrees/stagedtrees/workflows/R-CMD-check/badge.svg)</a>
+                    </p>
+                    <p><strong>Code Coverage:</strong> 
+                        <a href="https://app.codecov.io/github/stagedtrees/stagedtrees">![codecov](https://codecov.io/github/stagedtrees/stagedtrees/branch/main/graph/badge.svg?token=K76ZINC3IT)</a>
+                    </p>
+                    
+                    <h4>Overview</h4>
+                    <p>The `stagedtrees` package implements staged event trees, a class of probability models for categorical random variables. It allows for the estimation and analysis of staged event trees from data, offering functions to compute probabilities and make predictions.</p>
+                    
+                    <h4>Installation</h4>
+                    <pre><code>
+# Install stable version from CRAN:
+install.packages("stagedtrees")
 
-               Under Construction!!! Please refer to my <a href="https://github.com/manueleleonelli" target="_blank">GitHub Page</a>
-		
+# Or the development version from GitHub:
+remotes::install_github("stagedtrees/stagedtrees")
+                    </code></pre>
+
+                    <h4>Links</h4>
+                    <ul>
+                        <li><a href="https://github.com/stagedtrees/stagedtrees">GitHub Repository</a></li>
+                        <li><a href="https://cran.r-project.org/package=stagedtrees">CRAN Package</a></li>
+                        <li><a href="https://doi.org/10.18637/jss.v102.i06">Journal of Statistical Software Paper</a></li>
+                    </ul>
+                </div>
+
+                <!-- Package 2: bnmonitor -->
+                <div class="software-package">
+                    <h3>bnmonitor</h3>
+                    <img src="path/to/bnmonitor-hex.png" alt="bnmonitor hexagon" style="width:100px;">
+                    <p><strong>CRAN Version:</strong> 
+                        <a href="https://cran.r-project.org/package=bnmonitor">![bnmonitor CRAN](https://www.r-pkg.org/badges/version/bnmonitor)</a>
+                    </p>
+                    <p><strong>Download stats:</strong> 
+                        <a href="https://cran.r-project.org/package=bnmonitor">![CRAN Downloads](https://cranlogs.r-pkg.org/badges/bnmonitor)</a>
+                    </p>
+                    <p><strong>R CMD Check:</strong> 
+                        <a href="https://github.com/manueleleonelli/bnmonitor/actions">![R CMD Check](https://github.com/manueleleonelli/bnmonitor/workflows/R-CMD-check/badge.svg)</a>
+                    </p>
+                    
+                    <h4>Overview</h4>
+                    <p>The `bnmonitor` package allows for sensitivity and robustness analysis in Bayesian networks. It provides tools to perform various checks and monitors on Bayesian network models.</p>
+                    
+                    <h4>Installation</h4>
+                    <pre><code>
+# Install stable version from CRAN:
+install.packages("bnmonitor")
+
+# Or the development version from GitHub:
+remotes::install_github("manueleleonelli/bnmonitor")
+                    </code></pre>
+
+                    <h4>Links</h4>
+                    <ul>
+                        <li><a href="https://github.com/manueleleonelli/bnmonitor">GitHub Repository</a></li>
+                        <li><a href="https://cran.r-project.org/package=bnmonitor">CRAN Package</a></li>
+                        <li><a href="https://doi.org/10.1007/s10618-024-01007-0">Data Mining and Knowledge Discovery Paper</a></li>
+                    </ul>
+                </div>
+
+                <!-- Package 3: bnRep -->
+                <div class="software-package">
+                    <h3>bnRep</h3>
+                    <img src="path/to/bnRep-hex.png" alt="bnRep hexagon" style="width:100px;">
+                    <p><strong>CRAN Version:</strong> 
+                        <a href="https://cran.r-project.org/package=bnRep">![bnRep CRAN](https://www.r-pkg.org/badges/version/bnRep)</a>
+                    </p>
+                    <p><strong>Download stats:</strong> 
+                        <a href="https://cran.r-project.org/package=bnRep">![CRAN Downloads](https://cranlogs.r-pkg.org/badges/bnRep)</a>
+                    </p>
+                    <p><strong>R CMD Check:</strong> 
+                        <a href="https://github.com/manueleleonelli/bnRep/actions">![R CMD Check](https://github.com/manueleleonelli/bnRep/workflows/R-CMD-check/badge.svg)</a>
+                    </p>
+                    
+                    <h4>Overview</h4>
+                    <p>The `bnRep` package provides tools for reproducibility of Bayesian network structure learning. It enables users to generate reproducible results in their structural learning pipelines.</p>
+                    
+                    <h4>Installation</h4>
+                    <pre><code>
+# Install stable version from CRAN:
+install.packages("bnRep")
+
+# Or the development version from GitHub:
+remotes::install_github("manueleleonelli/bnRep")
+                    </code></pre>
+
+                    <h4>Links</h4>
+                    <ul>
+                        <li><a href="https://github.com/manueleleonelli/bnRep">GitHub Repository</a></li>
+                        <li><a href="https://cran.r-project.org/package=bnRep">CRAN Package</a></li>
+                        <li><a href="https://doi.org/10.1007/s10618-024-01007-0">Related Paper</a></li>
+                    </ul>
+                </div>
+
+                <!-- Package 4: evclass -->
+                <div class="software-package">
+                    <h3>evclass</h3>
+                    <img src="path/to/evclass-hex.png" alt="evclass hexagon" style="width:100px;">
+                    <p><strong>CRAN Version:</strong> 
+                        <a href="https://cran.r-project.org/package=evclass">![evclass CRAN](https://www.r-pkg.org/badges/version/evclass)</a>
+                    </p>
+                    <p><strong>Download stats:</strong> 
+                        <a href="https://cran.r-project.org/package=evclass">![CRAN Downloads](https://cranlogs.r-pkg.org/badges/evclass)</a>
+                    </p>
+                    <p><strong>R CMD Check:</strong> 
+                        <a href="https://github.com/manueleleonelli/evclass/actions">![R CMD Check](https://github.com/manueleleonelli/evclass/workflows/R-CMD-check/badge.svg)</a>
+                    </p>
+                    
+                    <h4>Overview</h4>
+                    <p>The `evclass` package implements evidential classifiers based on belief functions. It includes a variety of classifiers that use evidence theory to classify data.</p>
+                    
+                    <h4>Installation</h4>
+                    <pre><code>
+# Install stable version from CRAN:
+install.packages("evclass")
+
+# Or the development version from GitHub:
+remotes::install_github("manueleleonelli/evclass")
+                    </code></pre>
+
+                    <h4>Links</h4>
+                    <ul>
+                        <li><a href="https://github.com/manueleleonelli/evclass">GitHub Repository</a></li>
+                        <li><a href="https://cran.r-project.org/package=evclass">CRAN Package</a></li>
+                    </ul>
+                </div>
+
             </div>
 
-        <!-- Contact Info on the Sidebar -->
+            <!-- Sidebar with Contact Info -->
             <div class="col-md-4">
                 <div style="font-family:'Oswald',sans-serif; font-size: 32px;">
                     <a style="color:#595d61;" href="index.html"><b>Manuele Leonelli</b></a>
                 </div>
                 <br>
-		     <!-- Main Image -->
                 <img class="img-responsive" src="banner.png" alt=""><br>
                 <p><b>manuele.leonelli@ie.edu</b><br>
-                <p>
-                    Assistant Professor of Statistics<br>
-                    School of Science and Technology<br>
-                    IE University, Madrid, Spain<br>
-                </p>
-                <a style="color:#333;" href="https://scholar.google.com/citations?user=3QX9GBQAAAAJ&hl=en" target="_blank"><img src="icons/gscholar.png" width="30" height="30"></a>
-                &nbsp;
-                <a style="color:#333;" href="https://github.com/manueleleonelli" target="_blank"><img src="icons/GitHub-Mark-32px.png" width="30" height="30"></a>
-		&nbsp;
-	        <a style="color:#333;" href="https://arxiv.org/search/stat?searchtype=author&query=Leonelli,+M" target="_blank"><img src="icons/arxiv.png" width="30" height="30"></a>
-		&nbsp;
-		<a style="color:#333;" href="https://www.linkedin.com/in/manuele-leonelli-400aa296/?originalSubdomain=en" target="_blank"><img src="icons/1024px-LinkedIn_logo_In-Black.png" width="30" height="30"></a>
-                &nbsp;    
-		    
+                <p>Assistant Professor of Statistics<br>School of Science and Technology<br>IE University, Madrid, Spain</p>
+
+                <a href="https://scholar.google.com/citations?user=3QX9GBQAAAAJ&hl=en" target="_blank">
+                    <img src="icons/gscholar.png" width="30" height="30">
+                </a>
+                <a href="https://github.com/manueleleonelli" target="_blank">
+                    <img src="icons/GitHub-Mark-32px.png" width="30" height="30">
+                </a>
+                <a href="https://arxiv.org/search/stat?searchtype=author&query=Leonelli,+M" target="_blank">
+                    <img src="icons/arxiv.png" width="30" height="30">
+                </a>
+                <a href="https://www.linkedin.com/in/manuele-leonelli-400aa296/?originalSubdomain=en" target="_blank">
+                    <img src="icons/1024px-LinkedIn_logo_In-Black.png" width="30" height="30">
+                </a>
             </div>
-            
-            <!-- Links on the Sidebar -->
-            <!-- 
-            <div class="col-md-4" style="margin-top:2%">
-                <dd><a href="#">Google Scholar</a></dd> 
-                <dd><a href="#">GitHub</a></dd>
-		<dd><a href="#">arXiv</a></dd>
-                <dd><a href="#">LinkedIn</a></dd>
-            </div>
-            -->
-            
         </div>
-
     </div>
-    <!-- /.container -->
 
-    
-    <!-- Other people may like it too! -->
-    <a style="color:#868d96;font-size:0.9em; float:right;" href="https://github.com/mavroudisv/plain-academic" target="_blank">Design courtesy of Vasilios Mavroudis: Plain Academic &emsp;</a><br>
-    
+    <!-- Footer -->
+    <footer class="container">
+        <a style="color:#868d96;font-size:0.9em; float:right;" href="https://github.com/mavroudisv/plain-academic" target="_blank">
+            Design courtesy of Vasilios Mavroudis: Plain Academic &emsp;
+        </a>
+    </footer>
+
 </body>
-
-
 </html>
