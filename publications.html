@@ -28,52 +28,62 @@
     <!-- Page Content -->
     <div class="container">
         <div class="row">
-            <!-- Sidebar for Filters -->
-            <div class="col-md-4">
-                <h3>Filter Publications</h3>
-                <form id="filterForm">
-                    <label for="year">Year:</label>
-                    <select id="year">
-                        <option value="">All</option>
-                        <option value="2024">2024</option>
-                        <option value="2023">2023</option>
-                        <option value="2022">2022</option>
-                        <!-- Add more years as necessary -->
-                    </select>
 
-                    <label for="topic">Topic:</label>
-                    <select id="topic">
-                        <option value="">All</option>
-                        <option value="Bayesian Networks">Bayesian Networks</option>
-                        <option value="Sensitivity Analysis">Sensitivity Analysis</option>
-                        <option value="Staged Trees">Staged Trees</option>
-                        <!-- Add more topics as necessary -->
-                    </select>
-
-                    <label for="author">Author:</label>
-                    <select id="author">
-                        <option value="">All</option>
-                        <option value="Leonelli">Leonelli</option>
-                        <option value="Smith">Smith</option>
-                        <option value="Ballester-Ripoll">Ballester-Ripoll</option>
-                        <!-- Add more authors as necessary -->
-                    </select>
-
-                    <label for="venue">Venue:</label>
-                    <select id="venue">
-                        <option value="">All</option>
-                        <option value="arXiv">arXiv</option>
-                        <option value="PMLR">PMLR</option>
-                        <option value="Socio-Economic Planning Sciences">Socio-Economic Planning Sciences</option>
-                        <!-- Add more venues as necessary -->
-                    </select>
-                </form>
-            </div>
-
-            <!-- Publications List -->
-            <div class="col-md-8">
+            <!-- Left Sidebar: Filters and Publications -->
+            <div class="col-md-8" style="min-height: 100vh; height: auto;">    
                 <h2 id="publications">Publications</h2>
 
+                <!-- Filters Section -->
+                <div id="filters">
+                    <h3>Filter Publications</h3>
+                    <form id="filterForm">
+                        <div class="form-group">
+                            <label for="year">Year:</label>
+                            <select id="year" class="form-control">
+                                <option value="">All</option>
+                                <option value="2024">2024</option>
+                                <option value="2023">2023</option>
+                                <option value="2022">2022</option>
+                                <!-- Add more years as necessary -->
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="topic">Topic:</label>
+                            <select id="topic" class="form-control">
+                                <option value="">All</option>
+                                <option value="Bayesian Networks">Bayesian Networks</option>
+                                <option value="Sensitivity Analysis">Sensitivity Analysis</option>
+                                <option value="Staged Trees">Staged Trees</option>
+                                <!-- Add more topics as necessary -->
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="author">Author:</label>
+                            <select id="author" class="form-control">
+                                <option value="">All</option>
+                                <option value="Leonelli">Leonelli</option>
+                                <option value="Smith">Smith</option>
+                                <option value="Ballester-Ripoll">Ballester-Ripoll</option>
+                                <!-- Add more authors as necessary -->
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="venue">Venue:</label>
+                            <select id="venue" class="form-control">
+                                <option value="">All</option>
+                                <option value="arXiv">arXiv</option>
+                                <option value="PMLR">PMLR</option>
+                                <option value="Socio-Economic Planning Sciences">Socio-Economic Planning Sciences</option>
+                                <!-- Add more venues as necessary -->
+                            </select>
+                        </div>
+                    </form>
+                </div>
+
+                <!-- Publications List -->
                 <ul id="publicationList">
                     <li data-year="2024" data-topic="Bayesian Networks" data-author="Leonelli, Smith, Wright" data-venue="arXiv">
                         <strong>Leonelli, M.</strong>, Smith, J.Q., & Wright, S.K. (2024). The diameter of a stochastic matrix: A new measure for sensitivity analysis in Bayesian networks. <em>arXiv preprint arXiv:2407.04667</em>. [<a href="https://arxiv.org/abs/2407.04667" target="_blank">arXiv</a>] [<a href="Bib/leonelli2024diameter.bib" target="_blank">bib</a>]
@@ -95,43 +105,42 @@
                     <!-- Add similar structure for other years (2022, etc.) -->
                 </ul>
             </div>
-        </div>
-    </div>
 
-    <!-- Contact Info on the Sidebar -->
-    <div class="col-md-4">
-        <div style="font-family:'Oswald',sans-serif; font-size: 32px;">
-            <a style="color:#595d61;" href="index.html"><b>Manuele Leonelli</b></a>
+            <!-- Right Sidebar: Contact Info -->
+            <div class="col-md-4">
+                <div style="font-family:'Oswald',sans-serif; font-size: 32px;">
+                    <a style="color:#595d61;" href="index.html"><b>Manuele Leonelli</b></a>
+                </div>
+                <br>
+                <img class="img-responsive" src="banner.png" alt=""><br>
+                <p><b>manuele.leonelli@ie.edu</b><br>
+                <p>
+                    Assistant Professor of Statistics<br>
+                    School of Science and Technology<br>
+                    IE University, Madrid, Spain<br>
+                </p>
+                <a style="color:#333;" href="https://scholar.google.com/citations?user=3QX9GBQAAAAJ&hl=en" target="_blank"><img src="icons/gscholar.png" width="30" height="30"></a>
+                &nbsp;
+                <a style="color:#333;" href="https://github.com/manueleleonelli" target="_blank"><img src="icons/GitHub-Mark-32px.png" width="30" height="30"></a>
+                &nbsp;
+                <a style="color:#333;" href="https://arxiv.org/search/stat?searchtype=author&query=Leonelli,+M" target="_blank"><img src="icons/arxiv.png" width="30" height="30"></a>
+                &nbsp;
+                <a style="color:#333;" href="https://www.linkedin.com/in/manuele-leonelli-400aa296/?originalSubdomain=en" target="_blank"><img src="icons/1024px-LinkedIn_logo_In-Black.png" width="30" height="30"></a>
+                &nbsp;
+            </div>
         </div>
-        <br>
-        <img class="img-responsive" src="banner.png" alt=""><br>
-        <p><b>manuele.leonelli@ie.edu</b><br>
-        <p>
-            Assistant Professor of Statistics<br>
-            School of Science and Technology<br>
-            IE University, Madrid, Spain<br>
-        </p>
-        <a style="color:#333;" href="https://scholar.google.com/citations?user=3QX9GBQAAAAJ&hl=en" target="_blank"><img src="icons/gscholar.png" width="30" height="30"></a>
-        &nbsp;
-        <a style="color:#333;" href="https://github.com/manueleleonelli" target="_blank"><img src="icons/GitHub-Mark-32px.png" width="30" height="30"></a>
-        &nbsp;
-        <a style="color:#333;" href="https://arxiv.org/search/stat?searchtype=author&query=Leonelli,+M" target="_blank"><img src="icons/arxiv.png" width="30" height="30"></a>
-        &nbsp;
-        <a style="color:#333;" href="https://www.linkedin.com/in/manuele-leonelli-400aa296/?originalSubdomain=en" target="_blank"><img src="icons/1024px-LinkedIn_logo_In-Black.png" width="30" height="30"></a>
-        &nbsp;    
     </div>
 
     <!-- JavaScript for Filtering -->
     <script>
-        document.getElementById('filterForm').addEventListener('input', function() {
+        document.getElementById('filterForm').addEventListener('change', function () {
             var yearFilter = document.getElementById('year').value;
             var topicFilter = document.getElementById('topic').value.toLowerCase();
             var authorFilter = document.getElementById('author').value.toLowerCase();
             var venueFilter = document.getElementById('venue').value.toLowerCase();
 
             var publications = document.querySelectorAll('#publicationList li');
-
-            publications.forEach(function(pub) {
+            publications.forEach(function (pub) {
                 var year = pub.getAttribute('data-year');
                 var topics = pub.getAttribute('data-topic').toLowerCase().split(', ');
                 var authors = pub.getAttribute('data-author').toLowerCase().split(', ');
@@ -152,5 +161,6 @@
 
     <!-- Footer -->
     <a style="color:#868d96;font-size:0.9em; float:right;" href="https://github.com/mavroudisv/plain-academic" target="_blank">Design courtesy of Vasilios Mavroudis: Plain Academic &emsp;</a><br>
+
 </body>
 </html>
