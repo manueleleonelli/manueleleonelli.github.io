@@ -8,6 +8,35 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
     <link href='https://fonts.googleapis.com/css?family=Oswald:700' rel='stylesheet' type='text/css'>
+
+    <script>
+        function filterPublications() {
+            var year = document.getElementById("year").value.toLowerCase();
+            var topic = document.getElementById("topic").value.toLowerCase();
+            var author = document.getElementById("author").value.toLowerCase();
+            var venue = document.getElementById("venue").value.toLowerCase();
+            
+            var publications = document.querySelectorAll("#publication-list li");
+            
+            publications.forEach(function(publication) {
+                var pubYear = publication.getAttribute("data-year").toLowerCase();
+                var pubTopic = publication.getAttribute("data-topic").toLowerCase();
+                var pubAuthor = publication.getAttribute("data-author").toLowerCase();
+                var pubVenue = publication.getAttribute("data-venue").toLowerCase();
+                
+                var yearMatch = (year === "" || pubYear === year);
+                var topicMatch = (topic === "" || pubTopic.includes(topic));
+                var authorMatch = (author === "" || pubAuthor.includes(author));
+                var venueMatch = (venue === "" || pubVenue.includes(venue));
+                
+                if (yearMatch && topicMatch && authorMatch && venueMatch) {
+                    publication.style.display = "block";
+                } else {
+                    publication.style.display = "none";
+                }
+            });
+        }
+    </script>
 </head>
 
 <body>
@@ -44,7 +73,6 @@
                                 <option value="2022">2022</option>
                                 <option value="2021">2021</option>
                                 <option value="2020">2020</option>
-                                <!-- Add more years as needed -->
                             </select>
                         </div>
 
@@ -55,7 +83,6 @@
                                 <option value="Bayesian Networks">Bayesian Networks</option>
                                 <option value="Sensitivity Analysis">Sensitivity Analysis</option>
                                 <option value="Staged Trees">Staged Trees</option>
-                                <!-- Add more topics as needed -->
                             </select>
                         </div>
 
@@ -63,11 +90,10 @@
                             <label for="author">Author:</label>
                             <select id="author" class="form-control input-sm" style="width: 150px;">
                                 <option value="">All</option>
-                                <option value="Leonelli">Ballester-Ripoll</option>
+                                <option value="Ballester-Ripoll">Ballester-Ripoll</option>
                                 <option value="Leonelli">Leonelli</option>
                                 <option value="Smith">Smith</option>
                                 <option value="Wright">Wright</option>
-                                <!-- Add more authors as needed -->
                             </select>
                         </div>
 
@@ -77,11 +103,10 @@
                                 <option value="">All</option>
                                 <option value="Journal">Journal</option>
                                 <option value="Conference">Conference</option>
-                                <!-- Add more venues as needed -->
                             </select>
                         </div>
 
-                        <button type="button" class="btn btn-primary btn-sm" style="margin-left: 10px;">Filter</button>
+                        <button type="button" class="btn btn-primary btn-sm" style="margin-left: 10px;" onclick="filterPublications()">Filter</button>
                     </form>
                 </div>
 
