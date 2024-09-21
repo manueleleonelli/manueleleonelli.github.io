@@ -37,51 +37,57 @@
                 <div id="filters">
                     <h3>Filter Publications</h3>
                     <form id="filterForm">
-                        <div class="form-group">
-                            <label for="year">Year:</label>
-                            <select id="year" class="form-control">
-                                <option value="">All</option>
-                                <option value="2024">2024</option>
-                                <option value="2023">2023</option>
-                                <option value="2022">2022</option>
-                                <!-- Add more years as necessary -->
-                            </select>
-                        </div>
+                        <!-- Filter Section: Adjusted to appear in a single line -->
+<div class="row" style="margin-bottom: 20px;">
+    <form class="form-inline">
+        <div class="form-group">
+            <label for="year">Year:</label>
+            <select id="year" class="form-control input-sm" style="width: 100px;">
+                <option value="">All</option>
+                <option value="2024">2024</option>
+                <option value="2023">2023</option>
+                <option value="2022">2022</option>
+                <option value="2021">2021</option>
+                <option value="2020">2020</option>
+                <!-- Add more years as needed -->
+            </select>
+        </div>
 
-                        <div class="form-group">
-                            <label for="topic">Topic:</label>
-                            <select id="topic" class="form-control">
-                                <option value="">All</option>
-                                <option value="Bayesian Networks">Bayesian Networks</option>
-                                <option value="Sensitivity Analysis">Sensitivity Analysis</option>
-                                <option value="Staged Trees">Staged Trees</option>
-                                <!-- Add more topics as necessary -->
-                            </select>
-                        </div>
+        <div class="form-group" style="margin-left: 10px;">
+            <label for="topic">Topic:</label>
+            <select id="topic" class="form-control input-sm" style="width: 150px;">
+                <option value="">All</option>
+                <option value="Bayesian Networks">Bayesian Networks</option>
+                <option value="Sensitivity Analysis">Sensitivity Analysis</option>
+                <option value="Staged Trees">Staged Trees</option>
+                <!-- Add more topics as needed -->
+            </select>
+        </div>
 
-                        <div class="form-group">
-                            <label for="author">Author:</label>
-                            <select id="author" class="form-control">
-                                <option value="">All</option>
-                                <option value="Leonelli">Leonelli</option>
-                                <option value="Smith">Smith</option>
-                                <option value="Ballester-Ripoll">Ballester-Ripoll</option>
-                                <!-- Add more authors as necessary -->
-                            </select>
-                        </div>
+        <div class="form-group" style="margin-left: 10px;">
+            <label for="author">Author:</label>
+            <select id="author" class="form-control input-sm" style="width: 150px;">
+                <option value="">All</option>
+                <option value="Leonelli">Leonelli</option>
+                <option value="Smith">Smith</option>
+                <option value="Wright">Wright</option>
+                <!-- Add more authors as needed -->
+            </select>
+        </div>
 
-                        <div class="form-group">
-                            <label for="venue">Venue:</label>
-                            <select id="venue" class="form-control">
-                                <option value="">All</option>
-                                <option value="arXiv">arXiv</option>
-                                <option value="PMLR">PMLR</option>
-                                <option value="Socio-Economic Planning Sciences">Socio-Economic Planning Sciences</option>
-                                <!-- Add more venues as necessary -->
-                            </select>
-                        </div>
-                    </form>
-                </div>
+        <div class="form-group" style="margin-left: 10px;">
+            <label for="venue">Venue:</label>
+            <select id="venue" class="form-control input-sm" style="width: 150px;">
+                <option value="">All</option>
+                <option value="Journal">Journal</option>
+                <option value="Conference">Conference</option>
+                <!-- Add more venues as needed -->
+            </select>
+        </div>
+
+        <button type="button" class="btn btn-primary btn-sm" style="margin-left: 10px;">Filter</button>
+    </form>
+</div>
 
                 <!-- Publications List -->
                 <ul id="publicationList">
